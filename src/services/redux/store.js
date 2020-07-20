@@ -4,7 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import {Platform} from 'react-native';
-import storageWeb from 'redux-persist/lib/storage';
+// import storageWeb from 'redux-persist/lib/storage';
 import storageMobile from '@react-native-community/async-storage';
 
 // Store In the previous sections, we defined the actions that represent the facts about "what happened"
@@ -13,7 +13,7 @@ import storageMobile from '@react-native-community/async-storage';
 
 const persistConfig = {
   key: 'root',
-  storage: Platform.OS === 'web' ? storageWeb : storageMobile,
+  storage: Platform.OS === 'web' ? localStorage : storageMobile,
   blacklist: ['navigation'],
 };
 
