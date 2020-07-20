@@ -62,30 +62,34 @@ module.exports.login = async (req, res) => {
   // // throw validation errors
   // if (error) return res.status(400).json({ error: error.details[0].message });
 
-  const user = await User.findOne({ email: req.body.email });
+  const dbUrl = process.env. DB_CONNECT;
+  const TOKEN_SECRET = process.env.TOKEN_SECRET;
+  res.json({ message: 'It works!', dbUrl, TOKEN_SECRET });
 
-  // throw error when email is wrong
-  if (!user) return res.status(400).json({ error: "Email is wrong" });
+  // const user = await User.findOne({ email: req.body.email });
 
-  // check for password correctness
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword)
-    return res.status(400).json({ error: "Password is wrong" });
+  // // throw error when email is wrong
+  // if (!user) return res.status(400).json({ error: "Email is wrong" });
 
-  // create token
-  const token = jwt.sign(
-    {
-      name: user.name,
-      id: user._id,
-    },
-    process.env.TOKEN_SECRET
-  );
+  // // check for password correctness
+  // const validPassword = await bcrypt.compare(req.body.password, user.password);
+  // if (!validPassword)
+  //   return res.status(400).json({ error: "Password is wrong" });
 
-  res.header("auth-token", token).json({
-    error: null,
-    data: {
-      token,
-    },
-  });
+  // // create token
+  // const token = jwt.sign(
+  //   {
+  //     name: user.name,
+  //     id: user._id,
+  //   },
+  //   process.env.TOKEN_SECRET
+  // );
+
+  // res.header("auth-token", token).json({
+  //   error: null,
+  //   data: {
+  //     token,
+  //   },
+  // });
 };
 
