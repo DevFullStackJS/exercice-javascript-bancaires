@@ -9,6 +9,7 @@ const { catchAll, notFound } = require('./error');
 
 const app = express();
 const userRouter = require('./user/user.router');
+const ribRouter = require('./rib/rib.router');
 
 app.use(helmet());
 app.use(cors());
@@ -23,6 +24,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRouter);
+
+app.use('/api/rib', ribRouter);
 
 app.use(notFound);
 app.use(catchAll);
