@@ -4,6 +4,7 @@ import config from '../config';
 export const headers = token => ({
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
+  'auth-token': `${token}`,
   Authorization: `Bearer ${token}`,
 });
 

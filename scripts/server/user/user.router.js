@@ -8,7 +8,8 @@ const {
   remove,
   list,
   update,
-  view
+  view,
+  login,
 } = require('./user.controller');
 
 router
@@ -21,5 +22,8 @@ router
   .get(catchErrors(check), catchErrors(view))
   .put(catchErrors(check), catchErrors(update))
   .delete(catchErrors(check), catchErrors(remove));
+
+// login route
+router.post("/login", (req, res) => login(req, res));
 
 module.exports = router;

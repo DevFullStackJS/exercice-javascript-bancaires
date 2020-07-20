@@ -8,10 +8,12 @@ import {
 } from 'react-native';
 
 const SignInScreen = (props) => {
+  const { testApi } = props;
   const [username, setUsername] = React.useState('admin@foo.com');
   const [password, setPassword] = React.useState('changeme');
 
-  const signIn = () => {
+  const signIn = async () => {
+    await testApi({ username, password });
     console.log({ username, password });
   };
 
@@ -46,7 +48,7 @@ const SignInScreen = (props) => {
             />
           </View>
           <Button
-            onPress={() => signIn()}
+            onPress={async () => await signIn()}
             title="Sign In"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
