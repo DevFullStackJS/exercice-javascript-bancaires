@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
 
 export default class ViewIcon extends Component {
   render() {
-    const {title} = this.props;
+    const { title } = this.props;
 
     return (
       <View>

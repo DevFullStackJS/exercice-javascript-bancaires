@@ -1,4 +1,4 @@
 import ListView from './ListView';
-import {ScrollViewLayout} from './ScrollViewLayout';
+import ScrollViewLayout from './ScrollViewLayout';
 
-export {ListView, ScrollViewLayout};
+export { ListView, ScrollViewLayout };

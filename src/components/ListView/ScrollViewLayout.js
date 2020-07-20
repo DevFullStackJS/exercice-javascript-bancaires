@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {View, ScrollView, Dimensions} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, ScrollView, Dimensions } from 'react-native';
 
 import Loading from '../Common/loader';
 
-const isCheckToBottom = ({layoutMeasurement, contentOffset, contentSize}) =>
-  layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
+const isCheckToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => layoutMeasurement.height + contentOffset.y >= contentSize.height - 1;
 
 const ListScrollView = (props) => {
-  const {children, index, getAfter, list, page, loading} = props;
+  const { children, index, getAfter, list, page, loading } = props;
   const [isCheckTo, setToBottom] = useState(index || 5);
   const [isLoading, setToloading] = useState(false);
   const [isVide, isVideToloading] = useState(false);
@@ -27,15 +26,13 @@ const ListScrollView = (props) => {
       onScrollBeginDrag={() => {
         setToloading(true);
       }}
-      onScrollEndDrag={async ({nativeEvent}) => {
+      onScrollEndDrag={async ({ nativeEvent }) => {
         if (list && isCheckToBottom(nativeEvent) && isCheckTo < list.length) {
           setToBottom(isCheckTo + page);
           getAfter && getAfter(isCheckTo + page);
         }
         setTimeout(() => setToloading(false), 1000);
       }}>
-      {/* {isVide && <View style={{flex: 1,
-        justifyContent: 'center'}}><Text style={{textAlign: 'center'}}>Vide</Text></View>} */}
       {isL ? (
         <Loading
           style={{
@@ -64,7 +61,7 @@ const ListScrollView = (props) => {
           {children}
         </View>
       </View>
-      <View style={{height: 270}} />
+      <View style={{ height: 270 }} />
     </ScrollView>
   );
 };

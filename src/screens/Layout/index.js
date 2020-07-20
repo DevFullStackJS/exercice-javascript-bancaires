@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native';
-import {connect} from 'react-redux';
+import { StyleSheet, SafeAreaView } from 'react-native';
+
+import { connect } from 'react-redux';
 
 import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 });
 
 function Layout(props) {
-  const {loading, title} = props;
+  const { loading, title } = props;
 
   return (
     <SafeAreaView style={styles.layout_container}>

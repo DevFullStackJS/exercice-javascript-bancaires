@@ -1,12 +1,10 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 
-const Loader = ({style = {}}) => {
-  return (
-    <View style={{...style}}>
+const Loader = ({ style = {} }) => (
+    <View style={{ ...style }}>
       <ActivityIndicator size="large" />
     </View>
   );
-};
 
 export default Loader;

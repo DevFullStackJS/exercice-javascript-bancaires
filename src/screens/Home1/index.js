@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 
 import Layout from '../Layout';
 
@@ -11,7 +11,7 @@ export default class Home extends React.Component {
     };
   }
 
-  async componentDidMount() {}
+  // async componentDidMount() {}
 
   render() {
     return (

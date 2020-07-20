@@ -4,7 +4,7 @@ import config from '../config';
 export const headers = token => ({
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*',
-  Authorization: 'Bearer ' + token,
+  Authorization: `Bearer ${token}`,
 });
 
 export const get = async (url, token) => {
@@ -15,7 +15,7 @@ export const get = async (url, token) => {
     console.log('get res ------------>', res);
     return res;
   } catch (e) {
-    const errors = e ? JSON.parse(JSON.stringify(e)) : {error: true};
+    const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
     console.log('get errors ------------>', errors);
     return errors;
   }
@@ -29,7 +29,7 @@ export const post = async (url, data, token) => {
     console.log('post res ------------>', res);
     return res;
   } catch (e) {
-    const errors = e ? JSON.parse(JSON.stringify(e)) : {error: true};
+    const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
     console.log('post errors ------------>', errors);
     return errors;
   }
@@ -43,7 +43,7 @@ export const put = async (url, data = {}, token) => {
     console.log('put res ------------>', res);
     return res;
   } catch (e) {
-    const errors = e ? JSON.parse(JSON.stringify(e)) : {error: true};
+    const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
     console.log('put errors ------------>', errors);
     return errors;
   }
@@ -57,7 +57,7 @@ export const remove = async (url, token) => {
     console.log('remove res ------------>', res);
     return res;
   } catch (e) {
-    const errors = e ? JSON.parse(JSON.stringify(e)) : {error: true};
+    const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
     console.log('remove errors ------------>', errors);
     return errors;
   }

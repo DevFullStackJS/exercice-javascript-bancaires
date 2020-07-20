@@ -10,7 +10,7 @@ import {
 } from 'native-base';
 
 export const UserList = (props) => {
-  const {name, condition, quantity} = props;
+  const { name, condition, quantity } = props;
   return (
     <ListItem thumbnail>
       <Left>

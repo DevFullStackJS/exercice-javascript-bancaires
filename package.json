@@ -5,10 +5,8 @@
   "scripts": {
     "px": "cd ios && pod install && cd ..",
     "server": "nodemon scripts/server/index.js",
-    "lint": "eslint --quiet --ext .jsx --ext .js ./src",
-    "code-formatter": "prettier ./src/**/*.{ts,tx,tsx} --write",
-    "code-formatter-check": "prettier --check src/**/*.{ts,tx,tsx}",
     "st": "watchman watch-del-all && yarn start -- --reset-cache",
+    "lint": "eslint --quiet --ext .jsx --ext .js ./src/ --fix",
     "web": "node scripts/start.js",
     "test:web": "node scripts/test.js",
     "build": "node scripts/build.js",

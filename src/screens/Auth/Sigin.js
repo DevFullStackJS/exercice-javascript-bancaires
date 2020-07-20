@@ -4,19 +4,18 @@ import {
   Text,
   TextInput,
   Button,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 
 const SignInScreen = (props) => {
   const [username, setUsername] = React.useState('admin@foo.com');
   const [password, setPassword] = React.useState('changeme');
 
-
   const signIn = () => {
-    console.log({username, password});
+    console.log({ username, password });
   };
 
-  console.log({props});
+  console.log({ props });
 
   return (
     <SafeAreaView

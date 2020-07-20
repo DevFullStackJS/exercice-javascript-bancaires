@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 
 import Layout from '../Layout';
 
-import { post } from '../../services/technique/api';
+// import { post } from '../../services/technique/api';
 
 export default class Home extends React.Component {
   constructor(props) {

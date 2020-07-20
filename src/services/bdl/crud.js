@@ -1,5 +1,5 @@
-import { get, put} from '../technique/api';
+import { get } from '../technique/api';
 
 export default {
-    getAll : async (url) => await get(url),
-}
+    getAll: async (url) => await get(url),
+};
