@@ -52,7 +52,7 @@ class App extends Component {
           onPress={this.onClick}
           style={styles.button}
           underlayColor={'#0A84D0'}>
-          <Text style={styles.buttonText}>Rotate Logo</Text>
+          <Text style={styles.buttonText}>Rotate Logo !!!!!!!</Text>
         </TouchableHighlight>
       </View>
     );
