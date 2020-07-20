@@ -65,6 +65,7 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrlOrPath,
+  calendar: resolveApp("node_modules/react-native-calendars"),
 };
 
 
