@@ -1,12 +1,16 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import {connect} from 'react-redux';
+
+import mapStateToProps from '../../services/redux/mapStateToProps';
+import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
 import Layout from '../Layout';
 import Sigin from './Sigin';
 
 // import { post } from '../../services/technique/api';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,3 +39,8 @@ export default class Home extends React.Component {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);
