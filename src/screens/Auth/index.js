@@ -45,6 +45,7 @@ class Home extends React.Component {
 
   testApiGetOneRib = async () => {
     const { token } = this.state.data;
+
     const rib = '18206002105487266700217';
     const url = `rib/list/${rib}`;
     const data = {
@@ -75,6 +76,8 @@ class Home extends React.Component {
     console.log({ res });
     if (res && res.data && res.data.data) {
       this.setState({ data: res.data.data });
+      const test = await get('rib/test', res.data.data.token);
+      console.log({ test });
     }
   }
 

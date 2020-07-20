@@ -25,12 +25,11 @@ app.get('/', (req, res) => {
   res.json({ message: 'It works!' });
 });
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//   next();
-// });
+// (req, res) => {
+//   const dbUrl = process.env. DB_CONNECT;
+//   const TOKEN_SECRET = process.env.TOKEN_SECRET;
+//   res.json({ message: 'It works!', dbUrl, TOKEN_SECRET });
+// }
 
 app.use('/api/users', userRouter);
 

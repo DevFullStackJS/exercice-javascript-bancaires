@@ -42,6 +42,12 @@ module.exports.list = async (req, res) => {
   return res.json({rib: {}});
 };
 
+module.exports.testApi = async (req, res) => {
+  const dbUrl = process.env. DB_CONNECT;
+  const TOKEN_SECRET = process.env.TOKEN_SECRET;
+  res.json({ message: 'It works!', dbUrl, TOKEN_SECRET });
+};
+
 module.exports.listOneRib = async (req, res) => {
   const {params, body} = req;
   if(!params.rib || !body.max, !body.min) {
