@@ -7,18 +7,33 @@
  */
 
 import React from 'react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
-// import Loading from './components/Loading';
+import store, {persistor} from './services/redux/store';
+
 import Home from './screens/Home';
 import AuthStack from './screens/Auth';
 
 const App = (props) => {
   const {loggingIn} = props;
-  return <Home {...props} />;
-  // if (loggingIn) {
-  //   return <Home {...props} />;
-  // }
-  // return <AuthStack />;
+
+  if (loggingIn) {
+    return <Home {...props} />;
+  }
+  return <AuthStack />;
 };
 
-export default App;
+
+
+const AppMain = () => {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  );
+};
+
+export default AppMain;

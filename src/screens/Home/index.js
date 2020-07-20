@@ -14,15 +14,14 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
-    const data = {
-      name: 'req.body.name',
-      password: 'req.body.password',
-      email: 'req@body.email',
-      rib: '18206002105487266700217'
-    }
-    const url = 'users';
-    const res = await post(url, data, 'token');
-    console.log({res});
+    // const data = {
+    //   name: 'req.body.name',
+    //   password: 'req.body.password',
+    //   email: 'req@body.email',
+    //   rib: '18206002105487266700217'
+    // }
+    // const url = 'users';
+    // const res = await post(url, data, 'token');
   }
 
   render() {

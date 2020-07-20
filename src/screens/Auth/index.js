@@ -1,57 +1,37 @@
-import * as React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  SafeAreaView
-} from 'react-native';
+import React from 'react';
+import {View, Text} from 'react-native';
 
-const SignInScreen = () => {
-  const [username, setUsername] = React.useState('admin@foo.com');
-  const [password, setPassword] = React.useState('changeme');
+import Layout from '../Layout';
+import Sigin from './Sigin';
 
+// import { post } from '../../services/technique/api';
 
-  const signIn = () => {
-    console.log({username, password});
-  };
+export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
 
-  return (
-    <SafeAreaView>
-      <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'red' }}>
-        <View>
-          <View>
-            <Text>{'Sign In'}</Text>
-          </View>
-        </View>
-        <View>
-          <View>
-            <Text>Username</Text>
-            <TextInput
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
-            />
-          </View>
-          <View>
-            <Text>Password</Text>
-            <TextInput
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
-          <Button
-            onPress={() => signIn()}
-            title="Sign In"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
+  async componentDidMount() {
+    // const data = {
+    //   name: 'req.body.name',
+    //   password: 'req.body.password',
+    //   email: 'req@body.email',
+    //   rib: '18206002105487266700217'
+    // }
+    // const url = 'users';
+    // const res = await post(url, data, 'token');
+  }
 
-export default SignInScreen;
+  render() {
+
+    console.log(this.props);
+    return (
+      <Layout {...this.props} title={'Home'}>
+        <Sigin {...this.props} />
+      </Layout>
+    );
+  }
+}
