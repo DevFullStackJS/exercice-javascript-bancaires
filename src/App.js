@@ -14,11 +14,11 @@ import AuthStack from './screens/Auth';
 
 const App = (props) => {
   const {loggingIn} = props;
-
-  if (loggingIn) {
-    return <Home {...props} />;
-  }
-  return <AuthStack />;
+  return <Home {...props} />;
+  // if (loggingIn) {
+  //   return <Home {...props} />;
+  // }
+  // return <AuthStack />;
 };
 
 export default App;

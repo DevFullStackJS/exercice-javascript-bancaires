@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import AppHeader from '../../components/Headers';
 
 const styles = StyleSheet.create({
@@ -14,10 +14,10 @@ function Layout(props) {
   const {loading, title} = props;
 
   return (
-    <View style={styles.layout_container}>
+    <SafeAreaView style={styles.layout_container}>
       {!loading && props.children && <AppHeader {...props} title={title} />}
       {props.children}
-    </View>
+    </SafeAreaView>
   );
 }
 
