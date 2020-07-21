@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
+  Button,
 } from 'react-native';
 
 export default class ViewIcon extends Component {
   render() {
-    const { title } = this.props;
+    const { title, logout } = this.props;
 
     return (
       <View>
         <View>
           <Text>{title}</Text>
         </View>
+        {logout && <Button title='Logout' onPress={() => logout()} />}
       </View>
     );
   }

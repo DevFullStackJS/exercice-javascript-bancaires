@@ -1,4 +1,4 @@
-import constants from '../constants/crud';
+import constants from '../constants/rib';
 
 const initialState = {
   operations: [],
@@ -15,7 +15,7 @@ const users = (state = initialState, action) => {
     case constants.oneRibOperation:
       return {
         ...state,
-        operations: action.payload,
+        oneRibOperation: action.payload,
       };
     default:
       return state;

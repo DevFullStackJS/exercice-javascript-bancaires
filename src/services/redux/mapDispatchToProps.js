@@ -8,6 +8,7 @@ const mapDispatchToProps = (dispatch) => ({
   // Users
   signin: (payload, cb) => dispatch(users.signin(payload, cb)),
   signup: (payload, cb) => dispatch(users.signup(payload, cb)),
+  logout: () => dispatch(users.logout()),
 
   // Rib
   oneRibOperation: (payload, cb) => dispatch(rib.oneRibOperation(payload, cb)),

@@ -51,10 +51,9 @@ module.exports.testApi = async (req, res) => {
 module.exports.listOneRib = async (req, res) => {
   const {params, body} = req;
   if(!params.rib || !body.max, !body.min) {
-    return res.json({rib: {}});
+    return res.status(400).send("Invalid date or Rib");
   }
   const rib = await axios.get(urlApiRib);
-  console.log({params, body, rib});
   if (rib && rib.data && rib.data.statut === "OK") {
     return res.json({rib: getOperations(rib.data.operations, params.rib, body)});
   }

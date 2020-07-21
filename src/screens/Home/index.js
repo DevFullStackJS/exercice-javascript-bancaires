@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 
 import Layout from '../Layout';
-
-// import { post } from '../../services/technique/api';
+import { RibList } from '../../components/ItemList/RibList';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -14,22 +13,28 @@ export default class Home extends React.Component {
   }
 
   async componentDidMount() {
-    // const data = {
-    //   name: 'req.body.name',
-    //   password: 'req.body.password',
-    //   email: 'req@body.email',
-    //   rib: '18206002105487266700217'
-    // }
-    // const url = 'users';
-    // const res = await post(url, data, 'token');
+    // await this.props.operations();
+    const rib = '18206002105487266700217';
+    await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
   }
 
   render() {
+    const { logout, rib } = this.props;
+
+    console.log(rib.oneRibOperation);
     return (
-      <Layout {...this.props} title={'Home'}>
+      <Layout {...this.props} title={'Home'} logout={logout}>
         <View>
           <Text>Welecom TP RN !!!</Text>
         </View>
+        <FlatList
+          scrollEnabled
+          data={rib.oneRibOperation}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item }) => (
+            <RibList {...item} />
+          )}
+        />
       </Layout>
     );
   }

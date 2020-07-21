@@ -6,5 +6,6 @@ const url = {
 export default {
   signinUSER: 'signinUSER',
   signupUSER: 'signupUSER',
+  logout: 'logout',
   url,
 };

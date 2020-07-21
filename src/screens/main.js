@@ -27,7 +27,6 @@ class AppMain extends React.Component {
 
   render() {
     const { user } = this.props.users;
-    console.log({ user });
 
     if (user && user.token) {
       return <Home {...this.props} />;

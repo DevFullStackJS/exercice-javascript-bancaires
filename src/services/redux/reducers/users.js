@@ -12,6 +12,11 @@ const users = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    case constants.logout:
+      return {
+        ...state,
+        user: {},
+      };
     default:
       return state;
   }

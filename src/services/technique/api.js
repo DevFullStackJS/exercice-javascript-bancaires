@@ -1,12 +1,18 @@
 import axios from 'axios';
 import config from '../config';
 
-export const headers = token => ({
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-  'auth-token': `${token}`,
-  Authorization: `Bearer ${token}`,
-});
+import store from '../redux/store';
+
+export const headers = (token) => {
+  const users = store.getState().users;
+  console.log({ users });
+  return {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'auth-token': `${users && users.user ? users.user.token : ''}`,
+    Authorization: `Bearer ${token}`,
+  };
+};
 
 export const get = async (url, token) => {
   try {

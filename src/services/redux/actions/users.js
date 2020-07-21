@@ -23,4 +23,6 @@ export const signup = (data, callBack) => async (dispatch) => {
   }
 };
 
-export default { signin, signup };
+export const logout = () => (dispatch) => dispatch({ type: constants.logout });
+
+export default { signin, signup, logout };

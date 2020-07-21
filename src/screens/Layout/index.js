@@ -11,11 +11,11 @@ const styles = StyleSheet.create({
 });
 
 function Layout(props) {
-  const { loading, title } = props;
+  const { loading, title, logout } = props;
 
   return (
     <SafeAreaView style={styles.layout_container}>
-      {!loading && props.children && <AppHeader {...props} title={title} />}
+      {!loading && props.children && <AppHeader {...props} title={title} logout={logout} />}
       {props.children}
     </SafeAreaView>
   );
