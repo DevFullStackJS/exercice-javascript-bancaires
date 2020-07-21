@@ -8,16 +8,36 @@ import {
 } from 'react-native';
 
 const SignInScreen = (props) => {
-  const { signIn } = props;
-  const [email, setEmail] = React.useState('req123@body.email');
-  const [password, setPassword] = React.useState('req112.body.password');
+  const { signIn, signUp } = props;
+  const [email, setEmail] = React.useState('resdyyy3@body.email');
+  const [password, setPassword] = React.useState('req1dd12.body.password');
+  const [username, setUsername] = React.useState('name');
+  const [message, setMessage] = React.useState('');
+  const [rib, setRib] = React.useState('dsqsbdggdddddddsddddddfsdfsf');
+  const [sign, setSign] = React.useState('signIn');
+  const [n_sign, setNoSign] = React.useState('signIn');
+  const [signTitle, setSignTitle] = React.useState('sign In');
 
-  const toSignIn = async () => {
-    await signIn({ email, password });
-    console.log({ email, password });
+  const toogleSign = () => {
+    setSign(sign === 'signIn' ? 'signUp' : 'signIn');
+    setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
+    setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
   };
 
-  console.log({ props });
+  const callBack = (res) => {
+    if (res && res.data && res.data._id) {
+      toogleSign();
+      setMessage('Ajout avec succes');
+    }
+  };
+
+  const toSignIn = async () => {
+    console.log({ email, password });
+    if (sign === 'signUp') {
+      return signUp({ email, password, username, rib }, (res) => callBack(res));
+    }
+    await signIn({ email, password });
+  };
 
   return (
     <SafeAreaView
@@ -26,10 +46,31 @@ const SignInScreen = (props) => {
       <View>
         <View>
           <View>
-            <Text>{'Sign In'}</Text>
+            <Button
+              onPress={() => toogleSign()}
+              title={n_sign}
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
           </View>
         </View>
         <View>
+          {sign === 'signUp' && <View>
+            <Text>Username</Text>
+            <TextInput
+              placeholder="username"
+              value={username}
+              onChangeText={setUsername}
+            />
+          </View>}
+          {sign === 'signUp' && <View>
+            <Text>Rib</Text>
+            <TextInput
+              placeholder="rib"
+              value={rib}
+              onChangeText={setRib}
+            />
+          </View>}
           <View>
             <Text>Email</Text>
             <TextInput
@@ -47,9 +88,10 @@ const SignInScreen = (props) => {
               secureTextEntry
             />
           </View>
+          <Text>{message}</Text>
           <Button
             onPress={async () => await toSignIn()}
-            title="Sign In"
+            title={signTitle}
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
           />

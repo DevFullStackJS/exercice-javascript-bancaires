@@ -66,18 +66,16 @@ class Home extends React.Component {
     console.log({ res });
   }
 
-  signIn = async (data) => {
-    // const data = { password, email};
-    // const url = 'users/login';
-    // const res = await post(url, data, 'token');
-    // console.log({ res });
-    // if (res && res.data && res.data.data) {
-    //   this.setState({ data: res.data.data });
-    //   const test = await get('rib/test', res.data.data.token);
-    //   console.log({ test });
-    // }
+  cb = (res) => {
+    console.log({ res });
+  }
 
+  signIn = async (data) => {
     this.props.signin(data);
+  }
+
+  signUp = async (data, callBack) => {
+    this.props.signup(data, callBack);
   }
 
   render() {
@@ -87,7 +85,7 @@ class Home extends React.Component {
 
     return (
       <Layout {...this.props} title={'Sigin'}>
-        <Sigin {...this.props} signIn={this.signIn} />
+        <Sigin {...this.props} signIn={this.signIn} signUp={this.signUp} />
       </Layout>
     );
   }

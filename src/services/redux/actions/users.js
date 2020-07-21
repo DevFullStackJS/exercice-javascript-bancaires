@@ -12,15 +12,10 @@ export const signin = (data, callBack) => async (dispatch) => {
   }
 };
 
-export const signup = (data, callBack) => async (dispatch) => {
+export const signup = (data, callBack) => async () => {
   const payload = await usersSapp.signup(constants.url.signup, data);
+  console.log({ callBack });
   callBack && callBack(payload);
-  if (payload) {
-    return dispatch({
-      type: constants.sigunUSER,
-      payload,
-    });
-  }
 };
 
 export const logout = () => (dispatch) => dispatch({ type: constants.logout });
