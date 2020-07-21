@@ -56,25 +56,18 @@ module.exports.view = async (req, res) => {
 };
 
 module.exports.login = async (req, res) => {
-  // // validate the user
-  // const { error } = loginValidation(req.body);
-
-  // // throw validation errors
-  // if (error) return res.status(400).json({ error: error.details[0].message });
-
-  // const dbUrl = process.env. DB_CONNECT;
-  // const TOKEN_SECRET = process.env.TOKEN_SECRET;
-  // res.json({ message: 'It works!', dbUrl, TOKEN_SECRET });
-
   const user = await User.findOne({ email: req.body.email });
 
   // throw error when email is wrong
-  if (!user) return res.status(400).json({ error: "Email is wrong" });
+  if (!user){
+    return res.status(201).json({ error: "Identifiants est incorrect." });
+  }
 
-  // check for password correctness
+  // check for password correctness Le mot de passe ou identifiants est incorrect.
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword)
-    return res.status(400).json({ error: "Password is wrong" });
+  if (!validPassword) {
+    return res.status(201).json({ error: "Le mot de passe est incorrect." });
+  }
 
   // create token
   const token = jwt.sign(

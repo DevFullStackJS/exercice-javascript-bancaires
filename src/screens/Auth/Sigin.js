@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 
 const x = Dimensions.get('window').width;
@@ -54,26 +55,36 @@ const SignInScreen = (props) => {
   const [sign, setSign] = React.useState('signIn');
   const [n_sign, setNoSign] = React.useState('signIn');
   const [signTitle, setSignTitle] = React.useState('sign In');
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   const toogleSign = () => {
+    setError('');
     setSign(sign === 'signIn' ? 'signUp' : 'signIn');
     setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
     setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
   };
 
   const callBack = (res) => {
-    if (res && res.data && res.data._id) {
+    console.log({ res });
+    setLoading(false);
+    if (res && res.data && res.data.error) {
+      return setError(res.data.error);
+    }
+    if (sign === 'signUp' && res && res.data && res.data._id) {
       toogleSign();
       setMessage('Ajout avec succes');
     }
   };
 
   const toSignIn = async () => {
+    setError('');
+    setLoading(true);
     console.log({ email, password });
     if (sign === 'signUp') {
       return signUp({ email, password, username, rib }, (res) => callBack(res));
     }
-    await signIn({ email, password });
+    await signIn({ email, password }, (res) => callBack(res));
   };
 
   return (
@@ -128,15 +139,17 @@ const SignInScreen = (props) => {
                 style={styles.TextInput}
               />
             </View>
-            <Text>{message}</Text>
+            <Text style={{ textAlign: 'center', margin: 5 }}>{message}</Text>
+            <Text style={{ textAlign: 'center', margin: 5, color: 'red' }}>{error}</Text>
           </View>
           <View>
-            <Button
+            {!loading ? <Button
               onPress={async () => await toSignIn()}
               title={signTitle}
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
-            />
+            /> :
+            <ActivityIndicator size={'large'} />}
           </View>
         </View>
       </ScrollView>

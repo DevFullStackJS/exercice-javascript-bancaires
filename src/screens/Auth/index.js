@@ -17,8 +17,8 @@ class Home extends React.Component {
     };
   }
 
-  signIn = async (data) => {
-    this.props.signin(data);
+  signIn = async (data, callBack) => {
+    this.props.signin(data, callBack);
   }
 
   signUp = async (data, callBack) => {

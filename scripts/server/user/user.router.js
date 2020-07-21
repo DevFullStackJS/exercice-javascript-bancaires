@@ -24,6 +24,6 @@ router
   .delete(catchErrors(check), catchErrors(remove));
 
 // login route
-router.post("/login", (req, res) => login(req, res));
+router.post('/login', (req, res) => login(req, res));
 
 module.exports = router;
