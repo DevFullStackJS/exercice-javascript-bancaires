@@ -1,11 +1,28 @@
 import React from 'react';
 import Moment from 'moment';
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, FlatList, Button } from 'react-native';
+
+// TouchableHighlight, Text, StyleSheet, Modal
+
+// import Modal from 'modal-react-native-web';
 
 import SimplerDatePicker from '../../components/DatePiker';
 
 import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
+
+// const modalStyles = StyleSheet.create({
+//   modal: {
+//     flex: 1,
+//     backgroundColor: 'rgba(68, 75, 84, 0.9)',
+//   },
+//   centeredView: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginTop: 22,
+//   },
+// });
 
 const PikerDate = (props) => (
   <View style={{ marginBottom: 40 }}>
@@ -46,54 +63,51 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       isReady: false,
-      minDate: Moment().subtract(5, 'years'),
-      minDate2: Moment().subtract(5, 'years'),
+      minDate: Moment().subtract(10, 'years'),
+      minDate2: Moment().subtract(10, 'years'),
       maxDate: Moment().add(1, 'days'),
       min: new Date(),
       max: new Date(),
+      modalVisible: true,
     };
   }
 
   async componentDidMount() {
-    // await this.props.operations();
-    const rib = '18206002105487266700217';
-    // max: "21/07/2020"
-    // min: "01/01/2020"
-    // rib: "18206002105487266700217"
-    await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
+    await this.props.operations();
+    // const rib = '18206002105487266700217';
+    // await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
+  }
+
+  componentWillMount() {
+    // Modal.setAppElement('body');
   }
 
   onDatePicked = (date) => {
     if (date && date._i) {
       console.log(date._i);
-      this.setState({ min: date._i, minDate2: date });
+      this.setState({ min: date._i });
     }
   };
 
   onDatePickedMax = (date) => {
     if (date && date._i) {
-      this.setState({ max: date._i, maxDate: date });
+      this.setState({ max: date._i });
     }
   };
 
   getOperationDate = async () => {
     const { min, max } = this.state;
     const rib = '18206002105487266700217';
-    // await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
-    // 2020-07-22
     await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
   }
 
   render() {
     const { logout, rib } = this.props;
     const { minDate, maxDate, minDate2 } = this.state;
-    // this.props.rib.operations
-    // this.props.rib.oneRibOperation
 
     return (
       <Layout {...this.props} title={'Home'} logout={logout}>
         <View>
-          <Text>Welecom TP RN !!!</Text>
           <PikerDate
             minDate={minDate}
             maxDate={maxDate}
@@ -117,6 +131,28 @@ export default class Home extends React.Component {
             <RibList {...item} />
           )}
         />
+        {/* <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          style={modalStyles.modal}
+          // onDismiss={() => {
+          //   Alert.alert('Modal has been closed.');
+          // }}
+        >
+          <View style={modalStyles.centeredView}>
+            <View>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight
+                onPress={() => {
+                  this.setState({ modalVisible: !this.state.modalVisible });
+                }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal> */}
       </Layout>
     );
   }

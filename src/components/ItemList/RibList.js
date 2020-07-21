@@ -1,46 +1,39 @@
 import React from 'react';
 import {
   View,
-  Image,
+  // Image,
   Text,
+  Dimensions,
 } from 'react-native';
 
 import { styles } from './RibList.styles';
 
+const { width } = Dimensions.get('window');
+
 export const RibList = (props) => {
   const { Libelle, Date, Montant, recipe, spent } = props;
   return (
-    <View Image>
+    <View>
       <View>
-        <Image
-          source={{
-            uri: 'http://robohash.org/set_set1/bgset_bg2/kQqaIfGqxsjFoNIT',
-          }}
-        />
-      </View>
-      <View>
-        {/* <Text>{Libelle}</Text>
-        <Text note numberOfLines={1}>
-          {`Date: ${Date}, RIB: ${RIB} Montant: ${Montant} recipe: ${recipe} spent: ${spent}`}
-        </Text> */}
-
-        <View style={styles.headList}>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>{Date}</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>{Libelle}</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>{Montant}</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>{recipe}</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>{spent}</Text>
-          <View style={styles.titleEnd} />
+        <View style={[styles.headList, { justifyContent: 'space-between', padding: 10 }]}>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'left' }]}>{Date}</Text>
+          </View>
+          <View style={{ width: width / 5 }}>
+            <Text style={styles.titleText}>{Libelle}</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>{Montant}</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>{recipe}</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>{spent}</Text>
+          </View>
         </View>
       </View>
       <View style={styles.separate} />
-        {/* <Text>{Montant + Devise}</Text>
-      </View> */}
     </View>
   );
 };
