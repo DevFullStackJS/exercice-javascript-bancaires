@@ -1,15 +1,10 @@
 export const styles = {
-  headList: {
-    flexDirection: 'row',
-    height: 100,
-    padding: 20,
-    backgroundColor: 'grey',
-  },
-  footTotal: {
-    height: 100,
-    padding: 20,
+  sectionStyle: {
     flexDirection: 'row',
     backgroundColor: 'grey',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 5,
   },
   showTotal: {
     flex: 0.5,
@@ -17,13 +12,10 @@ export const styles = {
   titleView: {
     flex: 0.2,
   },
+  titleEnd: {
+    flex: 0.02,
+  },
   titleText: {
     fontWeight: 'bold',
-  },
-  ribCode: {
-    flexDirection: 'row',
-    backgroundColor: 'grey',
-    paddingTop: 10,
-    paddingLeft: 5,
   },
 };

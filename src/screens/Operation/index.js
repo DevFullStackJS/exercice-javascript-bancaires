@@ -39,8 +39,8 @@ class Operation extends React.Component {
 
     return (
       <Layout {...this.props} title={'Operation'} logout={logout}>
-        <View style={styles.ribCode}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
-        <View style={styles.headList}>
+        <View style={styles.sectionStyle}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
+        <View style={styles.sectionStyle}>
           <View style={styles.titleView} />
           <Text style={styles.titleText}>Date</Text>
           <View style={styles.titleView} />
@@ -51,6 +51,7 @@ class Operation extends React.Component {
           <Text style={styles.titleText}>Recettes</Text>
           <View style={styles.titleView} />
           <Text style={styles.titleText}>Dépenses</Text>
+          <View style={styles.titleEnd} />
         </View>
         <FlatList
           scrollEnabled
@@ -60,9 +61,9 @@ class Operation extends React.Component {
             <RibList {...item} />
           )}
         />
-        <View style={styles.footTotal}>
+        <View style={styles.sectionStyle}>
           <View style={styles.showTotal} />
-          <Text style={styles.titleText}>SOLDE: {totalSold}</Text>
+          <Text style={styles.titleText}>SOLDE:   {totalSold}</Text>
         </View>
       </Layout>
     );

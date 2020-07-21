@@ -35,6 +35,7 @@ export const RibList = (props) => {
           <Text style={styles.titleText}>{recipe}</Text>
           <View style={styles.titleView} />
           <Text style={styles.titleText}>{spent}</Text>
+          <View style={styles.titleEnd} />
         </View>
       </View>
       <View style={styles.separate} />
