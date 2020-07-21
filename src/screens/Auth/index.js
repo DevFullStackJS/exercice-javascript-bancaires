@@ -84,7 +84,7 @@ class Home extends React.Component {
     console.log({ user });
 
     return (
-      <Layout {...this.props} title={'Sigin'}>
+      <Layout {...this.props} title={'Sigin'} notLogout>
         <Sigin {...this.props} signIn={this.signIn} signUp={this.signUp} />
       </Layout>
     );

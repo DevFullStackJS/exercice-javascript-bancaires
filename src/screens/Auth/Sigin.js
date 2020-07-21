@@ -5,7 +5,38 @@ import {
   TextInput,
   Button,
   SafeAreaView,
+  StyleSheet,
+  Dimensions,
 } from 'react-native';
+
+const x = Dimensions.get('window').width;
+// const y = Dimensions.get('window').y;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // justifyContent: 'center',
+    backgroundColor: 'white',
+    // alignItems: 'center',
+  },
+  inputVew: {
+    margin: 50,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignContent: 'center',
+  },
+  labelInput: {
+    paddingRight: 20,
+    width: x / 4,
+  },
+  TextInput: {
+    padding: 20,
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: x / 2,
+  },
+});
 
 const SignInScreen = (props) => {
   const { signIn, signUp } = props;
@@ -40,9 +71,7 @@ const SignInScreen = (props) => {
   };
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: 'center', backgroundColor: 'white', alignItems: 'center' }}
-    >
+    <SafeAreaView style={styles.container}>
       <View>
         <View>
           <View>
@@ -55,12 +84,13 @@ const SignInScreen = (props) => {
           </View>
         </View>
         <View>
-          {sign === 'signUp' && <View>
-            <Text>Username</Text>
+          {sign === 'signUp' && <View style={styles.inputVew}>
+            <Text style={styles.labelInput}>Username</Text>
             <TextInput
               placeholder="username"
               value={username}
               onChangeText={setUsername}
+              style={styles.TextInput}
             />
           </View>}
           {sign === 'signUp' && <View>
@@ -71,12 +101,13 @@ const SignInScreen = (props) => {
               onChangeText={setRib}
             />
           </View>}
-          <View>
-            <Text>Email</Text>
+          <View style={styles.inputVew}>
+            <Text style={styles.labelInput}>Email</Text>
             <TextInput
               placeholder="email"
               value={email}
               onChangeText={setEmail}
+              style={styles.TextInput}
             />
           </View>
           <View>

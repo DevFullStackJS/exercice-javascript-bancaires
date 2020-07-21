@@ -20,8 +20,9 @@ export default class Home extends React.Component {
 
   render() {
     const { logout, rib } = this.props;
+    // this.props.rib.operations
+    // this.props.rib.oneRibOperation
 
-    console.log(rib.oneRibOperation);
     return (
       <Layout {...this.props} title={'Home'} logout={logout}>
         <View>
