@@ -43,6 +43,17 @@ const styles = StyleSheet.create({
     width: x / 2,
     borderRadius: 15,
   },
+  signinContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 7,
+    padding: 10,
+  },
+  textPage: {
+    textAlign: 'left',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
 const SignInScreen = (props) => {
@@ -53,7 +64,7 @@ const SignInScreen = (props) => {
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
   const [sign, setSign] = React.useState('signIn');
-  const [n_sign, setNoSign] = React.useState('signIn');
+  const [n_sign, setNoSign] = React.useState('signUp');
   const [signTitle, setSignTitle] = React.useState('sign In');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
@@ -87,12 +98,19 @@ const SignInScreen = (props) => {
     await signIn({ email, password }, (res) => callBack(res));
   };
 
+  const { width } = Dimensions.get('window');
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.body}>
-          <View>
-            <View>
+          {/* <View>
+            <View> */}
+          <View style={styles.signinContainer}>
+            <View style={{ width: width / 6 }}>
+              <Text style={styles.textPage}>{sign}</Text>
+            </View>
+            <View style={{ width: width / 8 }}>
               <Button
                 onPress={() => toogleSign()}
                 title={n_sign}
@@ -101,6 +119,8 @@ const SignInScreen = (props) => {
               />
             </View>
           </View>
+          {/* </View>
+          </View> */}
           <View>
             {sign === 'signUp' && <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Username</Text>
@@ -149,7 +169,7 @@ const SignInScreen = (props) => {
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
             /> :
-            <ActivityIndicator size={'large'} />}
+              <ActivityIndicator size={'large'} />}
           </View>
         </View>
       </ScrollView>
