@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 
 const x = Dimensions.get('window').width;
@@ -19,22 +20,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     // alignItems: 'center',
   },
+  body: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    flex: 1,
+  },
   inputVew: {
     margin: 50,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
     alignContent: 'center',
   },
   labelInput: {
-    paddingRight: 20,
+    paddingRight: 10,
     width: x / 4,
   },
   TextInput: {
-    padding: 20,
-    borderColor: 'gray',
+    padding: 10,
     borderWidth: 1,
     width: x / 2,
+    borderRadius: 15,
   },
 });
 
@@ -72,62 +78,68 @@ const SignInScreen = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <View>
+      <ScrollView>
+        <View style={styles.body}>
+          <View>
+            <View>
+              <Button
+                onPress={() => toogleSign()}
+                title={n_sign}
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+              />
+            </View>
+          </View>
+          <View>
+            {sign === 'signUp' && <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Username</Text>
+              <TextInput
+                placeholder="username"
+                value={username}
+                onChangeText={setUsername}
+                style={styles.TextInput}
+              />
+            </View>}
+            {sign === 'signUp' && <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Rib</Text>
+              <TextInput
+                placeholder="rib"
+                value={rib}
+                onChangeText={setRib}
+                style={styles.TextInput}
+              />
+            </View>}
+            <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Email</Text>
+              <TextInput
+                placeholder="email"
+                value={email}
+                onChangeText={setEmail}
+                style={styles.TextInput}
+              />
+            </View>
+            <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Password</Text>
+              <TextInput
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                style={styles.TextInput}
+              />
+            </View>
+            <Text>{message}</Text>
+          </View>
           <View>
             <Button
-              onPress={() => toogleSign()}
-              title={n_sign}
+              onPress={async () => await toSignIn()}
+              title={signTitle}
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
             />
           </View>
         </View>
-        <View>
-          {sign === 'signUp' && <View style={styles.inputVew}>
-            <Text style={styles.labelInput}>Username</Text>
-            <TextInput
-              placeholder="username"
-              value={username}
-              onChangeText={setUsername}
-              style={styles.TextInput}
-            />
-          </View>}
-          {sign === 'signUp' && <View>
-            <Text>Rib</Text>
-            <TextInput
-              placeholder="rib"
-              value={rib}
-              onChangeText={setRib}
-            />
-          </View>}
-          <View style={styles.inputVew}>
-            <Text style={styles.labelInput}>Email</Text>
-            <TextInput
-              placeholder="email"
-              value={email}
-              onChangeText={setEmail}
-              style={styles.TextInput}
-            />
-          </View>
-          <View>
-            <Text>Password</Text>
-            <TextInput
-              placeholder="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
-          <Text>{message}</Text>
-          <Button
-            onPress={async () => await toSignIn()}
-            title={signTitle}
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -7,14 +7,14 @@ import {
 
 export default class ViewIcon extends Component {
   render() {
-    const { title, logout, notLogout } = this.props;
+    const { title, logout } = this.props;
 
     return (
       <View>
         <View>
           <Text>{title}</Text>
         </View>
-        {!notLogout && <Button title='Logout' onPress={() => logout()} />}
+        <Button title='Logout' onPress={() => logout()} />
       </View>
     );
   }

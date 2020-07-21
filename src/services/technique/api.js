@@ -5,7 +5,6 @@ import store from '../redux/store';
 
 export const headers = (token) => {
   const users = store.getState().users;
-  console.log({ users });
   return {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -19,11 +18,11 @@ export const get = async (url, token) => {
     const res = await axios.get(`${config.baseURL}${url}`, {
       headers: token ? headers(token) : headers(),
     });
-    console.log('get res ------------>', res);
+    // console.log('get res ------------>', res);
     return res;
   } catch (e) {
     const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
-    console.log('get errors ------------>', errors);
+    // console.log('get errors ------------>', errors);
     return errors;
   }
 };
@@ -33,11 +32,11 @@ export const post = async (url, data, token) => {
     const res = await axios.post(`${config.baseURL}${url}`, data, {
       headers: headers(token),
     });
-    console.log('post res ------------>', res);
+    // console.log('post res ------------>', res);
     return res;
   } catch (e) {
     const errors = e ? JSON.parse(JSON.stringify(e)) : { error: true };
-    console.log('post errors ------------>', errors);
+    // console.log('post errors ------------>', errors);
     return errors;
   }
 };
