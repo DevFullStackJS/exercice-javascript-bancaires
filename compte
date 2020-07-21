@@ -7,3 +7,15 @@ heroku (CI /CD)
 diagramme de class
 Eslint
 
+
+Api Users
+- api/users/login {
+    201: {
+        data: { error }
+    },
+    200: {
+        data: {token}
+    }
+}
+
+

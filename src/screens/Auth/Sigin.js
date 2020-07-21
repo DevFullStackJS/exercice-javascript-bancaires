@@ -49,9 +49,9 @@ const SignInScreen = (props) => {
   const { signIn, signUp } = props;
   const [email, setEmail] = React.useState('resdyyy3@body.email');
   const [password, setPassword] = React.useState('req1dd12.body.password');
-  const [username, setUsername] = React.useState('name');
+  const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
-  const [rib, setRib] = React.useState('dsqsbdggdddddddsddddddfsdfsf');
+  const [rib, setRib] = React.useState('');
   const [sign, setSign] = React.useState('signIn');
   const [n_sign, setNoSign] = React.useState('signIn');
   const [signTitle, setSignTitle] = React.useState('sign In');
