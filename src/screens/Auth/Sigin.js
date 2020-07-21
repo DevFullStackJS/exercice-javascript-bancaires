@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 
 const SignInScreen = (props) => {
-  const { testApi } = props;
-  const [username, setUsername] = React.useState('admin@foo.com');
-  const [password, setPassword] = React.useState('changeme');
+  const { signIn } = props;
+  const [email, setEmail] = React.useState('req123@body.email');
+  const [password, setPassword] = React.useState('req112.body.password');
 
-  const signIn = async () => {
-    await testApi({ username, password });
-    console.log({ username, password });
+  const toSignIn = async () => {
+    await signIn({ email, password });
+    console.log({ email, password });
   };
 
   console.log({ props });
@@ -31,11 +31,11 @@ const SignInScreen = (props) => {
         </View>
         <View>
           <View>
-            <Text>Username</Text>
+            <Text>Email</Text>
             <TextInput
-              placeholder="Username"
-              value={username}
-              onChangeText={setUsername}
+              placeholder="email"
+              value={email}
+              onChangeText={setEmail}
             />
           </View>
           <View>
@@ -48,7 +48,7 @@ const SignInScreen = (props) => {
             />
           </View>
           <Button
-            onPress={async () => await signIn()}
+            onPress={async () => await toSignIn()}
             title="Sign In"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"

@@ -2,9 +2,8 @@ validator
 gestion erreur
 test Unitaire 
 test end to end
-cicleci
+cicleci (CI)
+heroku (CI /CD)
 diagramme de class
 Eslint
 
-    "code-formatter": "prettier ./src/**/*.{ts,tx,tsx} --write",
-    "code-formatter-check": "prettier --check src/**/*.{ts,tx,tsx}",

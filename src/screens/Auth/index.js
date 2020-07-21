@@ -24,7 +24,7 @@ class Home extends React.Component {
   }
 
   async componentDidMount() {
-    this.testApi();
+    // this.testApi();
   }
 
   testApiGet = async () => {
@@ -60,17 +60,18 @@ class Home extends React.Component {
     //   const operations = getOperations(list, "30002005500000157845Z02", { min: '10/04/2001', max: '11/04/2017' });
     //   console.log({ operations });
     // }
+    // const data = {
+    //   name: 'req.body.name',
+    //   password: 'req112.body.password',
+    //   email: 'req123@body.email',
+    //   rib: '18206002105487266700299',
+    // };
 
     console.log({ res });
   }
 
-  testApi = async () => {
-    const data = {
-      name: 'req.body.name',
-      password: 'req112.body.password',
-      email: 'req123@body.email',
-      rib: '18206002105487266700299',
-    };
+  signIn = async (data) => {
+    // const data = { password, email};
     const url = 'users/login';
     const res = await post(url, data, 'token');
     console.log({ res });
@@ -82,11 +83,9 @@ class Home extends React.Component {
   }
 
   render() {
-
-    console.log(this.state.data);
     return (
       <Layout {...this.props} title={'Home'}>
-        <Sigin {...this.props} testApi={this.testApiGetOneRib} />
+        <Sigin {...this.props} signIn={this.signIn} />
       </Layout>
     );
   }
