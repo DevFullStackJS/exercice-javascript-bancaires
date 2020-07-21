@@ -9,7 +9,27 @@ import { RibList } from '../../components/ItemList/RibList';
 
 const PikerDate = (props) => (
   <View style={{ marginBottom: 40 }}>
-    <SimplerDatePicker {...props} />
+    <SimplerDatePicker
+      {...props}
+      containerStyle= {{
+        flex: 1,
+        flexDirection: 'row',
+      }}
+      yearStyle= {{
+        flex: 1,
+        marginRight: 5,
+      }}
+      monthStyle= {{
+        flex: 1,
+        marginRight: 5,
+      }}
+      dayStyle= {{
+        flex: 1,
+      }}
+      textStyle= {{
+        fontSize: 16,
+      }}
+    />
   </View>
 );
 
