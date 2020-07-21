@@ -38,7 +38,7 @@ class Operation extends React.Component {
     const { totalSold } = this.state;
 
     return (
-      <Layout {...this.props} title={'Operation'} logout={logout}>
+      <Layout {...this.props} title={'Opération'} logout={logout}>
         <View style={styles.sectionStyle}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
         <View style={styles.sectionStyle}>
           <View style={styles.titleView} />
