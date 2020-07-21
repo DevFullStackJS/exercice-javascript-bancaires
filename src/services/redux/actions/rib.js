@@ -22,3 +22,5 @@ export const operations = (callBack) => async (dispatch) => {
     });
   }
 };
+
+export default { operations, oneRibOperation };

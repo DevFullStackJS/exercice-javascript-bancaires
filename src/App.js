@@ -12,24 +12,14 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import store, { persistor } from './services/redux/store';
 
-import Home from './screens/Home';
-import AuthStack from './screens/Auth';
+import Main from './screens/main';
 
-const App = (props) => {
-  const { loggingIn } = props;
+const App = () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Main />
+    </PersistGate>
+  </Provider>
+);
 
-  if (loggingIn) {
-    return <Home {...props} />;
-  }
-  return <AuthStack />;
-};
-
-const AppMain = () => (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  );
-
-export default AppMain;
+export default App;

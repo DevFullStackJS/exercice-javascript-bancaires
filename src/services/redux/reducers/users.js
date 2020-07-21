@@ -1,4 +1,4 @@
-import constants from '../constants/crud';
+import constants from '../constants/users';
 
 const initialState = {
   users: [],

@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import axios from 'axios';
-
 import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
@@ -10,8 +8,6 @@ import Layout from '../Layout';
 import Sigin from './Sigin';
 
 import { post, get } from '../../services/technique/api';
-
-// const ops = getOperations("30002005500000157845Z02", { min: '10/04/2001', max: '11/04/2017' });
 
 class Home extends React.Component {
   constructor(props) {
@@ -72,17 +68,23 @@ class Home extends React.Component {
 
   signIn = async (data) => {
     // const data = { password, email};
-    const url = 'users/login';
-    const res = await post(url, data, 'token');
-    console.log({ res });
-    if (res && res.data && res.data.data) {
-      this.setState({ data: res.data.data });
-      const test = await get('rib/test', res.data.data.token);
-      console.log({ test });
-    }
+    // const url = 'users/login';
+    // const res = await post(url, data, 'token');
+    // console.log({ res });
+    // if (res && res.data && res.data.data) {
+    //   this.setState({ data: res.data.data });
+    //   const test = await get('rib/test', res.data.data.token);
+    //   console.log({ test });
+    // }
+
+    this.props.signin(data);
   }
 
   render() {
+
+    const { user } = this.props.users;
+    console.log({ user });
+
     return (
       <Layout {...this.props} title={'Home'}>
         <Sigin {...this.props} signIn={this.signIn} />

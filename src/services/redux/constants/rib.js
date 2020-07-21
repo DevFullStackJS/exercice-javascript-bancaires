@@ -1,6 +1,6 @@
 const url = {
-  operations: '/rib/list',
-  oneRibOperation: '/rib/list/',
+  operations: 'rib/list',
+  oneRibOperation: 'rib/list/',
 };
 
 export default {

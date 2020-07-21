@@ -4,6 +4,11 @@ import users from './users';
 import rib from './rib';
 
 const reducers = combineReducers({
+  log: (_, action) => {
+    // eslint-disable-next-line no-console
+    console.log({ action });
+    return {};
+  },
   crud,
   users,
   rib,

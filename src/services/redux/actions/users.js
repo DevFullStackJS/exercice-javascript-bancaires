@@ -2,12 +2,12 @@ import constants from '../constants/users';
 import usersSapp from '../../applicatif/users';
 
 export const signin = (data, callBack) => async (dispatch) => {
-  const payload = await usersSapp.signin(constants.url.siginn, data);
-  callBack && callBack(payload);
-  if (payload) {
+  const res = await usersSapp.signin(constants.url.signin, data);
+  callBack && callBack(res);
+  if (res && res.data && res.data.data) {
     return dispatch({
       type: constants.signinUSER,
-      payload,
+      payload: res.data.data,
     });
   }
 };
@@ -22,3 +22,5 @@ export const signup = (data, callBack) => async (dispatch) => {
     });
   }
 };
+
+export default { signin, signup };

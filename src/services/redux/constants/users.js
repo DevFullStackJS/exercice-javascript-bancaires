@@ -1,6 +1,6 @@
 const url = {
-  signin: '/users/login',
-  signup: '/users',
+  signin: 'users/login',
+  signup: 'users',
 };
 
 export default {

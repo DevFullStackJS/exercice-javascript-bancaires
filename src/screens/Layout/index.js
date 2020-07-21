@@ -1,11 +1,6 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
 
-import { connect } from 'react-redux';
-
-import mapStateToProps from '../../services/redux/mapStateToProps';
-import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
-
 import AppHeader from '../../components/Headers';
 
 const styles = StyleSheet.create({
@@ -26,9 +21,4 @@ function Layout(props) {
   );
 }
 
-// export default Layout;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Layout);
+export default Layout;
