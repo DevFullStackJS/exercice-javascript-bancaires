@@ -5,8 +5,10 @@ import {
   Text,
 } from 'react-native';
 
+import { styles } from './RibList.styles';
+
 export const RibList = (props) => {
-  const { RIB, Date, Libelle, Devise, Montant } = props;
+  const { Libelle, Date, Montant, recipe, spent } = props;
   return (
     <View Image>
       <View>
@@ -17,14 +19,27 @@ export const RibList = (props) => {
         />
       </View>
       <View>
-        <Text>{Libelle}</Text>
+        {/* <Text>{Libelle}</Text>
         <Text note numberOfLines={1}>
-          {`Date: ${Date}, RIB: ${RIB}`}
-        </Text>
+          {`Date: ${Date}, RIB: ${RIB} Montant: ${Montant} recipe: ${recipe} spent: ${spent}`}
+        </Text> */}
+
+        <View style={styles.headList}>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>{Date}</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>{Libelle}</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>{Montant}</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>{recipe}</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>{spent}</Text>
+        </View>
       </View>
-      <View>
-        <Text>{Montant + Devise}</Text>
-      </View>
+      <View style={styles.separate} />
+        {/* <Text>{Montant + Devise}</Text>
+      </View> */}
     </View>
   );
 };

@@ -7,6 +7,7 @@ import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
 import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
+import { styles } from './index.styles';
 
 class Operation extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class Operation extends React.Component {
   async componentDidMount() {
     const rib = '18206002105487266700217';
     await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
-    const totalSold = this.checkSolde(this.props.rib.oneRibOperation);
+    const { oneRibOperation } = this.props.rib;
+    const totalSold = oneRibOperation ? this.checkSolde(oneRibOperation) : 0;
     this.setState({ totalSold });
   }
 
@@ -37,6 +39,19 @@ class Operation extends React.Component {
 
     return (
       <Layout {...this.props} title={'Operation'} logout={logout}>
+        <View style={styles.ribCode}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
+        <View style={styles.headList}>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>Date</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>Libelle</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>Montant</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>Recettes</Text>
+          <View style={styles.titleView} />
+          <Text style={styles.titleText}>Dépenses</Text>
+        </View>
         <FlatList
           scrollEnabled
           data={rib.oneRibOperation}
@@ -45,8 +60,9 @@ class Operation extends React.Component {
             <RibList {...item} />
           )}
         />
-        <View>
-          <Text>Solde: {totalSold}</Text>
+        <View style={styles.footTotal}>
+          <View style={styles.showTotal} />
+          <Text style={styles.titleText}>SOLDE: {totalSold}</Text>
         </View>
       </Layout>
     );
