@@ -1,5 +1,5 @@
 import crud from '../bdl/crud';
 
 export default {
-    getAll: () => crud.getAll(),
+  getAll: () => crud.getAll(),
 };
