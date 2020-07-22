@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, Dimensions } from 'react-native';
 
 import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
@@ -36,22 +36,27 @@ class Operation extends React.Component {
   render() {
     const { logout, rib } = this.props;
     const { totalSold } = this.state;
+    const { width } = Dimensions.get('window');
 
     return (
       <Layout {...this.props} title={'Opération'} logout={logout}>
         <View style={styles.sectionStyle}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
-        <View style={styles.sectionStyle}>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>Date</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>Libelle</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>Montant</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>Recettes</Text>
-          <View style={styles.titleView} />
-          <Text style={styles.titleText}>Dépenses</Text>
-          <View style={styles.titleEnd} />
+        <View style={[styles.sectionStyle, { justifyContent: 'space-between', padding: 10 }]}>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'left' }]}>Date</Text>
+          </View>
+          <View style={{ width: width / 5 }}>
+            <Text style={styles.titleText}>Libelle</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>Montant</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>Recettes</Text>
+          </View>
+          <View style={{ width: width / 6 }}>
+            <Text style={[styles.titleText, { textAlign: 'right' }]}>Dépenses</Text>
+          </View>
         </View>
         <FlatList
           scrollEnabled
