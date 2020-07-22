@@ -2,27 +2,12 @@ import React from 'react';
 import Moment from 'moment';
 import { View, FlatList, Button } from 'react-native';
 
-// TouchableHighlight, Text, StyleSheet, Modal
-
-// import Modal from 'modal-react-native-web';
-
 import SimplerDatePicker from '../../components/DatePiker';
+
+import ModalComponent from '../../components/Common/Modal';
 
 import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
-
-// const modalStyles = StyleSheet.create({
-//   modal: {
-//     flex: 1,
-//     backgroundColor: 'rgba(68, 75, 84, 0.9)',
-//   },
-//   centeredView: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginTop: 22,
-//   },
-// });
 
 const PikerDate = (props) => (
   <View style={{ marginBottom: 40 }}>
@@ -68,7 +53,7 @@ export default class Home extends React.Component {
       maxDate: Moment().add(1, 'days'),
       min: new Date(),
       max: new Date(),
-      modalVisible: true,
+      modalVisible: false,
     };
   }
 
@@ -101,6 +86,11 @@ export default class Home extends React.Component {
     await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
   }
 
+  onClose = () => {
+    console.log('dfsdfsdf');
+    this.setState({ modalVisible: false });
+  }
+
   render() {
     const { logout, rib } = this.props;
     const { minDate, maxDate, minDate2 } = this.state;
@@ -125,34 +115,13 @@ export default class Home extends React.Component {
         />
         <FlatList
           scrollEnabled
-          data={rib.oneRibOperation}
+          data={rib.operations}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item }) => (
             <RibList {...item} />
           )}
         />
-        {/* <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          style={modalStyles.modal}
-          // onDismiss={() => {
-          //   Alert.alert('Modal has been closed.');
-          // }}
-        >
-          <View style={modalStyles.centeredView}>
-            <View>
-              <Text>Hello World!</Text>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setState({ modalVisible: !this.state.modalVisible });
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal> */}
+        <ModalComponent />
       </Layout>
     );
   }
