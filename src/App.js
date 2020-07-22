@@ -10,9 +10,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import store, { persistor } from './services/redux/store';
+import store, { persistor } from './client/services/redux/store';
 
-import Main from './screens/main';
+import Main from './client/screens/main';
 
 const App = () => (
   <Provider store={store}>

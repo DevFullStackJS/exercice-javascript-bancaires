@@ -9,14 +9,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 50
+    maxlength: 50,
   },
   email: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 255,
-    unique: true
+    unique: true,
   },
   rib: {
     type: String,
@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 255
-  }
+    maxlength: 255,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);

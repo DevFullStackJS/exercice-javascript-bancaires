@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "px": "cd ios && pod install && cd ..",
-    "server": "nodemon scripts/server/index.js",
+    "server": "nodemon src/server/index.js",
     "st": "watchman watch-del-all && yarn start -- --reset-cache",
     "lint": "eslint --quiet --ext .jsx --ext .js ./src/ --fix",
     "web": "node scripts/start.js",

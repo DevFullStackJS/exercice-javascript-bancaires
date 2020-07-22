@@ -1,14 +1,11 @@
-const auth = require("../middleware/auth");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const User = require('./user.model');
-
-const { registerValidation, loginValidation } = require("../validation");
 
 module.exports.check = async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) {
-    throw Error('User not found');
+    throw Error('User not found', res);
   }
 
   next();
@@ -43,7 +40,7 @@ module.exports.list = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true
+    new: true,
   }).exec();
 
   res.json(user);
@@ -59,14 +56,14 @@ module.exports.login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   // throw error when email is wrong
-  if (!user){
-    return res.status(201).json({ error: "Identifiants est incorrect." });
+  if (!user) {
+    return res.status(201).json({ error: 'Identifiants est incorrect.' });
   }
 
   // check for password correctness Le mot de passe ou identifiants est incorrect.
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
-    return res.status(201).json({ error: "Le mot de passe est incorrect." });
+    return res.status(201).json({ error: 'Le mot de passe est incorrect.' });
   }
 
   // create token
@@ -75,14 +72,13 @@ module.exports.login = async (req, res) => {
       name: user.name,
       id: user._id,
     },
-    process.env.TOKEN_SECRET
+    process.env.TOKEN_SECRET,
   );
 
-  res.header("auth-token", token).json({
+  res.header('auth-token', token).json({
     error: null,
     data: {
       token,
     },
   });
 };
-

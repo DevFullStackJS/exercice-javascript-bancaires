@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 // const cors = require('@robertoachar/express-cors');
-var cors = require('cors')
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const helmet = require('helmet');
@@ -11,7 +11,7 @@ const { catchAll, notFound } = require('./error');
 const app = express();
 const userRouter = require('./user/user.router');
 const ribRouter = require('./rib/rib.router');
-const verifyToken = require("./validation/validate-token");
+const verifyToken = require('./validation/validate-token');
 
 app.use(helmet());
 app.use(cors());
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '../../build')))
-  .set('static', path.join(__dirname, 'static'))
+  .set('static', path.join(__dirname, 'static'));
 app.get('/', (req, res) => {
   res.json({ message: 'It works!' });
 });
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRouter);
 
-app.use("/api/rib", verifyToken, ribRouter);
+app.use('/api/rib', verifyToken, ribRouter);
 
 app.use(notFound);
 app.use(catchAll);
