@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+import { Text, TouchableHighlight, View, Platform, Modal } from 'react-native';
+import ModalWeb from 'modal-react-native-web';
 
-import Modal from 'modal-react-native-web';
+const ModalWebMobile = Platform.OS === 'web' ? ModalWeb : Modal;
 
 export default class ModalComponent extends Component {
   state = {
@@ -15,15 +16,16 @@ export default class ModalComponent extends Component {
   render() {
     return (
       <View style={{ marginTop: 22 }}>
-        <Modal
+        <ModalWebMobile
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
           // eslint-disable-next-line no-undef
-          appElement={document && document.getElementById('root')}
-          onDismiss={() => {
+          appElement={Platform.OS === 'web' && document && document.getElementById('root')}
+          // onDismiss={() => {
             // alert('Modal has been closed.');
-          }}>
+          // }}
+        >
           <View style={{ marginTop: 22 }}>
             <View>
               <Text>Hello World!</Text>
@@ -36,7 +38,7 @@ export default class ModalComponent extends Component {
               </TouchableHighlight>
             </View>
           </View>
-        </Modal>
+        </ModalWebMobile>
 
         <TouchableHighlight
           onPress={() => {
