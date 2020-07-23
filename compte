@@ -25,6 +25,7 @@ Api Users
 }
 
 yarn add -D canvas-prebuilt
+
 "canvas-prebuilt": "^2.0.0-alpha.14",
 
 source /Users/lahnjara/.bashrc
