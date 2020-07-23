@@ -5,6 +5,10 @@ const router = express.Router();
 const { list, listOneRib, testApi } = require('./rib.controller');
 
 router
+  .route('/')
+  .get(catchErrors(list));
+
+router
   .route('/list')
   .get(catchErrors(list));
 

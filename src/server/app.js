@@ -1,7 +1,11 @@
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+
+import { swaggerDocument, options } from './swagger';
+
 const bodyParser = require('body-parser');
-// const cors = require('@robertoachar/express-cors');
 const cors = require('cors');
-const express = require('express');
+
 const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -21,21 +25,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '../../build')))
   .set('static', path.join(__dirname, 'static'));
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.json({ message: 'It works!' });
 });
 
-// (req, res) => {
-//   const dbUrl = process.env. DB_CONNECT;
-//   const TOKEN_SECRET = process.env.TOKEN_SECRET;
-//   res.json({ message: 'It works!', dbUrl, TOKEN_SECRET });
-// }
+app.use('/api/docs', swaggerUi.serve);
+app.get('/api/docs', swaggerUi.setup(swaggerDocument, false, options, '.swagger-ui .topbar { background-color: red }'));
 
 app.use('/api/users', userRouter);
 
 app.use('/api/rib', verifyToken, ribRouter);
 
+app.use('/api/ribs', verifyToken, ribRouter);
+
 app.use(notFound);
+
 app.use(catchAll);
 
 module.exports = app;

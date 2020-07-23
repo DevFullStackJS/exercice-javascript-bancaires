@@ -1,0 +1,241 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Gestion banquaire Application API",
+    "description": "Gestion banquaire Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    },
+    {
+      "name": "Ribs",
+      "description": "API for rib in the system"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:5000/",
+      "description": "Local server"
+    },
+    {
+      "url": "https://api_url_testing",
+      "description": "Testing server"
+    },
+    {
+      "url": "https://api_url_production",
+      "description": "Production server"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    // "Bearer": {
+    //   "type": "apiKey",
+    //   "name": "Authorization",
+    //   "in": "header"
+    // },
+    "JWT": {
+      "type": "apiKey",
+      "name": "auth-token",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/ribs": {
+      "get": {
+        "tags": [
+          "Ribs"
+        ],
+        "summary": "Get all rib in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Ribs"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user with given ID",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": [
+        "email",
+        "_id"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Rib": {
+      "required": [
+        "email",
+        "_id"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "numero": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Ribs": {
+      "type": "array",
+      "$ref": "#/definitions/Rib"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -3,6 +3,8 @@ import config from '../config';
 
 import store from '../redux/store';
 
+const { baseURL, pathApi } = config;
+
 export const headers = (token) => {
   const users = store.getState().users;
   return {
@@ -15,7 +17,7 @@ export const headers = (token) => {
 
 export const get = async (url, token) => {
   try {
-    const res = await axios.get(`${config.baseURL}${url}`, {
+    const res = await axios.get(`${baseURL}${pathApi}${url}`, {
       headers: token ? headers(token) : headers(),
     });
     // console.log('get res ------------>', res);
@@ -29,7 +31,7 @@ export const get = async (url, token) => {
 
 export const post = async (url, data, token) => {
   try {
-    const res = await axios.post(`${config.baseURL}${url}`, data, {
+    const res = await axios.post(`${baseURL}${pathApi}${url}`, data, {
       headers: headers(token),
     });
     // console.log('post res ------------>', res);
@@ -43,7 +45,7 @@ export const post = async (url, data, token) => {
 
 export const put = async (url, data = {}, token) => {
   try {
-    const res = await axios.put(`${config.baseURL}${url}`, data, {
+    const res = await axios.put(`${baseURL}${pathApi}${url}`, data, {
       headers: token ? headers(token) : headers(),
     });
     console.log('put res ------------>', res);
@@ -57,7 +59,7 @@ export const put = async (url, data = {}, token) => {
 
 export const remove = async (url, token) => {
   try {
-    const res = await axios.delete(`${config.baseURL}${url}`, {
+    const res = await axios.delete(`${baseURL}${pathApi}${url}`, {
       headers: headers(token),
     });
     console.log('remove res ------------>', res);

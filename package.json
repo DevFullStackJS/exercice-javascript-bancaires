@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "px": "cd ios && pod install && cd ..",
-    "server": "nodemon src/server/index.js",
+    "server": "nodemon src/server/index.js --exec babel-node",
     "st": "watchman watch-del-all && yarn start -- --reset-cache",
     "lint": "eslint --quiet --ext .jsx --ext .js ./src/ --fix",
     "web": "node scripts/start.js",
@@ -49,6 +49,7 @@
     "camelcase": "^5.3.1",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "config": "^3.3.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "css-loader": "3.4.2",
     "dotenv": "^8.2.0",
@@ -68,6 +69,7 @@
     "eslint-utils": "^2.0.0",
     "express": "^4.17.1",
     "express-catch-errors": "^0.1.0",
+    "express-openapi-validator": "^3.16.7",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "helmet": "^3.23.3",
@@ -118,6 +120,9 @@
     "semver": "6.3.0",
     "simple-react-native-datepicker": "^2.0.4",
     "style-loader": "0.23.1",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-model-validator": "^3.0.19",
+    "swagger-ui-express": "^4.1.4",
     "terser-webpack-plugin": "2.3.4",
     "ts-pnp": "1.1.5",
     "url-loader": "2.3.0",
@@ -128,6 +133,7 @@
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
+    "@babel/node": "^7.10.5",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
