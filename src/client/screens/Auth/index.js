@@ -6,6 +6,7 @@ import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
 import Sigin from './Sigin';
+import Background from '../../components/Common/background';
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,9 +28,11 @@ class Home extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <Sigin {...this.props} signIn={this.signIn} signUp={this.signUp} />
-      </View>
+      <Background>
+        <View style={{ flex: 1 }}>
+          <Sigin {...this.props} signIn={this.signIn} signUp={this.signUp} />
+        </View>
+      </Background>
     );
   }
 }
