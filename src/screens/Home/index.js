@@ -4,7 +4,7 @@ import { View, FlatList, Button } from 'react-native';
 
 import SimplerDatePicker from '../../components/DatePiker';
 
-import ModalComponent from '../../components/Common/Modal';
+// import ModalComponent from '../../components/Common/Modal';
 
 import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
@@ -121,7 +121,7 @@ export default class Home extends React.Component {
             <RibList {...item} />
           )}
         />
-        <ModalComponent />
+        {/* <ModalComponent /> */}
       </Layout>
     );
   }

@@ -1,50 +1,50 @@
-import React, { Component } from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+// import React, { Component } from 'react';
+// import { Text, TouchableHighlight, View } from 'react-native';
 
-import Modal from 'modal-react-native-web';
+// import Modal from 'modal-react-native-web';
 
-export default class ModalComponent extends Component {
-  state = {
-    modalVisible: false,
-  };
+// export default class ModalComponent extends Component {
+//   state = {
+//     modalVisible: false,
+//   };
 
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
-  }
+//   setModalVisible(visible) {
+//     this.setState({ modalVisible: visible });
+//   }
 
-  render() {
-    return (
-      <View style={{ marginTop: 22 }}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          // eslint-disable-next-line no-undef
-          appElement={document && document.getElementById('root')}
-          onDismiss={() => {
-            // alert('Modal has been closed.');
-          }}>
-          <View style={{ marginTop: 22 }}>
-            <View>
-              <Text>Hello World!</Text>
+//   render() {
+//     return (
+//       <View style={{ marginTop: 22 }}>
+//         <Modal
+//           animationType="slide"
+//           transparent={false}
+//           visible={this.state.modalVisible}
+//           // eslint-disable-next-line no-undef
+//           appElement={document && document.getElementById('root')}
+//           onDismiss={() => {
+//             // alert('Modal has been closed.');
+//           }}>
+//           <View style={{ marginTop: 22 }}>
+//             <View>
+//               <Text>Hello World!</Text>
 
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        </Modal>
+//               <TouchableHighlight
+//                 onPress={() => {
+//                   this.setModalVisible(!this.state.modalVisible);
+//                 }}>
+//                 <Text>Hide Modal</Text>
+//               </TouchableHighlight>
+//             </View>
+//           </View>
+//         </Modal>
 
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
-}
+//         <TouchableHighlight
+//           onPress={() => {
+//             this.setModalVisible(true);
+//           }}>
+//           <Text>Show Modal</Text>
+//         </TouchableHighlight>
+//       </View>
+//     );
+//   }
+// }
