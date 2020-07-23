@@ -12,19 +12,32 @@ import {
 } from 'react-native';
 
 const x = Dimensions.get('window').width;
-// const y = Dimensions.get('window').y;
+const y = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     // alignItems: 'center',
   },
   body: {
     justifyContent: 'center',
     flexDirection: 'column',
     flex: 1,
+    position: 'absolute',
+    alignItems: 'center',
+    margin: 10,
+    padding: 10,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: x,
+    height: y,
+  },
+  titleContainer: {
+    paddingTop: 20,
   },
   inputVew: {
     margin: 50,
@@ -36,23 +49,45 @@ const styles = StyleSheet.create({
   labelInput: {
     paddingRight: 10,
     width: x / 4,
+    color: 'red',
+    fontWeight: 'bold',
   },
   TextInput: {
     padding: 10,
     borderWidth: 1,
     width: x / 2,
     borderRadius: 15,
+    borderColor: 'red',
+    color: 'red',
+    fontWeight: 'bold',
+  },
+  messageShow: {
+    textAlign: 'center',
+    margin: 5,
+  },
+  errorShow: {
+    textAlign: 'center',
+    margin: 5, color: 'red',
+  },
+  option: {
+    paddingBottom: 5,
+  },
+  optionSeparatorStr: {
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   signinContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     margin: 7,
     padding: 10,
   },
   textPage: {
-    textAlign: 'left',
-    fontSize: 18,
+    textAlign: 'center',
+    fontSize: 22,
     fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 });
 
@@ -98,29 +133,13 @@ const SignInScreen = (props) => {
     await signIn({ email, password }, (res) => callBack(res));
   };
 
-  const { width } = Dimensions.get('window');
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.body}>
-          {/* <View>
-            <View> */}
-          <View style={styles.signinContainer}>
-            <View style={{ width: width / 6 }}>
-              <Text style={styles.textPage}>{sign}</Text>
-            </View>
-            <View style={{ width: width / 8 }}>
-              <Button
-                onPress={() => toogleSign()}
-                title={n_sign}
-                color="#841584"
-                accessibilityLabel="Learn more about this purple button"
-              />
-            </View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.textPage}>{sign}</Text>
           </View>
-          {/* </View>
-          </View> */}
           <View>
             {sign === 'signUp' && <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Username</Text>
@@ -159,17 +178,26 @@ const SignInScreen = (props) => {
                 style={styles.TextInput}
               />
             </View>
-            <Text style={{ textAlign: 'center', margin: 5 }}>{message}</Text>
-            <Text style={{ textAlign: 'center', margin: 5, color: 'red' }}>{error}</Text>
+            <Text style={styles.messageShow}>{message}</Text>
+            <Text style={styles.errorShow}>{error}</Text>
           </View>
           <View>
             {!loading ? <Button
               onPress={async () => await toSignIn()}
               title={signTitle}
-              color="#841584"
+              color='blue'
               accessibilityLabel="Learn more about this purple button"
             /> :
               <ActivityIndicator size={'large'} />}
+          </View>
+          <View style={styles.option}>
+            <Text style={styles.optionSeparatorStr}>ou</Text>
+            <Button
+              onPress={() => toogleSign()}
+              title={n_sign}
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
           </View>
         </View>
       </ScrollView>
