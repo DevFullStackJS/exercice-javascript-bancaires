@@ -1,32 +1,36 @@
 const mongoose = require('mongoose');
 
-const RibSchema = new mongoose.Schema({
-  montant: {
+const UserSchema = new mongoose.Schema({
+  username: {
     type: String,
     required: true,
     minlength: 3,
     maxlength: 50,
   },
-  libelle: {
+  email: {
     type: String,
     required: true,
     minlength: 5,
     maxlength: 255,
+    unique: true,
   },
-  devise: {
-    type: String,
-    required: true,
-    minlength: 5,
-    maxlength: 255,
-  },
-  date: {
+  rib: {
     type: String,
     required: true,
     minlength: 20,
     maxlength: 255,
+    // unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 255,
   },
 });
 
-const Rib = mongoose.model('Rib', RibSchema);
+// const User = mongoose.model('User', UserSchema);
 
-module.exports = Rib;
+module.exports = mongoose.models.Users || mongoose.model('Users', UserSchema);
+
+// module.exports = User;

@@ -2,7 +2,7 @@
 
 const winston = require('winston');
 
-module.exports.notFound = (req, res, next) => {
+export const notFound = (req, res, next) => {
   winston.warn('Not found');
 
   const error = new Error('Not Found');
@@ -11,7 +11,7 @@ module.exports.notFound = (req, res, next) => {
   next(error);
 };
 
-module.exports.catchAll = (err, req, res, next) => {
+export const catchAll = (err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || 'Something broke';
 

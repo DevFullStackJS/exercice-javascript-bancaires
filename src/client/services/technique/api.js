@@ -5,13 +5,13 @@ import store from '../redux/store';
 
 const { baseURL, pathApi } = config;
 
-export const headers = (token) => {
+export const headers = () => {
   const users = store.getState().users;
   return {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'auth-token': `${users && users.user ? users.user.token : ''}`,
-    Authorization: `Bearer ${token}`,
+    Authorization: `${users && users.user ? users.user.token : ''}`,
   };
 };
 

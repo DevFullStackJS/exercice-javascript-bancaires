@@ -70,6 +70,7 @@
     "express": "^4.17.1",
     "express-catch-errors": "^0.1.0",
     "express-openapi-validator": "^3.16.7",
+    "express-validator": "^6.6.0",
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "helmet": "^3.23.3",

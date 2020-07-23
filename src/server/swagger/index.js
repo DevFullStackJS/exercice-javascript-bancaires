@@ -1,4 +1,5 @@
-export const swaggerDocument = require('./models.json');
+// export const swaggerDocument = require('./models.json');
+import swaggerDoc from './models';
 
 export const options = {
   validatorUrl: null,
@@ -11,7 +12,7 @@ export const options = {
     additionalQueryStringParams: {},
   },
   swaggerOptions: {
-    authAction: { JWT: { name: 'JWT', schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: '' }, value: 'Bearer <JWT>' } },
+    authAction: { JWT: { name: 'JWT', schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: 'Bearer <JWT>' }, value: 'Bearer <JWT>' } },
   },
   docExpansion: 'full',
   operationsSorter: function (a, b) {
@@ -24,4 +25,4 @@ export const options = {
   },
 };
 
-export default { options, swaggerDocument };
+export const swaggerDocument = swaggerDoc;
