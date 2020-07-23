@@ -13,7 +13,7 @@ jobs:
             - run: npm install
             - run: npm test
             - run: npm run build
-            # - run: npm run server
+            - run: npm run sv
 workflows:
     build-and-test:
       jobs:
