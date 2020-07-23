@@ -12,7 +12,13 @@ export const options = {
     additionalQueryStringParams: {},
   },
   swaggerOptions: {
-    authAction: { JWT: { name: 'JWT', schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: 'Bearer <JWT>' }, value: 'Bearer <JWT>' } },
+    authAction: {
+      JWT: {
+        name: 'JWT',
+        schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: 'Bearer <JWT>' },
+        value: 'Bearer <JWT>',
+      },
+    },
   },
   docExpansion: 'full',
   operationsSorter: function (a, b) {
