@@ -12,7 +12,6 @@ jobs:
           steps:
             - run: npm install
             - run: npm test
-            - run: yarn run sv
             - run: npm run build
             # - run: npm run sv
 workflows:
