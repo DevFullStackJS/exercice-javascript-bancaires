@@ -19,10 +19,7 @@ class Operation extends React.Component {
 
   async componentDidMount() {
     const { ribId, min, max } = this.props;
-    console.log('ribId', ribId);
-    console.log('min', min);
-    console.log('max', max);
-    await this.props.oneRibOperation({ min, max, ribId });
+    await this.props.oneRibOperation({ min, max, rib: ribId });
     const { oneRibOperation } = this.props.rib;
     const totalSold = oneRibOperation ? this.checkSolde(oneRibOperation) : 0;
     this.setState({ totalSold });

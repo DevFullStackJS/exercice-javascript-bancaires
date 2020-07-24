@@ -93,11 +93,10 @@ export default class Home extends React.Component {
   //   await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
   // }
 
-  getOperationDate = async () => {
+  getOperationDate = async (selectedRIB) => {
     const { min, max } = this.state;
-    if (min && max) {
-      const rib = '18206002105487266700217';
-      await this.props.oneRibOperation({ min, max, rib });
+    if (min && max && selectedRIB) {
+      await this.props.oneRibOperation({ min, max, rib: selectedRIB });
     }
   }
 
@@ -107,8 +106,10 @@ export default class Home extends React.Component {
 
   showRIBInfos = async () => {
     const { selectedRIB } = this.state;
-    selectedRIB && this.setState({ showResult: true });
-    await this.getOperationDate();
+    if (selectedRIB) {
+      // await this.props.oneRibOperation({ min, max, rib: selectedRIB });
+      this.setState({ showResult: true });
+    }
   }
 
   hideRIBInfos = () => {

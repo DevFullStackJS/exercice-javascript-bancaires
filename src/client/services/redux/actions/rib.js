@@ -2,6 +2,7 @@ import constants from '../constants/rib';
 import ribSapp from '../../applicatif/rib';
 
 export const oneRibOperation = ({ min, max, rib }, callBack) => async (dispatch) => {
+  console.log({ min, max, rib });
   const res = await ribSapp.oneRibOperation(`${constants.url.oneRibOperation}${rib}/${min}/${max}`);
   callBack && callBack(res);
   if (res && res.data && res.data.rib) {
