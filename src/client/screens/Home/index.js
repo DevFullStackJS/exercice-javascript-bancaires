@@ -16,22 +16,22 @@ const PikerDate = (props) => (
   <View style={{ marginBottom: 40 }}>
     <SimplerDatePicker
       {...props}
-      containerStyle= {{
+      containerStyle={{
         flex: 1,
         flexDirection: 'row',
       }}
-      yearStyle= {{
+      yearStyle={{
         flex: 1,
         marginRight: 5,
       }}
-      monthStyle= {{
+      monthStyle={{
         flex: 1,
         marginRight: 5,
       }}
-      dayStyle= {{
+      dayStyle={{
         flex: 1,
       }}
-      textStyle= {{
+      textStyle={{
         fontSize: 16,
       }}
     />
@@ -59,6 +59,7 @@ export default class Home extends React.Component {
       modalVisible: false,
       showResult: false,
       selectedRIB: '',
+      strictRIBList: [],
     };
   }
 
@@ -66,6 +67,7 @@ export default class Home extends React.Component {
     await this.props.operations();
     // const rib = '18206002105487266700217';
     // await this.props.oneRibOperation({ min: '03/28/2017', max: '04/12/2017', rib });
+    this.getStrictList(this.props.rib.operations);
   }
 
   componentWillMount() {
@@ -115,57 +117,68 @@ export default class Home extends React.Component {
     this.setState({ selectedRIB });
   }
 
+  getStrictList = (lists) => {
+    const ls = lists && lists.map(m => m.RIB);
+    let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
+    strictRIBList = strictRIBList && strictRIBList.map(l => {
+      console.log('l');
+      return { RIB: l };
+    });
+    this.setState({ strictRIBList });
+  }
+
   render() {
     const { logout, rib } = this.props;
-    const { minDate, maxDate, minDate2, showResult, selectedRIB, min, max } = this.state;
+    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, min, max } = this.state;
 
     return (
       <Background>
         <Layout {...this.props} title={'Home'} logout={logout}>
-          { !showResult
+          {!showResult
             ? (
-            <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
-              <View style={{ flex: 0.3 }}>
-              <Text>Select period date</Text>
-                <PikerDate
-                  minDate={minDate}
-                  maxDate={maxDate}
-                  onDatePicked={this.onDatePicked}
-                />
-                <PikerDate
-                  minDate={minDate2}
-                  maxDate={maxDate}
-                  onDatePicked={this.onDatePickedMax}
-                />
-              </View>
-              <View style={{ flex: 0.3 }}>
-                {/* <Button
+              <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
+                <View style={{ flex: 0.3 }}>
+                  <Text>Select period date</Text>
+                  <PikerDate
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    onDatePicked={this.onDatePicked}
+                  />
+                  <PikerDate
+                    minDate={minDate2}
+                    maxDate={maxDate}
+                    onDatePicked={this.onDatePickedMax}
+                  />
+                </View>
+                <View style={{ flex: 0.3 }}>
+                  {/* <Button
                   title='Liste Operations'
                   onPress={this.getOperationDate}
                 /> */}
-                <Text>Select one RIB</Text>
-                <FlatList
-                  scrollEnabled
-                  data={rib.operations}
-                  keyExtractor={(_, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <SelectItem {...item} setRIBId={ this.setRIBId } />
-                  )}
-                />
+                  <Text>Select one RIB</Text>
+                  <FlatList
+                    scrollEnabled
+                    // data={rib.operations}
+                    data={strictRIBList}
+                    keyExtractor={(_, index) => index.toString()}
+                    renderItem={({ item }) => (
+                      <SelectItem {...item} setRIBId={this.setRIBId} />
+                    )}
+                  />
+                </View>
+                <View style={{ flex: 0.3 }}>
+                  <Button
+                    title='Find'
+                    onPress={this.showRIBInfos}
+                  />
+                </View>
               </View>
-              <View style={{ flex: 0.3 }}>
-                <Button
-                  title='Find'
-                  onPress={this.showRIBInfos}
-                />
-              </View>
-            </View>
             )
             : (
               <Operations hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
             )
           }
-          { false && <FlatList
+          {false && <FlatList
             scrollEnabled
             data={rib.operations}
             keyExtractor={(_, index) => index.toString()}
