@@ -5,10 +5,10 @@ export const oneRibOperation = ({ min, max, rib }, callBack) => async (dispatch)
   console.log({ min, max, rib });
   const res = await ribSapp.oneRibOperation(`${constants.url.oneRibOperation}${rib}/${min}/${max}`);
   callBack && callBack(res);
-  if (res && res.data && res.data.rib) {
+  if (res && res.data && res.data.ribs) {
     return dispatch({
       type: constants.oneRibOperation,
-      payload: res.data.rib,
+      payload: res.data.ribs,
     });
   }
 };
