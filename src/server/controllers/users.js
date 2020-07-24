@@ -23,13 +23,15 @@ module.exports.check = async (req, res, next) => {
   next();
 };
 
-module.exports.checkUser = async (id) => {
+const checkUser = async (id) => {
   if (isValidID(id)) {
     const user = await User.findById(id);
     return user;
   }
   return null;
 };
+
+module.exports.checkUser = checkUser;
 
 module.exports.create = async (req, res) => {
   const errors = validationResult(req);
