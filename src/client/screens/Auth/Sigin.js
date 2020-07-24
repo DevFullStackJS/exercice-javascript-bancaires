@@ -9,16 +9,13 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const x = Dimensions.get('window').width;
 const y = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // backgroundColor: 'white',
-    // alignItems: 'center',
   },
   body: {
     justifyContent: 'center',
@@ -28,10 +25,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 10,
-    // top: 0,
-    // left: 0,
-    // right: 0,
-    // bottom: 0,
     paddingTop: 20,
     paddingBottom: 20,
     width: x,
@@ -41,7 +34,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   inputVew: {
-    margin: 50,
+    margin: 10,
     justifyContent: 'center',
     flexDirection: 'row',
     alignItems: 'center',
@@ -68,7 +61,8 @@ const styles = StyleSheet.create({
   },
   errorShow: {
     textAlign: 'center',
-    margin: 5, color: 'red',
+    margin: 5,
+    color: 'blue',
   },
   option: {
     paddingBottom: 5,
@@ -79,8 +73,6 @@ const styles = StyleSheet.create({
   },
   signinContainer: {
     flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
     margin: 7,
     padding: 10,
   },
@@ -106,10 +98,10 @@ const SignInScreen = (props) => {
   const [n_sign, setNoSign] = React.useState('signUp');
   const [signTitle, setSignTitle] = React.useState('sign In');
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  const [errors, setErrors] = React.useState({});
 
   const toogleSign = () => {
-    setError('');
+    setErrors({});
     setSign(sign === 'signIn' ? 'signUp' : 'signIn');
     setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
     setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
@@ -118,8 +110,10 @@ const SignInScreen = (props) => {
   const callBack = (res) => {
     console.log({ res });
     setLoading(false);
-    if (res && res.data && res.data.error) {
-      return setError(res.data.error);
+    if (res && res.errors && res.errors.length > 0) {
+      const data = res.errors;
+      const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
+      return setErrors(resErrors);
     }
     if (sign === 'signUp' && res && res.data && res.data._id) {
       toogleSign();
@@ -128,7 +122,7 @@ const SignInScreen = (props) => {
   };
 
   const toSignIn = async () => {
-    setError('');
+    setErrors({});
     setLoading(true);
     console.log({ email, password });
     if (sign === 'signUp') {
@@ -136,6 +130,8 @@ const SignInScreen = (props) => {
     }
     await signIn({ email, password }, (res) => callBack(res));
   };
+
+  const displayError = (name) => (errors && errors[name] ? errors[name].msg : '');
 
   return (
       <View style={{ flex: 1 }}>
@@ -163,6 +159,7 @@ const SignInScreen = (props) => {
                   style={styles.TextInput}
                 />
               </View>}
+              <View><Text style={styles.errorShow}>{displayError('username')}</Text></View>
               {sign === 'signUp' && <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Rib</Text>
                 <TextInput
@@ -172,6 +169,7 @@ const SignInScreen = (props) => {
                   style={styles.TextInput}
                 />
               </View>}
+              <View><Text style={styles.errorShow}>{displayError('rib')}</Text></View>
               <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Email</Text>
                 <TextInput
@@ -181,6 +179,7 @@ const SignInScreen = (props) => {
                   style={styles.TextInput}
                 />
               </View>
+              <View><Text style={styles.errorShow}>{displayError('email')}</Text></View>
               <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Password</Text>
                 <TextInput
@@ -191,8 +190,8 @@ const SignInScreen = (props) => {
                   style={styles.TextInput}
                 />
               </View>
+              <View><Text style={styles.errorShow}>{displayError('password')}</Text></View>
               <Text style={styles.messageShow}>{message}</Text>
-              <Text style={styles.errorShow}>{error}</Text>
             </View>
             <View>
               {!loading ? <Button
