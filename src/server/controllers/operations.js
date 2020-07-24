@@ -18,7 +18,7 @@ module.exports.listOneRib = async (req, res) => {
   const { params, body } = req;
   const date = checkDate({ params, body });
   if (!date) {
-    return res.status(400).send(invalid_date);
+    return res.status(400).send(errorMessage(invalid_date));
   }
   // eslint-disable-next-line no-irregular-whitespace
   if (!params.rib || params.rib.length < 20) {

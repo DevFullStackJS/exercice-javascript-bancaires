@@ -294,7 +294,7 @@ module.exports = {
         tags: [
           'Operations',
         ],
-        summary: 'Get rib operations in system',
+        summary: 'Operations (rib) in system',
         security: [
           {
             JWT: [],
@@ -317,12 +317,12 @@ module.exports = {
               $ref: '#/definitions/Operations',
             },
           },
-          404: {
+          400: {
             description: 'KO',
             schema: {
               properties: {
                 error: {
-                  type: 'Rib not found',
+                  type: 'Rib not found or Date Invalid',
                 },
               },
             },
