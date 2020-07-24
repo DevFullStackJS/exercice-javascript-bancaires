@@ -1,13 +1,13 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
-import { validationResult } from 'express-validator';
+const { validationResult } = require('express-validator');
 
-import { errorMessage } from '../utils';
-import constants from '../../config/constants';
+const { errorMessage } = require('../utils');
+const constants = require('../../config/constants');
 
-// import User from '../models/users';
+// const User = require('../models/users');
 
 const { error_email, error_mdp, not_found } = constants;
 
@@ -15,7 +15,7 @@ const isValidID = _id => mongoose.Types.ObjectId.isValid(_id);
 
 const User = require('../models/users');
 
-export const check = async (req, res, next) => {
+module.exports.check = async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) {
     throw Error('User not found', res);
@@ -23,7 +23,7 @@ export const check = async (req, res, next) => {
   next();
 };
 
-export const checkUser = async (id) => {
+module.exports.checkUser = async (id) => {
   if (isValidID(id)) {
     const user = await User.findById(id);
     return user;
@@ -31,7 +31,7 @@ export const checkUser = async (id) => {
   return null;
 };
 
-export const create = async (req, res) => {
+module.exports.create = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -46,7 +46,7 @@ export const create = async (req, res) => {
   res.json(user);
 };
 
-export const remove = async (req, res) => {
+module.exports.remove = async (req, res) => {
   const isFound = await checkUser(req.params.id);
   if (!isFound) {
     return res.status(404).json(errorMessage(not_found));
@@ -55,13 +55,13 @@ export const remove = async (req, res) => {
   res.json({ sucsess: true, _id: req.params.id });
 };
 
-export const list = async (_, res) => {
+module.exports.list = async (_, res) => {
   const users = await User.find();
 
   res.json(users);
 };
 
-export const update = async (req, res) => {
+module.exports.update = async (req, res) => {
   const isFound = await checkUser(req.params.id);
   if (!isFound) {
     return res.status(404).json(errorMessage(not_found));
@@ -73,7 +73,7 @@ export const update = async (req, res) => {
   res.json(user);
 };
 
-export const view = async (req, res) => {
+module.exports.view = async (req, res) => {
   const user = await checkUser(req.params.id);
   console.log({ user });
   if (!user) {
@@ -83,7 +83,7 @@ export const view = async (req, res) => {
   res.json(user);
 };
 
-export const login = async (req, res) => {
+module.exports.login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   // throw error when email is wrong

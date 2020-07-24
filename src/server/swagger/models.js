@@ -1,6 +1,6 @@
-import config from '../../config';
+const config = require('../../config');
 
-export default {
+module.exports = {
   swagger: '2.0',
   info: {
     version: '1.0.0',

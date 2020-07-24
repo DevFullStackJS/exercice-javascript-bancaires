@@ -1,4 +1,4 @@
-export const errorMessage = messaga => ({ error: { messaga } });
+module.exports.errorMessage = messaga => ({ error: { messaga } });
 
 const dateTransformation = (d) => {
   let nDate1 = d.split('/');
@@ -19,7 +19,7 @@ const orderList = (list) => {
   return orderdedList;
 };
 
-export const checkDate = (period) => {
+module.exports.checkDate = (period) => {
   const { max, min } = period;
   if (max && min) {
     let nDate1 = min.split('/');
@@ -34,7 +34,7 @@ export const checkDate = (period) => {
   return false;
 };
 
-export const getOperations = (datas, rib, period) => {
+module.exports.getOperations = (datas, rib, period) => {
   const { max, min } = period;
   let lists = datas && datas.filter(
     op => op.RIB === rib

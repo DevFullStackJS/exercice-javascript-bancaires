@@ -1,19 +1,19 @@
-import express from 'express';
-import swaggerUi from 'swagger-ui-express';
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import path from 'path';
-import morgan from 'morgan';
-import helmet from 'helmet';
+const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
+const morgan = require('morgan');
+const helmet = require('helmet');
 
-import { swaggerDocument, options } from './swagger';
+const { swaggerDocument, options } = require('./swagger');
 
 // route
-import usersRoute from './routers/users';
-import operationsRouter from './routers/opetations';
+const usersRoute = require('./routers/users');
+const operationsRouter = require('./routers/opetations');
 
-import verifyToken from './middleware/auth';
-import { catchAll, notFound } from './validator/error';
+const verifyToken = require('./middleware/auth');
+const { catchAll, notFound } = require('./validator/error');
 
 const app = express();
 

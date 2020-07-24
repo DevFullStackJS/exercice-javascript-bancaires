@@ -1,7 +1,7 @@
-// export const swaggerDocument = require('./models.json');
-import swaggerDoc from './models';
+// module.exports.swaggerDocument = require('./models.json');
+const swaggerDoc = require('./models');
 
-export const options = {
+module.exports.options = {
   validatorUrl: null,
   oauth: {
     clientId: 'your-client-id1',
@@ -31,4 +31,4 @@ export const options = {
   },
 };
 
-export const swaggerDocument = swaggerDoc;
+module.exports.swaggerDocument = swaggerDoc;

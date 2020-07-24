@@ -1,6 +1,6 @@
-import express from 'express';
+const express = require('express');
 
-import { list, listOneRib } from '../controllers/operations';
+const { list, listOneRib } = require('../controllers/operations');
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router
   .route('/:rib')
   .post((req, res) => listOneRib(req, res));
 
-export default router;
+module.exports = router;

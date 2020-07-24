@@ -1,12 +1,12 @@
-import axios from 'axios';
-import config from '../../config';
-import constants from '../../config/constants';
-import { getOperations, checkDate, errorMessage } from '../utils';
+const axios = require('axios');
+const config = require('../../config');
+const constants = require('../../config/constants');
+const { getOperations, checkDate, errorMessage } = require('../utils');
 
 const { urlApiRib } = config;
 const { invalid_date, invalid_rib } = constants;
 
-export const list = async (_, res) => {
+module.exports.list = async (_, res) => {
   const rib = await axios.get(urlApiRib);
   if (rib && rib.data) {
     return res.json({ rib: rib.data });
@@ -14,7 +14,7 @@ export const list = async (_, res) => {
   return res.json({ rib: {} });
 };
 
-export const listOneRib = async (req, res) => {
+module.exports.listOneRib = async (req, res) => {
   const { params, body } = req;
   const date = checkDate({ params, body });
   if (!date) {

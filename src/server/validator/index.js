@@ -1,8 +1,8 @@
-import { body, check } from 'express-validator';
+const { body, check } = require('express-validator');
 
 const User = require('../models/users');
 
-export const usersValidatorUpdate = [
+module.exports.usersValidatorUpdate = [
   body('username').isLength({ min: 3 }),
   body('email').isEmail(),
   check('email').custom(value => User.findByEmail(value).then(user => {
@@ -13,7 +13,7 @@ export const usersValidatorUpdate = [
   body('rib').isLength({ min: 20 }),
 ];
 
-export const usersValidator = [
+module.exports.usersValidator = [
   body('username').isLength({ min: 3 }),
   body('email').isEmail(),
   check('email').custom(value => User.findByEmail(value).then(user => {
