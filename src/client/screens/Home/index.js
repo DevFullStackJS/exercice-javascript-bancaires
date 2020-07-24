@@ -1,15 +1,11 @@
 import React from 'react';
 import Moment from 'moment';
 import { View, FlatList, Button, Text } from 'react-native';
-// import Moment from 'moment';
 
 import SimplerDatePicker from '../../components/DatePiker';
 
-// import ModalComponent from '../../components/Common/Modal';
-
 import Background from '../../components/Common/background';
 import Layout from '../Layout';
-import { RibList } from '../../components/ItemList/RibList';
 import SelectItem from '../../components/ItemList/selectItem';
 import Operations from '../Operation';
 
@@ -66,8 +62,6 @@ export default class Home extends React.Component {
 
   async componentDidMount() {
     await this.props.operations();
-    // const rib = '18206002105487266700217';
-    // await this.props.oneRibOperation({ min: '03/28/2017', max: '04/12/2017', rib });
     this.getStrictList(this.props.rib.operations);
   }
 
@@ -87,12 +81,6 @@ export default class Home extends React.Component {
     }
   };
 
-  // getOperationDate = async () => {
-  //   const { min, max } = this.state;
-  //   const rib = '18206002105487266700217';
-  //   await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
-  // }
-
   getOperationDate = async (selectedRIB) => {
     const { min, max } = this.state;
     if (min && max && selectedRIB) {
@@ -104,11 +92,15 @@ export default class Home extends React.Component {
     this.setState({ modalVisible: false });
   }
 
+  callBack = (res) => {
+    console.log({ res });
+    this.setState({ showResult: true });
+  }
+
   showRIBInfos = async () => {
-    const { selectedRIB } = this.state;
-    if (selectedRIB) {
-      // await this.props.oneRibOperation({ min, max, rib: selectedRIB });
-      this.setState({ showResult: true });
+    const { selectedRIB, min, max } = this.state;
+    if (selectedRIB && min && max) {
+      await this.props.oneRibOperation({ min, max, rib: selectedRIB }, this.callBack);
     }
   }
 
@@ -131,12 +123,12 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { logout, rib } = this.props;
+    const { logout } = this.props;
     const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, min, max } = this.state;
 
     return (
       <Background>
-        <Layout {...this.props} title={'Home'} logout={logout}>
+        <Layout {...this.props} title={'Compagnie fiduciaire'} logout={logout}>
           {!showResult
             ? (
             <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
@@ -178,17 +170,9 @@ export default class Home extends React.Component {
               </View>
             )
             : (
-              <Operations hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
+              <Operations { ...this.props } hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
             )
           }
-          {false && <FlatList
-            scrollEnabled
-            data={rib.operations}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item }) => (
-              <RibList {...item} />
-            )}
-          />}
           {/* <ModalComponent /> */}
         </Layout>
       </Background>

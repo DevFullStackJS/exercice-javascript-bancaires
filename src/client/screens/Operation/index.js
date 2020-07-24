@@ -1,15 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { FlatList, View, Text, Dimensions, Button } from 'react-native';
 
-import mapStateToProps from '../../services/redux/mapStateToProps';
-import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
-
-// import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
 import { styles } from './index.styles';
 
-class Operation extends React.Component {
+export default class Operation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,8 +13,6 @@ class Operation extends React.Component {
   }
 
   async componentDidMount() {
-    const { ribId, min, max } = this.props;
-    await this.props.oneRibOperation({ min, max, rib: ribId });
     const { oneRibOperation } = this.props.rib;
     const totalSold = oneRibOperation ? this.checkSolde(oneRibOperation) : 0;
     this.setState({ totalSold });
@@ -80,8 +73,3 @@ class Operation extends React.Component {
     );
   }
 }
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Operation);

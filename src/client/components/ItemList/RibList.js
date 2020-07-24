@@ -15,12 +15,12 @@ export const RibList = (props) => {
   return (
     <View>
       <View>
-        <View style={[styles.headList, { justifyContent: 'space-between', padding: 10 }]}>
-          <View style={{ width: width / 6 }}>
+        <View style={[styles.headList, { justifyContent: 'space-between', padding: 10, margin: 8 }]}>
+          <View style={{ width: width / 5 }}>
             <Text style={[styles.titleText, { textAlign: 'left' }]}>{Date}</Text>
           </View>
           <View style={{ width: width / 5 }}>
-            <Text style={styles.titleText}>{Libelle}</Text>
+            <Text numberOfLines={1} style={styles.titleText}>{Libelle}</Text>
           </View>
           <View style={{ width: width / 6 }}>
             <Text style={[styles.titleText, { textAlign: 'right' }]}>{Montant}</Text>
@@ -28,7 +28,7 @@ export const RibList = (props) => {
           <View style={{ width: width / 6 }}>
             <Text style={[styles.titleText, { textAlign: 'right' }]}>{recipe}</Text>
           </View>
-          <View style={{ width: width / 6 }}>
+          <View style={{ width: width / 7 }}>
             <Text style={[styles.titleText, { textAlign: 'right' }]}>{spent}</Text>
           </View>
         </View>
