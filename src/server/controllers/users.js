@@ -66,9 +66,11 @@ module.exports.update = async (req, res) => {
   if (!isFound) {
     return res.status(404).json(errorMessage(not_found));
   }
-  const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true,
-  }).exec();
+  const user = await User.findOneAndUpdate(
+    { _id: req.params.id },
+    { username: req.body.username, rib: req.body.rib },
+    { new: true }
+  ).exec();
 
   res.json(user);
 };

@@ -24,8 +24,8 @@ module.exports = {
     },
   ],
   schemes: [
-    'http',
     'https',
+    'http',
   ],
   servers: [
     {
