@@ -1,4 +1,4 @@
-module.exports.errorMessage = messaga => ({ error: { messaga } });
+module.exports.errorMessage = message => ({ error: { message } });
 
 const dateTransformation = (d) => {
   let nDate1 = d.split('/');

@@ -314,16 +314,16 @@ module.exports = {
             JWT: [],
           },
         ],
-        parameters: [
-          {
-            name: 'Date',
-            in: 'body',
-            description: 'User that we want to create',
-            schema: {
-              $ref: '#/definitions/Date',
-            },
-          },
-        ],
+        // parameters: [
+        //   {
+        //     name: 'Date',
+        //     in: 'body',
+        //     description: 'User that we want to create',
+        //     schema: {
+        //       $ref: '#/definitions/Date',
+        //     },
+        //   },
+        // ],
         responses: {
           200: {
             description: 'OK',

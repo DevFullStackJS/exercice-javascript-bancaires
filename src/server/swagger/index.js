@@ -15,8 +15,8 @@ module.exports.options = {
     authAction: {
       JWT: {
         name: 'JWT',
-        schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: 'Bearer <JWT>' },
-        value: 'Bearer <JWT>',
+        schema: { type: 'apiKey', in: 'header', name: 'Authorization', description: '<JWT>' },
+        value: '<JWT>',
       },
     },
   },
