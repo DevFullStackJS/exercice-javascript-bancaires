@@ -7,13 +7,6 @@ const dateTransformation = (d) => {
   return new Date(nDate1).getTime();
 };
 
-// const dateTransformationFront = (d) => {
-//   let nDate1 = d.split('-');
-//   nDate1 = `${nDate1[1]}/${nDate1[0]}/${nDate1[2]}`;
-
-//   return new Date(nDate1).getTime();
-// };
-
 const mapToList = (lists) => lists.map(list => {
     const montant = list.Montant.replace(',', '.');
     const recipe = Number(montant) >= 0 ? Number(montant) : 0;

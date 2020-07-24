@@ -100,7 +100,13 @@ export default class Home extends React.Component {
   showRIBInfos = async () => {
     const { selectedRIB, min, max } = this.state;
     if (selectedRIB && min && max) {
-      await this.props.oneRibOperation({ min, max, rib: selectedRIB }, this.callBack);
+      let mx = max;
+      let mn = min;
+      if (new Date(max).getTime() < new Date(min).getTime()) {
+        mx = min;
+        mn = max;
+      }
+      await this.props.oneRibOperation({ min: mn, max: mx, rib: selectedRIB }, this.callBack);
     }
   }
 
