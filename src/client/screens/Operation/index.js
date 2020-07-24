@@ -22,7 +22,7 @@ class Operation extends React.Component {
     console.log('ribId', ribId);
     console.log('min', min);
     console.log('max', max);
-    await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', ribId });
+    await this.props.oneRibOperation({ min, max, ribId });
     const { oneRibOperation } = this.props.rib;
     const totalSold = oneRibOperation ? this.checkSolde(oneRibOperation) : 0;
     this.setState({ totalSold });
