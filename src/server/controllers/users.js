@@ -69,7 +69,7 @@ module.exports.update = async (req, res) => {
   const user = await User.findOneAndUpdate(
     { _id: req.params.id },
     { username: req.body.username, rib: req.body.rib },
-    { new: true }
+    { new: true },
   ).exec();
 
   res.json(user);
