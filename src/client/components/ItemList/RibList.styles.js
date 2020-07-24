@@ -13,6 +13,7 @@ export const styles = {
     fontWeight: 'bold',
   },
   separate: {
+    backgroundColor: 'white',
     padding: 10,
   },
 };

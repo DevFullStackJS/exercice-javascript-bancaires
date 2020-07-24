@@ -6,7 +6,7 @@ import AppHeader from '../../components/Headers';
 const styles = StyleSheet.create({
   layout_container: {
     flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
 });
 

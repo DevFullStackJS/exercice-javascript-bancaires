@@ -1,13 +1,16 @@
 import React from 'react';
 import Moment from 'moment';
-import { View, FlatList, Button } from 'react-native';
+import { View, FlatList, Button, Text } from 'react-native';
 
 import SimplerDatePicker from '../../components/DatePiker';
 
 // import ModalComponent from '../../components/Common/Modal';
 
+import Background from '../../components/Common/background';
 import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
+import SelectItem from '../../components/ItemList/selectItem';
+import Operations from '../Operation';
 
 const PikerDate = (props) => (
   <View style={{ marginBottom: 40 }}>
@@ -35,6 +38,14 @@ const PikerDate = (props) => (
   </View>
 );
 
+// const dateTransformation = (d) => {
+//   if (!d) return;
+//   let nDate1 = d.split('-');
+//   nDate1 = `${nDate1[2]}/${nDate1[1]}/${nDate1[0]}`;
+
+//   return nDate1;
+// };
+
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -46,13 +57,15 @@ export default class Home extends React.Component {
       min: new Date(),
       max: new Date(),
       modalVisible: false,
+      showResult: false,
+      selectedRIB: '',
     };
   }
 
   async componentDidMount() {
     await this.props.operations();
     // const rib = '18206002105487266700217';
-    // await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
+    // await this.props.oneRibOperation({ min: '03/28/2017', max: '04/12/2017', rib });
   }
 
   componentWillMount() {
@@ -61,6 +74,7 @@ export default class Home extends React.Component {
 
   onDatePicked = (date) => {
     if (date && date._i) {
+      console.log(date._i);
       this.setState({ min: date._i });
     }
   };
@@ -68,11 +82,14 @@ export default class Home extends React.Component {
   onDatePickedMax = (date) => {
     if (date && date._i) {
       this.setState({ max: date._i });
-      console.log(date._i, date);
     }
-
-    // 2019-07-20
   };
+
+  // getOperationDate = async () => {
+  //   const { min, max } = this.state;
+  //   const rib = '18206002105487266700217';
+  //   await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
+  // }
 
   getOperationDate = async () => {
     const { min, max } = this.state;
@@ -87,38 +104,81 @@ export default class Home extends React.Component {
     this.setState({ modalVisible: false });
   }
 
+  showRIBInfos = () => {
+    const { selectedRIB } = this.state;
+    selectedRIB && this.setState({ showResult: true });
+  }
+
+  hideRIBInfos = () => {
+    this.setState({ showResult: false });
+  }
+
+  setRIBId = (selectedRIB) => {
+    console.log('Rib selected', selectedRIB);
+    this.setState({ selectedRIB });
+  }
+
   render() {
     const { logout, rib } = this.props;
-    const { minDate, maxDate, minDate2 } = this.state;
+    const { minDate, maxDate, minDate2, showResult, selectedRIB } = this.state;
 
     return (
-      <Layout {...this.props} title={'Home'} logout={logout}>
-        <View>
-          <PikerDate
-            minDate={minDate}
-            maxDate={maxDate}
-            onDatePicked={this.onDatePicked}
-          />
-          <PikerDate
-            minDate={minDate2}
-            maxDate={maxDate}
-            onDatePicked={this.onDatePickedMax}
-          />
-        </View>
-        <Button
-          title='Liste Operations'
-          onPress={this.getOperationDate}
-        />
-        <FlatList
-          scrollEnabled
-          data={rib.operations}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => (
-            <RibList {...item} />
-          )}
-        />
-        {/* <ModalComponent /> */}
-      </Layout>
+      <Background>
+        <Layout {...this.props} title={'Home'} logout={logout}>
+          { !showResult
+            ? (
+            <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
+              <View style={{ flex: 0.3 }}>
+              <Text>Select period date</Text>
+                <PikerDate
+                  minDate={minDate}
+                  maxDate={maxDate}
+                  onDatePicked={this.onDatePicked}
+                />
+                <PikerDate
+                  minDate={minDate2}
+                  maxDate={maxDate}
+                  onDatePicked={this.onDatePickedMax}
+                />
+              </View>
+              <View style={{ flex: 0.3 }}>
+                {/* <Button
+                  title='Liste Operations'
+                  onPress={this.getOperationDate}
+                /> */}
+                <Text>Select one RIB</Text>
+                <FlatList
+                  scrollEnabled
+                  data={rib.operations}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <SelectItem {...item} setRIBId={ this.setRIBId } />
+                  )}
+                />
+              </View>
+              <View style={{ flex: 0.3 }}>
+                <Button
+                  title='Find'
+                  onPress={this.showRIBInfos}
+                />
+              </View>
+            </View>
+            )
+            : (
+              <Operations hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} />
+            )
+          }
+          { false && <FlatList
+            scrollEnabled
+            data={rib.operations}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item }) => (
+              <RibList {...item} />
+            )}
+          />}
+          {/* <ModalComponent /> */}
+        </Layout>
+      </Background>
     );
   }
 }
