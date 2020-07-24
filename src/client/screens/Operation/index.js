@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { FlatList, View, Text, Dimensions } from 'react-native';
+import { FlatList, View, Text, Dimensions, Button } from 'react-native';
 
 import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
-import Layout from '../Layout';
+// import Layout from '../Layout';
 import { RibList } from '../../components/ItemList/RibList';
 import { styles } from './index.styles';
 
@@ -18,8 +18,11 @@ class Operation extends React.Component {
   }
 
   async componentDidMount() {
-    const rib = '18206002105487266700217';
-    await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', rib });
+    const { ribId, min, max } = this.props;
+    console.log('ribId', ribId);
+    console.log('min', min);
+    console.log('max', max);
+    await this.props.oneRibOperation({ min: '28/03/2017', max: '12/04/2017', ribId });
     const { oneRibOperation } = this.props.rib;
     const totalSold = oneRibOperation ? this.checkSolde(oneRibOperation) : 0;
     this.setState({ totalSold });
@@ -34,13 +37,13 @@ class Operation extends React.Component {
   getTotal = (result, p) => result.reduce((acc, cur) => acc + cur[p], 0);
 
   render() {
-    const { logout, rib } = this.props;
+    const { rib, hideRIBInfos, ribId } = this.props;
     const { totalSold } = this.state;
     const { width } = Dimensions.get('window');
 
     return (
-      <Layout {...this.props} title={'Opération'} logout={logout}>
-        <View style={styles.sectionStyle}><Text style={styles.titleText}>RIB:18206002105487266700217</Text></View>
+      <>
+        <View style={styles.sectionStyle}><Text style={styles.titleText}>{`RIB: ${ribId}`}</Text></View>
         <View style={[styles.sectionStyle, { justifyContent: 'space-between', padding: 10 }]}>
           <View style={{ width: width / 6 }}>
             <Text style={[styles.titleText, { textAlign: 'left' }]}>Date</Text>
@@ -70,7 +73,13 @@ class Operation extends React.Component {
           <View style={styles.showTotal} />
           <Text style={styles.titleText}>SOLDE:   {totalSold}</Text>
         </View>
-      </Layout>
+        <View>
+          <Button
+            title='Cancel'
+            onPress={hideRIBInfos}
+          />
+        </View>
+      </>
     );
   }
 }
