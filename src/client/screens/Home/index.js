@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'moment';
 import { View, FlatList, Button, Text } from 'react-native';
+// import Moment from 'moment';
 
 import SimplerDatePicker from '../../components/DatePiker';
 
@@ -73,14 +74,14 @@ export default class Home extends React.Component {
   }
 
   onDatePicked = (date) => {
-    if (date && date._i) {
-      this.setState({ min: date._i });
+    if (date) {
+      this.setState({ min: date.format('YYYY-MM-DD') });
     }
   };
 
   onDatePickedMax = (date) => {
-    if (date && date._i) {
-      this.setState({ max: date._i });
+    if (date) {
+      this.setState({ max: date.format('YYYY-MM-DD') });
     }
   };
 
@@ -102,9 +103,10 @@ export default class Home extends React.Component {
     this.setState({ modalVisible: false });
   }
 
-  showRIBInfos = () => {
+  showRIBInfos = async () => {
     const { selectedRIB } = this.state;
     selectedRIB && this.setState({ showResult: true });
+    await this.getOperationDate();
   }
 
   hideRIBInfos = () => {
@@ -125,7 +127,7 @@ export default class Home extends React.Component {
           { !showResult
             ? (
             <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
-              <View style={{ flex: 0.3 }}>
+              <View style={{ flex: 0.3, marginBottom: 30 }}>
               <Text>Select period date</Text>
                 <PikerDate
                   minDate={minDate}

@@ -56,7 +56,9 @@ class SimplerDatePicker extends React.Component {
   static getMonthData = () => Moment.months();
 
   static getDayData = (minDate = Moment(), maxDate = Moment(), year, yearData, month) => {
-    console.log({ minDate, maxDate });
+    if (!minDate || !maxDate) {
+      return [];
+    }
     if (year < 0 || month < 0) {
       return [];
     }
