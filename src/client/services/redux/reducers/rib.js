@@ -1,11 +1,12 @@
 import constants from '../constants/rib';
+import users from '../constants/users';
 
 const initialState = {
   operations: [],
   oneRibOperation: [],
 };
 
-const users = (state = initialState, action) => {
+const rib = (state = initialState, action) => {
   switch (action.type) {
     case constants.operations:
       return {
@@ -17,9 +18,11 @@ const users = (state = initialState, action) => {
         ...state,
         oneRibOperation: action.payload,
       };
+    case users.logout:
+      return initialState;
     default:
       return state;
   }
 };
 
-export default users;
+export default rib;

@@ -4,13 +4,12 @@ import {
   Text,
   TextInput,
   Button,
-  SafeAreaView,
   StyleSheet,
   Dimensions,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-
+// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const x = Dimensions.get('window').width;
 const y = Dimensions.get('window').height;
 
@@ -29,12 +28,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 10,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    // top: 0,
+    // left: 0,
+    // right: 0,
+    // bottom: 0,
+    paddingTop: 20,
+    paddingBottom: 20,
     width: x,
-    height: y,
+    height: y - 100,
   },
   titleContainer: {
     paddingTop: 20,
@@ -89,6 +90,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'uppercase',
   },
+  btn: {
+    paddingLeft: 30, paddingRight: 30,
+  },
 });
 
 const SignInScreen = (props) => {
@@ -134,74 +138,85 @@ const SignInScreen = (props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <View style={styles.body}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.textPage}>{sign}</Text>
-          </View>
-          <View>
-            {sign === 'signUp' && <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Username</Text>
-              <TextInput
-                placeholder="username"
-                value={username}
-                onChangeText={setUsername}
-                style={styles.TextInput}
-              />
-            </View>}
-            {sign === 'signUp' && <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Rib</Text>
-              <TextInput
-                placeholder="rib"
-                value={rib}
-                onChangeText={setRib}
-                style={styles.TextInput}
-              />
-            </View>}
-            <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Email</Text>
-              <TextInput
-                placeholder="email"
-                value={email}
-                onChangeText={setEmail}
-                style={styles.TextInput}
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          style={{
+            // flex:1,
+          }}
+          contentContainerStyle={{
+            // flex: 1
+            width: x,
+            height: y - 10,
+          }}
+        >
+          <View style={styles.body}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.textPage}>{sign}</Text>
+            </View>
+            <View style={{}}>
+              {sign === 'signUp' && <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>Username</Text>
+                <TextInput
+                  placeholder="username"
+                  value={username}
+                  onChangeText={setUsername}
+                  style={styles.TextInput}
+                />
+              </View>}
+              {sign === 'signUp' && <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>Rib</Text>
+                <TextInput
+                  placeholder="rib"
+                  value={rib}
+                  onChangeText={setRib}
+                  style={styles.TextInput}
+                />
+              </View>}
+              <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>Email</Text>
+                <TextInput
+                  placeholder="email"
+                  value={email}
+                  onChangeText={setEmail}
+                  style={styles.TextInput}
+                />
+              </View>
+              <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>Password</Text>
+                <TextInput
+                  placeholder="Password"
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry
+                  style={styles.TextInput}
+                />
+              </View>
+              <Text style={styles.messageShow}>{message}</Text>
+              <Text style={styles.errorShow}>{error}</Text>
+            </View>
+            <View>
+              {!loading ? <Button
+                onPress={async () => await toSignIn()}
+                title={signTitle}
+                color='blue'
+                accessibilityLabel="Learn more about this purple button"
+                style={styles.btn}
+              /> :
+                <ActivityIndicator size={'large'} />}
+            </View>
+            <View style={styles.option}>
+              <Text style={styles.optionSeparatorStr}>ou</Text>
+              <Button
+                onPress={() => toogleSign()}
+                title={n_sign}
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+                style={styles.btn}
               />
             </View>
-            <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Password</Text>
-              <TextInput
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-                style={styles.TextInput}
-              />
-            </View>
-            <Text style={styles.messageShow}>{message}</Text>
-            <Text style={styles.errorShow}>{error}</Text>
           </View>
-          <View>
-            {!loading ? <Button
-              onPress={async () => await toSignIn()}
-              title={signTitle}
-              color='blue'
-              accessibilityLabel="Learn more about this purple button"
-            /> :
-              <ActivityIndicator size={'large'} />}
-          </View>
-          <View style={styles.option}>
-            <Text style={styles.optionSeparatorStr}>ou</Text>
-            <Button
-              onPress={() => toogleSign()}
-              title={n_sign}
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </View>
   );
 };
 

@@ -7,12 +7,12 @@ const dateTransformation = (d) => {
   return new Date(nDate1).getTime();
 };
 
-const dateTransformationFront = (d) => {
-  let nDate1 = d.split('-');
-  nDate1 = `${nDate1[1]}/${nDate1[0]}/${nDate1[2]}`;
+// const dateTransformationFront = (d) => {
+//   let nDate1 = d.split('-');
+//   nDate1 = `${nDate1[1]}/${nDate1[0]}/${nDate1[2]}`;
 
-  return new Date(nDate1).getTime();
-};
+//   return new Date(nDate1).getTime();
+// };
 
 const mapToList = (lists) => lists.map(list => {
     const montant = list.Montant.replace(',', '.');
@@ -30,7 +30,7 @@ module.exports.checkDate = ({ min, max }) => {
   if (max && min) {
     const nDate1 = new Date(min).getTime();
     const nDate2 = new Date(max).getTime();
-    return typeof nDate1 === 'number' && typeof nDate2 === 'number' && nDate1 > 9000 && nDate2 > 9000
+    return typeof nDate1 === 'number' && typeof nDate2 === 'number' && nDate1 > 9000 && nDate2 > 9000;
   }
 
   return false;
