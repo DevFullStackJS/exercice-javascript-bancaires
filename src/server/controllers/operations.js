@@ -15,18 +15,18 @@ module.exports.list = async (_, res) => {
 };
 
 module.exports.listOneRib = async (req, res) => {
-  const { params, body } = req;
-  const date = checkDate({ params, body });
+  const { min, max, rib } = req.params;
+  const date = checkDate({ min, max });
   if (!date) {
     return res.status(400).send(errorMessage(invalid_date));
   }
   // eslint-disable-next-line no-irregular-whitespace
-  if (!params.rib || params.rib.length < 20) {
+  if (!rib || rib.length < 20) {
     return res.status(400).send(errorMessage(invalid_rib));
   }
-  const rib = await axios.get(urlApiRib);
-  if (rib && rib.data && rib.data.statut === 'OK') {
-    return res.json({ rib: getOperations(rib.data.operations, params.rib, body) });
+  const ribs = await axios.get(urlApiRib);
+  if (ribs && ribs.data && ribs.data.statut === 'OK') {
+    return res.json({ ribs: getOperations(ribs.data.operations, rib, { min, max }) });
   }
   return res.json({ rib: [] });
 };

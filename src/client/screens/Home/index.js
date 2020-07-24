@@ -35,14 +35,6 @@ const PikerDate = (props) => (
   </View>
 );
 
-const dateTransformation = (d) => {
-  if (!d) return;
-  let nDate1 = d.split('-');
-  nDate1 = `${nDate1[2]}/${nDate1[1]}/${nDate1[0]}`;
-
-  return nDate1;
-};
-
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +61,6 @@ export default class Home extends React.Component {
 
   onDatePicked = (date) => {
     if (date && date._i) {
-      console.log(date._i);
       this.setState({ min: date._i });
     }
   };
@@ -77,13 +68,18 @@ export default class Home extends React.Component {
   onDatePickedMax = (date) => {
     if (date && date._i) {
       this.setState({ max: date._i });
+      console.log(date._i, date);
     }
+
+    // 2019-07-20
   };
 
   getOperationDate = async () => {
     const { min, max } = this.state;
-    const rib = '18206002105487266700217';
-    await this.props.oneRibOperation({ min: dateTransformation(min), max: dateTransformation(max), rib });
+    if (min && max) {
+      const rib = '18206002105487266700217';
+      await this.props.oneRibOperation({ min, max, rib });
+    }
   }
 
   onClose = () => {

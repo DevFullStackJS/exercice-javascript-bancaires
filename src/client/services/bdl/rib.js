@@ -1,6 +1,6 @@
-import { get, post } from '../technique/api';
+import { get } from '../technique/api';
 
 export default {
   operations: async (url) => await get(url),
-  oneRibOperation: async (url, data) => await post(url, data),
+  oneRibOperation: async (url) => await get(url),
 };

@@ -9,7 +9,7 @@ router
   .get(list);
 
 router
-  .route('/:rib')
-  .post((req, res) => listOneRib(req, res));
+  .route('/:rib/:min/:max')
+  .get((req, res) => listOneRib(req, res));
 
 module.exports = router;

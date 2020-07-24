@@ -280,7 +280,7 @@ module.exports = {
         },
       },
     },
-    '/operations/{rib}': {
+    '/operations/{rib}/{min}/{max}': {
       parameters: [
         {
           name: 'rib',
@@ -289,12 +289,26 @@ module.exports = {
           description: 'rib of user that we want to find operations',
           type: 'string',
         },
+        {
+          name: 'min',
+          in: 'path',
+          required: true,
+          description: 'date min format 2017-12-30',
+          type: 'string',
+        },
+        {
+          name: 'max',
+          in: 'path',
+          required: true,
+          description: 'date max format 2020-12-30',
+          type: 'string',
+        },
       ],
-      post: {
+      get: {
         tags: [
           'Operations',
         ],
-        summary: 'Operations (rib) in system',
+        summary: 'Get Operations of rib in system',
         security: [
           {
             JWT: [],

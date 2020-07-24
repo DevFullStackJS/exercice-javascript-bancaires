@@ -1,8 +1,8 @@
 import constants from '../constants/rib';
 import ribSapp from '../../applicatif/rib';
 
-export const oneRibOperation = (data, callBack) => async (dispatch) => {
-  const res = await ribSapp.oneRibOperation(`${constants.url.oneRibOperation}${data.rib}`, data);
+export const oneRibOperation = ({ min, max, rib }, callBack) => async (dispatch) => {
+  const res = await ribSapp.oneRibOperation(`${constants.url.oneRibOperation}${rib}/${min}/${max}`);
   callBack && callBack(res);
   if (res && res.data && res.data.rib) {
     return dispatch({
