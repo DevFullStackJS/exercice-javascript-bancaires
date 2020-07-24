@@ -74,7 +74,6 @@ export default class Home extends React.Component {
 
   onDatePicked = (date) => {
     if (date && date._i) {
-      console.log(date._i);
       this.setState({ min: date._i });
     }
   };
@@ -100,7 +99,6 @@ export default class Home extends React.Component {
   }
 
   onClose = () => {
-    console.log('dfsdfsdf');
     this.setState({ modalVisible: false });
   }
 
@@ -114,13 +112,12 @@ export default class Home extends React.Component {
   }
 
   setRIBId = (selectedRIB) => {
-    console.log('Rib selected', selectedRIB);
     this.setState({ selectedRIB });
   }
 
   render() {
     const { logout, rib } = this.props;
-    const { minDate, maxDate, minDate2, showResult, selectedRIB } = this.state;
+    const { minDate, maxDate, minDate2, showResult, selectedRIB, min, max } = this.state;
 
     return (
       <Background>
@@ -165,7 +162,7 @@ export default class Home extends React.Component {
             </View>
             )
             : (
-              <Operations hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} />
+              <Operations hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
             )
           }
           { false && <FlatList

@@ -17,7 +17,6 @@ export default class SelectItem extends React.Component {
   }
 
   onHandleRIB = (rib) => {
-    console.log('Pressed !!!', rib);
     this.setState({ setSelectedColor: 'beige' });
     this.props.setRIBId(rib);
   }
