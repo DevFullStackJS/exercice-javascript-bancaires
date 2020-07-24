@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
 
 const SignInScreen = (props) => {
   const { signIn, signUp } = props;
-  const [email, setEmail] = React.useState('resdyyy3@body.email');
-  const [password, setPassword] = React.useState('req1dd12.body.password');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
