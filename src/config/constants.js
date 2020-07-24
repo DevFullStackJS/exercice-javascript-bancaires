@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   error_mdp: 'Le mot de passe est incorrect.',
   error_email: 'Identifiants est incorrect.',
   not_found: 'User not found',

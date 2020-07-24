@@ -33,4 +33,4 @@ const OperationsSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('Operations', OperationsSchema);
+module.exports = mongoose.model('Operations', OperationsSchema);

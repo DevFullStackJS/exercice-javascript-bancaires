@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   // url: 'localhost:5000/',
   // baseURL: 'http://localhost:5000/',
   url: 'express-tp.herokuapp.com/',
