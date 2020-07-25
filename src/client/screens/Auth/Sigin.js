@@ -132,6 +132,7 @@ const SignInScreen = (props) => {
                     return value;
                   }))}
                   style={styles.TextInput}
+                  keyboardType='numeric'
                 />
               </View>}
               <DisplyErrorComponet
@@ -149,6 +150,8 @@ const SignInScreen = (props) => {
                     return value;
                   }))}
                   style={styles.TextInput}
+                  autoCompleteType='email'
+                  keyboardType='email-address'
                 />
               </View>
               <DisplyErrorComponet
@@ -167,6 +170,7 @@ const SignInScreen = (props) => {
                   }))}
                   secureTextEntry
                   style={styles.TextInput}
+                  autoCompleteType='password'
                 />
               </View>
               <DisplyErrorComponet
