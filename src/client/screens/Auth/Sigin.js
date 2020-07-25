@@ -4,88 +4,38 @@ import {
   Text,
   TextInput,
   Button,
-  StyleSheet,
-  Dimensions,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
 
-const x = Dimensions.get('window').width;
-const y = Dimensions.get('window').height;
+import styles from './Sigin.style';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  body: {
-    justifyContent: 'center',
-    flexDirection: 'column',
-    flex: 1,
-    position: 'absolute',
-    alignItems: 'center',
-    margin: 10,
-    padding: 10,
-    paddingTop: 20,
-    paddingBottom: 20,
-    width: x,
-    height: y - 100,
-  },
-  titleContainer: {
-    paddingTop: 20,
-  },
-  inputVew: {
-    margin: 10,
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'center',
-  },
-  labelInput: {
-    paddingRight: 10,
-    width: x / 4,
-    color: 'red',
-    fontWeight: 'bold',
-  },
-  TextInput: {
-    padding: 10,
-    borderWidth: 1,
-    width: x / 2,
-    borderRadius: 15,
-    borderColor: 'red',
-    color: 'red',
-    fontWeight: 'bold',
-  },
-  messageShow: {
-    textAlign: 'center',
-    margin: 5,
-  },
-  errorShow: {
-    textAlign: 'center',
-    margin: 5,
-    color: 'blue',
-  },
-  option: {
-    paddingBottom: 5,
-  },
-  optionSeparatorStr: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  signinContainer: {
-    flex: 1,
-    margin: 7,
-    padding: 10,
-  },
-  textPage: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-  },
-  btn: {
-    paddingLeft: 30, paddingRight: 30,
-  },
-});
+import validator from '../../../validator/users';
+
+const {
+  usernameValidator,
+  ribValidator,
+  passwordValidator,
+  emailValidator,
+  signinValidator,
+  signupValidator,
+  isNotEmpty,
+} = validator;
+
+const DisplyErrorComponet = ({ errors, name }) => {
+  if (!errors || !name) {
+    return <View />;
+  }
+  return (
+    <View style={styles.inputVew}>
+      {
+        errors.map(({ msg }, i) => <View key={`${name} ${i}`}>
+          <Text style={styles.errorShow}>{msg}</Text>
+        </View>)
+      }
+    </View>
+  );
+};
 
 const SignInScreen = (props) => {
   const { signIn, signUp } = props;
@@ -108,8 +58,10 @@ const SignInScreen = (props) => {
   };
 
   const callBack = (res) => {
-    console.log({ res });
     setLoading(false);
+    if (res && res.data && res.data.error && res.data.error.message) {
+      setMessage(res.data.error.message);
+    }
     if (res && res.errors && res.errors.length > 0) {
       const data = res.errors;
       const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
@@ -124,26 +76,28 @@ const SignInScreen = (props) => {
   const toSignIn = async () => {
     setErrors({});
     setLoading(true);
-    console.log({ email, password });
     if (sign === 'signUp') {
       return signUp({ email, password, username, rib }, (res) => callBack(res));
     }
     await signIn({ email, password }, (res) => callBack(res));
   };
 
-  const displayError = (name) => (errors && errors[name] ? errors[name].msg : '');
+  const goTosignin = signupValidator(errors, ['password', 'email']);
+  const goTosignup = signinValidator(errors, ['password', 'email', 'username', 'rib']);
+
+  const isNotEmptyLogin = isNotEmpty(password) || isNotEmpty(email);
+
+  const isNotEmptySignup = isNotEmpty(password) || isNotEmpty(email) || isNotEmpty(username) || isNotEmpty(rib);
+
+  console.log(isNotEmptyLogin, isNotEmptySignup);
+
+  const isInvalidate = sign === 'signUp' ? !(!isNotEmptySignup && !goTosignup) : !(!isNotEmptyLogin && !goTosignin);
 
   return (
       <View style={{ flex: 1 }}>
         <ScrollView
-          style={{
-            // flex:1,
-          }}
-          contentContainerStyle={{
-            // flex: 1
-            width: x,
-            height: y - 10,
-          }}
+          style={{}}
+          contentContainerStyle={styles.contentContainerStyle}
         >
           <View style={styles.body}>
             <View style={styles.titleContainer}>
@@ -155,50 +109,78 @@ const SignInScreen = (props) => {
                 <TextInput
                   placeholder="username"
                   value={username}
-                  onChangeText={setUsername}
+                  onChangeText={(value => setUsername(() => {
+                    setMessage('');
+                    setErrors({ ...errors, username: usernameValidator(value, 3) || [] });
+                    return value;
+                  }))}
                   style={styles.TextInput}
                 />
               </View>}
-              <View><Text style={styles.errorShow}>{displayError('username')}</Text></View>
+              <DisplyErrorComponet
+                errors={errors.username}
+                name='username'
+              />
               {sign === 'signUp' && <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Rib</Text>
                 <TextInput
                   placeholder="rib"
                   value={rib}
-                  onChangeText={setRib}
+                  onChangeText={(value => setRib(() => {
+                    setMessage('');
+                    setErrors({ ...errors, rib: ribValidator(value, 20) || [] });
+                    return value;
+                  }))}
                   style={styles.TextInput}
                 />
               </View>}
-              <View><Text style={styles.errorShow}>{displayError('rib')}</Text></View>
+              <DisplyErrorComponet
+                errors={errors.rib}
+                name='rib'
+              />
               <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Email</Text>
                 <TextInput
                   placeholder="email"
                   value={email}
-                  onChangeText={setEmail}
+                  onChangeText={(value => setEmail(() => {
+                    setMessage('');
+                    setErrors({ ...errors, email: emailValidator(value) || [] });
+                    return value;
+                  }))}
                   style={styles.TextInput}
                 />
               </View>
-              <View><Text style={styles.errorShow}>{displayError('email')}</Text></View>
+              <DisplyErrorComponet
+                errors={errors.email}
+                name='email'
+              />
               <View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Password</Text>
                 <TextInput
                   placeholder="Password"
                   value={password}
-                  onChangeText={setPassword}
+                  onChangeText={(value => setPassword(() => {
+                    setMessage('');
+                    setErrors({ ...errors, password: passwordValidator(value) || [] });
+                    return value;
+                  }))}
                   secureTextEntry
                   style={styles.TextInput}
                 />
               </View>
-              <View><Text style={styles.errorShow}>{displayError('password')}</Text></View>
+              <DisplyErrorComponet
+                errors={errors.password}
+                name='password'
+              />
               <Text style={styles.messageShow}>{message}</Text>
             </View>
             <View>
               {!loading ? <Button
+                disabled={isInvalidate}
                 onPress={async () => await toSignIn()}
                 title={signTitle}
-                color='blue'
-                accessibilityLabel="Learn more about this purple button"
+                color={isInvalidate ? '#808080' : 'blue'}
                 style={styles.btn}
               /> :
                 <ActivityIndicator size={'large'} />}
@@ -209,8 +191,8 @@ const SignInScreen = (props) => {
                 onPress={() => toogleSign()}
                 title={n_sign}
                 color="#841584"
-                accessibilityLabel="Learn more about this purple button"
                 style={styles.btn}
+                containerStyle={styles.containerStyle}
               />
             </View>
           </View>

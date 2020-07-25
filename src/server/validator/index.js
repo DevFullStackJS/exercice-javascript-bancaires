@@ -16,5 +16,6 @@ module.exports.usersValidator = [
       }
     })),
   check('password').isLength({ min: 5 }).withMessage('Must be at least 5 chars long'),
-  check('rib').isNumeric().withMessage('Must be only numeric').isLength({ min: 20 }).withMessage('Must be at least 20 chars long')
+  check('rib').isNumeric().withMessage('Must be only numeric').isLength({ min: 20 })
+.withMessage('Must be at least 20 chars long'),
 ];
