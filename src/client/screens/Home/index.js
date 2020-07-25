@@ -1,6 +1,10 @@
 import React from 'react';
 import Moment from 'moment';
 import { View, FlatList, Button, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
+
+import mapStateToProps from '../../services/redux/mapStateToProps';
+import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
 import { home_title, select_period, select_rib, find, from, to } from '../../../config/constants';
 
@@ -24,15 +28,7 @@ const PikerDate = (props) => (
   </View>
 );
 
-// const dateTransformation = (d) => {
-//   if (!d) return;
-//   let nDate1 = d.split('-');
-//   nDate1 = `${nDate1[2]}/${nDate1[1]}/${nDate1[0]}`;
-
-//   return nDate1;
-// };
-
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -183,3 +179,8 @@ export default class Home extends React.Component {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);
