@@ -19,8 +19,8 @@ mongoose
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err));
 
-// require('./user/user.model');
-
+require('./models/comptes');
+require('./models/operations');
 require('./models/users');
 
 app.listen(port, () => {

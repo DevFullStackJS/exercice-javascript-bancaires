@@ -7,8 +7,6 @@ const { validationResult } = require('express-validator');
 const { errorMessage } = require('../utils');
 const constants = require('../../config/constants');
 
-// const User = require('../models/users');
-
 const { error_email, error_mdp, not_found } = constants;
 
 const isValidID = _id => mongoose.Types.ObjectId.isValid(_id);

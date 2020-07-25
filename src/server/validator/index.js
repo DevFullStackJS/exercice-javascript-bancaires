@@ -2,6 +2,10 @@ const { body, check } = require('express-validator');
 
 const User = require('../models/users');
 
+module.exports.comptesValidator = [
+  body('rib').isLength({ min: 20 }),
+];
+
 module.exports.usersValidatorUpdate = [
   body('username').isLength({ min: 3 }),
   body('rib').isLength({ min: 20 }),

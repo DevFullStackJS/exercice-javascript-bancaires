@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
     maxlength: 255,
     // unique: true
   },
+  ribs: [{
+    type: String,
+    required: true,
+    minlength: 20,
+    maxlength: 255,
+  }],
   password: {
     type: String,
     required: true,

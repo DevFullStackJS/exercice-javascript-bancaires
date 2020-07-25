@@ -11,6 +11,7 @@ const { swaggerDocument, options } = require('./swagger');
 // route
 const usersRoute = require('./routers/users');
 const operationsRouter = require('./routers/opetations');
+const comptesRouter = require('./routers/comptes');
 
 const verifyToken = require('./middleware/auth');
 const { catchAll, notFound } = require('./validator/error');
@@ -34,6 +35,8 @@ app.get('/api/docs', swaggerUi.setup(swaggerDocument, false, options, '.swagger-
 app.use('/api/users', usersRoute);
 
 app.use('/api/operations', verifyToken, operationsRouter);
+
+app.use('/api/comptes', verifyToken, comptesRouter);
 
 app.use(notFound);
 
