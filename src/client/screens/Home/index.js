@@ -2,35 +2,24 @@ import React from 'react';
 import Moment from 'moment';
 import { View, FlatList, Button, Text } from 'react-native';
 
-import SimplerDatePicker from '../../components/DatePiker';
+import { home_title, select_period, select_rib, find, from, to } from '../../../config/constants';
 
+import SimplerDatePicker from '../../components/DatePiker';
 import Background from '../../components/Common/background';
 import Layout from '../Layout';
 import SelectItem from '../../components/ItemList/selectItem';
 import Operations from '../Operation';
+import styles from './index.style';
 
 const PikerDate = (props) => (
-  <View style={{ marginBottom: 40 }}>
+  <View style={styles.pickerDateContainer}>
     <SimplerDatePicker
       {...props}
-      containerStyle={{
-        flex: 1,
-        flexDirection: 'row',
-      }}
-      yearStyle={{
-        flex: 1,
-        marginRight: 5,
-      }}
-      monthStyle={{
-        flex: 1,
-        marginRight: 5,
-      }}
-      dayStyle={{
-        flex: 1,
-      }}
-      textStyle={{
-        fontSize: 16,
-      }}
+      containerStyle={styles.simpleDPcontainer}
+      yearStyle={styles.yearStyle}
+      monthStyle={styles.monthStyle}
+      dayStyle={styles.dayStyle}
+      textStyle={styles.textStyle}
     />
   </View>
 );
@@ -134,17 +123,21 @@ export default class Home extends React.Component {
 
     return (
       <Background>
-        <Layout {...this.props} title={'Compagnie fiduciaire'} logout={logout}>
+        <Layout {...this.props} title={home_title} logout={logout}>
           {!showResult
             ? (
-            <View style={{ flex: 1, justifyContent: 'space-between', padding: 20, margin: 10 }}>
-              <View style={{ flex: 0.3, marginBottom: 30 }}>
-              <Text>Select period date</Text>
+            <View style={styles.formContainer}>
+              <View style={styles.datesContainer}>
+                <View style={styles.titleLabel}>
+                  <Text style={styles.textLabel}>{select_period}</Text>
+                </View>
+                <Text style={styles.periodLabel}>{from}</Text>
                 <PikerDate
                   minDate={minDate}
                   maxDate={maxDate}
                   onDatePicked={this.onDatePicked}
                 />
+                <Text style={styles.periodLabel}>{to}</Text>
                 <PikerDate
                   minDate={minDate2}
                   maxDate={maxDate}
@@ -152,28 +145,25 @@ export default class Home extends React.Component {
                 />
               </View>
               <View style={{ flex: 0.3 }}>
-                {/* <Button
-                  title='Liste Operations'
-                  onPress={this.getOperationDate}
-                /> */}
-                  <Text>Select one RIB</Text>
-                  <FlatList
-                    scrollEnabled
-                    // data={rib.operations}
-                    data={strictRIBList}
-                    keyExtractor={(_, index) => index.toString()}
-                    renderItem={({ item }) => (
-                      <SelectItem {...item} setRIBId={this.setRIBId} />
-                    )}
-                  />
+                <View style={styles.titleLabel}>
+                  <Text style={styles.textLabel}>{select_rib}</Text>
                 </View>
-                <View style={{ flex: 0.3 }}>
-                  <Button
-                    title='Find'
-                    onPress={this.showRIBInfos}
-                  />
-                </View>
+                <FlatList
+                  scrollEnabled
+                  data={strictRIBList}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={({ item }) => (
+                    <SelectItem {...item} setRIBId={this.setRIBId} />
+                  )}
+                />
               </View>
+              <View style={{ flex: 0.3 }}>
+                <Button
+                  title={find}
+                  onPress={this.showRIBInfos}
+                />
+              </View>
+            </View>
             )
             : (
               <Operations { ...this.props } hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
