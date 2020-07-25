@@ -16,7 +16,6 @@ const {
   usernameValidator,
   ribValidator,
   passwordValidator,
-  emailValidator,
   signinValidator,
   isNotEmpty,
 } = validator;
@@ -92,7 +91,7 @@ const SignInScreen = () => {
             </View>
             <View style={{}}>
               {<View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Username</Text>
+                <Text style={styles.labelInput}>Type Compte</Text>
                 <TextInput
                   placeholder="username"
                   value={username}
@@ -127,13 +126,13 @@ const SignInScreen = () => {
                 name='rib'
               />
               <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Email</Text>
+                <Text style={styles.labelInput}>Identifiants</Text>
                 <TextInput
                   placeholder="email"
                   value={email}
                   onChangeText={(value => setEmail(() => {
                     setMessage('');
-                    setErrors({ ...errors, email: emailValidator(value) || [] });
+                    setErrors({ ...errors, email: usernameValidator(value, 5) || [] });
                     return value;
                   }))}
                   style={styles.TextInput}

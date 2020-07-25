@@ -45,7 +45,7 @@ const SignInScreen = (props) => {
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
   const [sign, setSign] = React.useState('signIn');
-  const [n_sign, setNoSign] = React.useState('signUp');
+  // const [n_sign, setNoSign] = React.useState('signUp');
   const [signTitle, setSignTitle] = React.useState('sign In');
   const [loading, setLoading] = React.useState(false);
   const [errors, setErrors] = React.useState({});
@@ -53,7 +53,7 @@ const SignInScreen = (props) => {
   const toogleSign = () => {
     setErrors({});
     setSign(sign === 'signIn' ? 'signUp' : 'signIn');
-    setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
+    // setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
     setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
   };
 
@@ -189,7 +189,7 @@ const SignInScreen = (props) => {
               /> :
                 <ActivityIndicator size={'large'} />}
             </View>
-            <View style={styles.option}>
+            {/* <View style={styles.option}>
               <Text style={styles.optionSeparatorStr}>ou</Text>
               <Button
                 onPress={() => toogleSign()}
@@ -198,7 +198,7 @@ const SignInScreen = (props) => {
                 style={styles.btn}
                 containerStyle={styles.containerStyle}
               />
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </View>
