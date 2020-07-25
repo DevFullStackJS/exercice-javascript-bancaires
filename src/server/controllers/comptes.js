@@ -21,7 +21,7 @@ module.exports = {
   },
   remove: async (req, res) => {
     const comptes = await Comptes.findByIdAndRemove(req.params.id);
-    res.json({ sucsess: comptes && comptes._id , _id: req.params.id });
+    res.json({ sucsess: comptes && comptes._id, _id: req.params.id });
   },
   view: async (req, res) => {
     const compte = await Comptes.findById(req.params.id);

@@ -1,6 +1,7 @@
 import crud from './actions/crud';
 import users from './actions/users';
 import rib from './actions/rib';
+import comptes from './actions/comptes';
 
 const mapDispatchToProps = (dispatch) => ({
   getAllCrud: (payload, cb) => dispatch(crud.getAllCrud(payload, cb)),
@@ -13,6 +14,11 @@ const mapDispatchToProps = (dispatch) => ({
   // Rib
   oneRibOperation: (payload, cb) => dispatch(rib.oneRibOperation(payload, cb)),
   operations: (payload, cb) => dispatch(rib.operations(payload, cb)),
+
+  // Comptes
+  getComptes: (payload, cb) => dispatch(comptes.getComptes(payload, cb)),
+  getCompte: (payload, cb) => dispatch(comptes.getCompte(payload, cb)),
+  createCompte: (payload, cb) => dispatch(comptes.createCompte(payload, cb)),
 });
 
 export default mapDispatchToProps;

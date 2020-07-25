@@ -1,22 +1,16 @@
-import constants from '../constants/rib';
+import constants from '../constants/comptes';
 import users from '../constants/users';
 
 const initialState = {
-  operations: [],
-  oneRibOperation: [],
+  list: [],
 };
 
-const rib = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case constants.operations:
+    case constants.getComptes:
       return {
         ...state,
-        operations: action.payload,
-      };
-    case constants.oneRibOperation:
-      return {
-        ...state,
-        oneRibOperation: action.payload,
+        comptes: action.payload,
       };
     case users.logout:
       return initialState;
@@ -24,5 +18,3 @@ const rib = (state = initialState, action) => {
       return state;
   }
 };
-
-export default rib;

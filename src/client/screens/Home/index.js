@@ -51,6 +51,7 @@ export default class Home extends React.Component {
 
   async componentDidMount() {
     await this.props.operations();
+    await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
   }
 
@@ -108,6 +109,8 @@ export default class Home extends React.Component {
   }
 
   getStrictList = (lists) => {
+    // const { list } = this.props.comptes;
+    // list && console.log({ list });
     const ls = lists && lists.map(m => m.RIB);
     let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
     strictRIBList = strictRIBList && strictRIBList.map(l => {
