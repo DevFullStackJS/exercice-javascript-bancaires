@@ -10,7 +10,6 @@ module.exports = {
   to: 'Au',
   select_rib: 'Choisir RIB',
   find: 'Rechercher',
-  no_rib_saved: 'Aucun RIB trouvé',
   operation_trad: {
     rib: 'RIB: ',
     date: 'Date',
@@ -22,5 +21,6 @@ module.exports = {
     spent_atr: 'spent',
     sold: 'SOLDE:   ',
     cancel: 'Retour',
+    no_op_saved: 'Aucune opération trouvée',
   },
 };
