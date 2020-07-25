@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case constants.getComptes:
       return {
         ...state,
-        comptes: action.payload,
+        list: action.payload,
       };
     case users.logout:
       return initialState;

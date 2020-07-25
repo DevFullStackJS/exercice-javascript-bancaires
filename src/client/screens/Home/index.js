@@ -111,8 +111,8 @@ export default class Home extends React.Component {
   }
 
   getStrictList = (lists) => {
-    // const { list } = this.props.comptes;
-    // list && console.log({ list });
+    const { list } = this.props.comptes;
+    console.log({ list });
     const ls = lists && lists.map(m => m.RIB);
     let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
     strictRIBList = strictRIBList && strictRIBList.map(l => {
@@ -126,6 +126,7 @@ export default class Home extends React.Component {
     const { logout } = this.props;
     const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding } = this.state;
 
+    console.log(this.props);
     return (
       <Background>
         <Layout {...this.props} title={home_title} logout={logout}>
