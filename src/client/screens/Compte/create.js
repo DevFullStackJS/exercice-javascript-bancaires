@@ -21,6 +21,8 @@ const {
   isNotEmpty,
 } = validator;
 
+const signTitle = 'Creation Compte';
+
 const DisplyErrorComponet = ({ errors, name }) => {
   if (!errors || !name) {
     return <View />;
@@ -36,39 +38,31 @@ const DisplyErrorComponet = ({ errors, name }) => {
   );
 };
 
-const SignInScreen = (props) => {
-  const { signIn, signUp } = props;
+const SignInScreen = () => {
+  // const { } = props;
   const [email, setEmail] = React.useState('resdyyy3@body.email');
   const [password, setPassword] = React.useState('req1dd12.body.password');
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
-  const [sign, setSign] = React.useState('signUp');
-  const [signTitle, setSignTitle] = React.useState('Creation Compte');
   const [loading, setLoading] = React.useState(false);
   const [errors, setErrors] = React.useState({});
 
-  const toogleSign = () => {
-    setErrors({});
-    setSign(sign === 'signIn' ? 'signUp' : 'signIn');
-    setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
-  };
-
-  const callBack = (res) => {
-    setLoading(false);
-    if (res && res.data && res.data.error && res.data.error.message) {
-      setMessage(res.data.error.message);
-    }
-    if (res && res.errors && res.errors.length > 0) {
-      const data = res.errors;
-      const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
-      return setErrors(resErrors);
-    }
-    if (res && res.data && res.data._id) {
-      toogleSign();
-      setMessage('Ajout avec succes');
-    }
-  };
+  // const callBack = (res) => {
+  //   setLoading(false);
+  //   if (res && res.data && res.data.error && res.data.error.message) {
+  //     setMessage(res.data.error.message);
+  //   }
+  //   if (res && res.errors && res.errors.length > 0) {
+  //     const data = res.errors;
+  //     const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
+  //     return setErrors(resErrors);
+  //   }
+  //   if (res && res.data && res.data._id) {
+  //     toogleSign();
+  //     setMessage('Ajout avec succes');
+  //   }
+  // };
 
   const createCompte = async () => {
     setErrors({});
