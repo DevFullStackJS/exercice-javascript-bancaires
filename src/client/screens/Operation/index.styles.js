@@ -1,3 +1,7 @@
+import { Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+
 export const styles = {
   sectionStyle: {
     flexDirection: 'row',
@@ -5,6 +9,10 @@ export const styles = {
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 5,
+  },
+  theadStyle: {
+    justifyContent: 'space-between',
+    padding: 10,
   },
   showTotal: {
     flex: 0.5,
@@ -15,7 +23,22 @@ export const styles = {
   titleEnd: {
     flex: 0.02,
   },
+  leftContainer: {
+    width: width / 5,
+  },
+  centerContainer: {
+    width: width / 6,
+  },
+  rigthContainer: {
+    width: width / 7,
+  },
   titleText: {
     fontWeight: 'bold',
+  },
+  leftAlignment: {
+    textAlign: 'left',
+  },
+  rigthAlignment: {
+    textAlign: 'right',
   },
 };
