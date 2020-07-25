@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
-import { View, FlatList, Button, Text } from 'react-native';
+import { View, FlatList, Button, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 import { home_title, select_period, select_rib, find, from, to } from '../../../config/constants';
 
@@ -15,11 +15,11 @@ const PikerDate = (props) => (
   <View style={styles.pickerDateContainer}>
     <SimplerDatePicker
       {...props}
-      containerStyle={styles.simpleDPcontainer}
-      yearStyle={styles.yearStyle}
-      monthStyle={styles.monthStyle}
-      dayStyle={styles.dayStyle}
-      textStyle={styles.textStyle}
+      containerStyle={StyleSheet.flatten(styles.simpleDPcontainer)}
+      yearStyle={StyleSheet.flatten(styles.yearStyle)}
+      monthStyle={StyleSheet.flatten(styles.monthStyle)}
+      dayStyle={StyleSheet.flatten(styles.dayStyle)}
+      textStyle={StyleSheet.flatten(styles.textStyle)}
     />
   </View>
 );
@@ -46,6 +46,7 @@ export default class Home extends React.Component {
       showResult: false,
       selectedRIB: '',
       strictRIBList: [],
+      loding: false,
     };
   }
 
@@ -95,12 +96,13 @@ export default class Home extends React.Component {
         mx = min;
         mn = max;
       }
+      this.setState({ loding: true });
       await this.props.oneRibOperation({ min: mn, max: mx, rib: selectedRIB }, this.callBack);
     }
   }
 
   hideRIBInfos = () => {
-    this.setState({ showResult: false });
+    this.setState({ showResult: false, loding: false, selectedRIB: '' });
   }
 
   setRIBId = (selectedRIB) => {
@@ -119,7 +121,7 @@ export default class Home extends React.Component {
 
   render() {
     const { logout } = this.props;
-    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, min, max } = this.state;
+    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding } = this.state;
 
     return (
       <Background>
@@ -158,15 +160,17 @@ export default class Home extends React.Component {
                 />
               </View>
               <View style={{ flex: 0.3 }}>
-                <Button
-                  title={find}
-                  onPress={this.showRIBInfos}
-                />
+                { !loding
+                ? <Button
+                    title={find}
+                    onPress={this.showRIBInfos}
+                  />
+                : <ActivityIndicator />}
               </View>
             </View>
             )
             : (
-              <Operations { ...this.props } hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} min={min} max={max} />
+              <Operations { ...this.props } hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} />
             )
           }
           {/* <ModalComponent /> */}
