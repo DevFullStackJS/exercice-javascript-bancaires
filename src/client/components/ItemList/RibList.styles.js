@@ -1,16 +1,32 @@
+import { Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+
 export const styles = {
   headList: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: 'beige',
+    padding: 10,
+    margin: 8,
   },
-  titleView: {
-    flex: 0.2,
+  leftContainer: {
+    width: width / 5,
   },
-  titleEnd: {
-    flex: 0.02,
+  centerContainer: {
+    width: width / 6,
+  },
+  rigthContainer: {
+    width: width / 7,
   },
   titleText: {
     fontWeight: 'bold',
+  },
+  leftAlignment: {
+    textAlign: 'left',
+  },
+  rigthAlignment: {
+    textAlign: 'right',
   },
   separate: {
     backgroundColor: 'white',
