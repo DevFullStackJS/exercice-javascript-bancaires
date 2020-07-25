@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import mapStateToProps from '../services/redux/mapStateToProps';
 import mapDispatchToProps from '../services/redux/mapDispatchToProps';
 
-import Home from './Home';
+import AppNavigation from './navigation';
 import AuthStack from './Auth';
 
 class AppMain extends React.Component {
@@ -29,7 +29,7 @@ class AppMain extends React.Component {
     const { user } = this.props.users;
 
     if (user && user.token) {
-      return <Home {...this.props} />;
+      return <AppNavigation {...this.props} />;
     }
     return <AuthStack />;
   }
