@@ -1,5 +1,7 @@
 import React from 'react';
-import { FlatList, View, Text, Dimensions, Button } from 'react-native';
+import { FlatList, View, Text, Button } from 'react-native';
+
+import { operation_trad } from '../../../config/constants';
 
 import { RibList } from '../../components/ItemList/RibList';
 import { styles } from './index.styles';
@@ -19,8 +21,8 @@ export default class Operation extends React.Component {
   }
 
   checkSolde = (ops) => {
-    const totalRecipe = this.getTotal(ops, 'recipe');
-    const totalSpent = this.getTotal(ops, 'spent');
+    const totalRecipe = this.getTotal(ops, operation_trad.recipe_atr);
+    const totalSpent = this.getTotal(ops, operation_trad.spent_atr);
     return totalRecipe - totalSpent;
   }
 
@@ -29,26 +31,27 @@ export default class Operation extends React.Component {
   render() {
     const { rib, hideRIBInfos, ribId } = this.props;
     const { totalSold } = this.state;
-    const { width } = Dimensions.get('window');
 
     return (
       <>
-        <View style={styles.sectionStyle}><Text style={styles.titleText}>{`RIB: ${ribId}`}</Text></View>
-        <View style={[styles.sectionStyle, { justifyContent: 'space-between', padding: 10 }]}>
-          <View style={{ width: width / 6 }}>
-            <Text style={[styles.titleText, { textAlign: 'left' }]}>Date</Text>
+        <View style={styles.sectionStyle}>
+          <Text style={styles.titleText}>{`${operation_trad.rib} ${ribId}`}</Text>
+        </View>
+        <View style={[styles.sectionStyle, styles.theadStyle]}>
+          <View style={styles.leftContainer}>
+            <Text style={[styles.titleText, styles.leftAlignment]}>{operation_trad.date}</Text>
           </View>
-          <View style={{ width: width / 5 }}>
-            <Text style={styles.titleText}>Libelle</Text>
+          <View style={styles.leftContainer}>
+            <Text style={styles.titleText}>{operation_trad.libelle}</Text>
           </View>
-          <View style={{ width: width / 6 }}>
-            <Text style={[styles.titleText, { textAlign: 'right' }]}>Montant</Text>
+          <View style={styles.centerContainer}>
+            <Text style={[styles.titleText, styles.rigthAlignment]}>{operation_trad.montant}</Text>
           </View>
-          <View style={{ width: width / 6 }}>
-            <Text style={[styles.titleText, { textAlign: 'right' }]}>Recettes</Text>
+          <View style={styles.centerContainer}>
+            <Text style={[styles.titleText, styles.rigthAlignment]}>{operation_trad.recepe}</Text>
           </View>
-          <View style={{ width: width / 6 }}>
-            <Text style={[styles.titleText, { textAlign: 'right' }]}>Dépenses</Text>
+          <View style={styles.rigthContainer}>
+            <Text style={[styles.titleText, styles.rigthAlignment]}>{operation_trad.spent}</Text>
           </View>
         </View>
         <FlatList
@@ -61,11 +64,11 @@ export default class Operation extends React.Component {
         />
         <View style={styles.sectionStyle}>
           <View style={styles.showTotal} />
-          <Text style={styles.titleText}>SOLDE:   {totalSold}</Text>
+          <Text style={styles.titleText}>{`${operation_trad.sold} ${totalSold}`}</Text>
         </View>
         <View>
           <Button
-            title='Cancel'
+            title={operation_trad.cancel}
             onPress={hideRIBInfos}
           />
         </View>
