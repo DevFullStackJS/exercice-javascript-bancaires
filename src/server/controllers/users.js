@@ -51,6 +51,7 @@ module.exports.create = async (req, res) => {
   const user = new User({
     ...req.body,
     password,
+    rib: req.body.rib ? req.body.rib.map(r => `${req.body.email}//${r}`) : undefined,
   });
   await user.save();
   res.json(user);

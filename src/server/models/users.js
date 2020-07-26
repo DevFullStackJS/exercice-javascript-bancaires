@@ -22,9 +22,8 @@ const UserSchema = new mongoose.Schema({
   //   // unique: true
   // },
   // rib: [String],
-  rib: { 
-    type: [{ type: String, unique: false }],
-    unique: false,
+  rib: {
+    type: mongoose.Schema.Types.Array,
   },
   password: {
     type: String,

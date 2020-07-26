@@ -61,7 +61,6 @@ const SignInScreen = (props) => {
   const [errors, setErrors] = React.useState({});
 
   const callBack = (res) => {
-    console.log(res);
     setRole(1);
     setLoading(false);
     if (res && res.error && res.error.message) {
@@ -80,13 +79,13 @@ const SignInScreen = (props) => {
   };
 
   const createCompte = async () => {
+    setMessage('');
     const data = { email, password, role, rib: [selectedRIB] };
     const validators = validatorUsers(data);
     if (validators && validators.length > 0) {
       const toObjectErrors = validators.reduce((acc, { name, message }) => ({ ...acc, [name]: message }), {});
       setErrors(toObjectErrors);
     }
-    console.log(data);
     await signUp(data, (res) => callBack(res));
   };
 
