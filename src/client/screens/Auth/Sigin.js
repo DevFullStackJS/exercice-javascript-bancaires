@@ -17,8 +17,6 @@ const {
   ribValidator,
   passwordValidator,
   emailValidator,
-  signinValidator,
-  signupValidator,
   isNotEmpty,
 } = validator;
 
@@ -69,7 +67,7 @@ const SignInScreen = (props) => {
     }
     if (sign === 'signUp' && res && res.data && res.data._id) {
       toogleSign();
-      setMessage('Ajout avec succes');
+      setMessage('Ajout avec success');
     }
   };
 
@@ -82,16 +80,7 @@ const SignInScreen = (props) => {
     await signIn({ email, password }, (res) => callBack(res));
   };
 
-  const goTosignin = signupValidator(errors, ['password', 'email']);
-  const goTosignup = signinValidator(errors, ['password', 'email', 'username', 'rib']);
-
-  const isNotEmptyLogin = isNotEmpty(password) || isNotEmpty(email);
-
-  const isNotEmptySignup = isNotEmpty(password) || isNotEmpty(email) || isNotEmpty(username) || isNotEmpty(rib);
-
-  console.log(isNotEmptyLogin, isNotEmptySignup);
-
-  const isInvalidate = sign === 'signUp' ? !(!isNotEmptySignup && !goTosignup) : !(!isNotEmptyLogin && !goTosignin);
+  const isInvalidate = !(isNotEmpty(password) || isNotEmpty(email));
 
   return (
       <View style={{ flex: 1 }}>

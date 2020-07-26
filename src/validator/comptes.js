@@ -2,7 +2,7 @@ import validator from './common';
 
 const { checkNumberChars, checkErrors, isEmailAddress, checkErrorsBtn, isNotEmpty } = validator;
 
-export default {
+module.exports = {
   usernameValidator: (value, min = 3) => checkErrors([checkNumberChars(value, min)]),
   ribValidator: (value, min = 3) => checkErrors([checkNumberChars(value, min)]),
   passwordValidator: (value, min = 8) => checkErrors([checkNumberChars(value, min)]),

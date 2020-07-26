@@ -6,21 +6,17 @@ import {
   Button,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 
+import { RibList } from '../Home';
 import Modal from '../../components/Common/Modal';
 
 import styles from './styles';
 
 import validator from '../../../validator/users';
 
-const {
-  usernameValidator,
-  ribValidator,
-  passwordValidator,
-  signinValidator,
-  isNotEmpty,
-} = validator;
+const { validatorUsers } = validator;
 
 const signTitle = 'Creation Compte';
 
@@ -30,158 +26,177 @@ const DisplyErrorComponet = ({ errors, name }) => {
   }
   return (
     <View style={styles.inputVew}>
-      {
-        errors.map(({ msg }, i) => <View key={`${name} ${i}`}>
-          <Text style={styles.errorShow}>{msg}</Text>
-        </View>)
-      }
+      <Text style={styles.errorShow}>{errors}</Text>
     </View>
   );
 };
 
-const SignInScreen = () => {
-  // const { } = props;
+const roles = (r) => (r === 1 ? 'Utilisateur' : 'Administrateur');
+
+const ModalRole = ({ setRole, role }) => (
+  <View>
+    <Text style={{ textAlign: 'center' }}>Role</Text>
+    <View style={{ margin: 20 }}>
+      <TouchableOpacity onPress={() => setRole(1)}>
+        <Text style={{ backgroundColor: role === 1 ? 'blue' : 'white' }}>{roles(1)}</Text>
+      </TouchableOpacity>
+    </View>
+    <View style={{ margin: 20 }}>
+      <TouchableOpacity onPress={() => setRole(2)}>
+        <Text style={{ backgroundColor: role === 2 ? 'blue' : 'white' }}>{roles(2)}</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+);
+
+const SignInScreen = (props) => {
+  const { signUp, strictRIBList, setRIBId, selectedRIB } = props;
   const [email, setEmail] = React.useState('resdyyy3@body.email');
   const [password, setPassword] = React.useState('req1dd12.body.password');
-  const [username, setUsername] = React.useState('');
-  const [message, setMessage] = React.useState('');
-  const [rib, setRib] = React.useState('');
+  const [role, setRole] = React.useState(1);
+  const [messageall, setMessage] = React.useState('');
+  // const [rib, setRib] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [modalVisible, setModalVisible] = React.useState(false);
   const [errors, setErrors] = React.useState({});
 
-  // const callBack = (res) => {
-  //   setLoading(false);
-  //   if (res && res.data && res.data.error && res.data.error.message) {
-  //     setMessage(res.data.error.message);
-  //   }
-  //   if (res && res.errors && res.errors.length > 0) {
-  //     const data = res.errors;
-  //     const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
-  //     return setErrors(resErrors);
-  //   }
-  //   if (res && res.data && res.data._id) {
-  //     toogleSign();
-  //     setMessage('Ajout avec succes');
-  //   }
-  // };
+  const callBack = (res) => {
+    console.log(res);
+    setRole(1);
+    setLoading(false);
+    if (res && res.error && res.error.message) {
+      setMessage(res.error.message);
+      return;
+    }
+    if (res && res.errors) {
+      const toObjectErrors = res.errors.reduce((acc, { name, message }) => ({ ...acc, [name]: message }), {});
+      setErrors(toObjectErrors);
+      return;
+    }
+    if (res && res.data) {
+      setMessage('Ajout avec success');
+    }
 
-  const createCompte = async () => {
-    setErrors({});
-    setLoading(true);
-    setUsername('');
-    console.log({ email, password, username, rib });
-    // if (sign === 'signUp') {
-    //   return signUp({ email, password, username, rib }, (res) => callBack(res));
-    // }
-    // await signIn({ email, password }, (res) => callBack(res));
   };
 
-  const goTosignup = signinValidator(errors, ['password', 'email', 'username', 'rib']);
-
-  const isNotEmptySignup = isNotEmpty(password) || isNotEmpty(email) || isNotEmpty(username) || isNotEmpty(rib);
-
-  const isInvalidate = !(!isNotEmptySignup && !goTosignup);
+  const createCompte = async () => {
+    const data = { email, password, role, rib: [selectedRIB] };
+    const validators = validatorUsers(data);
+    if (validators && validators.length > 0) {
+      const toObjectErrors = validators.reduce((acc, { name, message }) => ({ ...acc, [name]: message }), {});
+      setErrors(toObjectErrors);
+    }
+    console.log(data);
+    await signUp(data, (res) => callBack(res));
+  };
 
   return (
-      <View style={{ flex: 1 }}>
-        <ScrollView
-          style={{}}
-          contentContainerStyle={styles.contentContainerStyle}
-        >
-          <View style={styles.body}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.textPage}>{signTitle}</Text>
-            </View>
-            <View style={{}}>
-              {<View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Type Compte</Text>
-                <Modal />
-                {/* <TextInput
-                  placeholder="username"
-                  value={username}
-                  onChangeText={(value => setUsername(() => {
-                    setMessage('');
-                    setErrors({ ...errors, username: usernameValidator(value, 3) || [] });
-                    return value;
-                  }))}
-                  style={styles.TextInput}
-                /> */}
-              </View>}
-              <DisplyErrorComponet
-                errors={errors.username}
-                name='username'
-              />
-              {<View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Rib</Text>
-                <TextInput
-                  placeholder="rib"
-                  value={rib}
-                  onChangeText={(value => setRib(() => {
-                    setMessage('');
-                    setErrors({ ...errors, rib: ribValidator(value, 20) || [] });
-                    return value;
-                  }))}
-                  style={styles.TextInput}
-                  keyboardType='numeric'
-                />
-              </View>}
-              <DisplyErrorComponet
-                errors={errors.rib}
-                name='rib'
-              />
-              <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Identifiants</Text>
-                <TextInput
-                  placeholder="email"
-                  value={email}
-                  onChangeText={(value => setEmail(() => {
-                    setMessage('');
-                    setErrors({ ...errors, email: usernameValidator(value, 5) || [] });
-                    return value;
-                  }))}
-                  style={styles.TextInput}
-                  autoCompleteType='email'
-                  keyboardType='email-address'
-                />
-              </View>
-              <DisplyErrorComponet
-                errors={errors.email}
-                name='email'
-              />
-              <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Password</Text>
-                <TextInput
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={(value => setPassword(() => {
-                    setMessage('');
-                    setErrors({ ...errors, password: passwordValidator(value) || [] });
-                    return value;
-                  }))}
-                  secureTextEntry
-                  style={styles.TextInput}
-                  autoCompleteType='password'
-                />
-              </View>
-              <DisplyErrorComponet
-                errors={errors.password}
-                name='password'
-              />
-              <Text style={styles.messageShow}>{message}</Text>
-            </View>
-            <View>
-              {!loading ? <Button
-                disabled={isInvalidate}
-                onPress={async () => await createCompte()}
-                title={signTitle}
-                color={isInvalidate ? '#808080' : 'blue'}
-                style={styles.btn}
-              /> :
-                <ActivityIndicator size={'large'} />}
-            </View>
+    <View style={{ flex: 1 }}>
+      <ScrollView
+        style={{}}
+        contentContainerStyle={styles.contentContainerStyle}
+      >
+        <View style={styles.body}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.textPage}>{signTitle}</Text>
           </View>
-        </ScrollView>
-      </View>
+          <View style={{}}>
+            {<View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Type Compte</Text>
+              <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}>
+                <Text style={styles.labelInput}>Modifier</Text>
+              </TouchableOpacity>
+            </View>}
+            <DisplyErrorComponet
+              errors={errors.role}
+              name='role'
+            />
+            {<View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Rib</Text>
+              <TextInput
+                placeholder="rib"
+                value={selectedRIB}
+                onFocus={() => setModalVisible(!modalVisible)}
+                // onChangeText={setRib}
+                // onChangeText={(value => setRib(() => {
+                //   setMessage('');
+                //   setErrors({ ...errors, rib: ribValidator(value, 20) || [] });
+                //   return value;
+                // }))}
+                style={styles.TextInput}
+              />
+            </View>}
+            <DisplyErrorComponet
+              errors={errors.rib}
+              name='rib'
+            />
+            <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Identifiant</Text>
+              <TextInput
+                placeholder="Identifiant"
+                value={email}
+                onChangeText={setEmail}
+                // onChangeText={(value => setEmail(() => {
+                //   setMessage('');
+                //   setErrors({ ...errors, email: roleValidator(value, 5) || [] });
+                //   return value;
+                // }))}
+                style={styles.TextInput}
+              />
+            </View>
+            <DisplyErrorComponet
+              errors={errors.email}
+              name='email'
+            />
+            <View style={styles.inputVew}>
+              <Text style={styles.labelInput}>Password</Text>
+              <TextInput
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                // onChangeText={(value => setPassword(() => {
+                //   setMessage('');
+                //   setErrors({ ...errors, password: passwordValidator(value) || [] });
+                //   return value;
+                // }))}
+                secureTextEntry
+                style={styles.TextInput}
+                autoCompleteType='password'
+              />
+            </View>
+            <DisplyErrorComponet
+              errors={errors.password}
+              name='password'
+            />
+            <Text style={styles.messageShow}>{messageall}</Text>
+          </View>
+          <View>
+            {!loading ? <Button
+              // disabled={isInvalidate}
+              onPress={async () => await createCompte()}
+              title={signTitle}
+              color={'blue'}
+              style={styles.btn}
+            /> :
+              <ActivityIndicator size={'large'} />}
+          </View>
+          <Modal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          >
+            <RibList
+              strictRIBList={strictRIBList}
+              setRIBId={setRIBId}
+            />
+            <ModalRole setRole={setRole} role={role} />
+          </Modal>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

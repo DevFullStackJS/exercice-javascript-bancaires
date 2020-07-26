@@ -1,5 +1,5 @@
 const url = {
-  signin: 'users/login',
+  signin: 'login',
   signup: 'users',
 };
 

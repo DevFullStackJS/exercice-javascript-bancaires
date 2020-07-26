@@ -2,12 +2,14 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
-const { validationResult } = require('express-validator');
+const validator = require('../../validator/users');
+
+const { validatorUsers } = validator;
 
 const { errorMessage } = require('../utils');
 const constants = require('../../config/constants');
 
-const { error_email, error_mdp, not_found } = constants;
+const { error_email, error_mdp, not_found, is_exist } = constants;
 
 const isValidID = _id => mongoose.Types.ObjectId.isValid(_id);
 
@@ -32,10 +34,17 @@ const checkUser = async (id) => {
 module.exports.checkUser = checkUser;
 
 module.exports.create = async (req, res) => {
-  const errors = validationResult(req);
-  console.log({ errors: errors.array() });
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+  const errors = validatorUsers(req.body);
+  // const errors = validationResult(req);
+  console.log({ errors });
+  if (!errors || errors.length > 0) {
+    return res.status(400).json({ errors: errors });
+  }
+  const isExist = await User.findOne({ email: req.body.email });
+
+  // throw error when email is wrong
+  if (isExist) {
+    return res.status(400).json(errorMessage(is_exist));
   }
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, salt);
@@ -66,6 +75,10 @@ module.exports.update = async (req, res) => {
   const isFound = await checkUser(req.params.id);
   if (!isFound) {
     return res.status(404).json(errorMessage(not_found));
+  }
+  const errors = validatorUsers(req.body);
+  if (!(errors && errors.length === 0)) {
+    return res.status(400).json({ errors: errors });
   }
   const user = await User.findOneAndUpdate(
     { _id: req.params.id },
@@ -114,9 +127,9 @@ module.exports.login = async (req, res) => {
     data: {
       token,
       user: {
-        username: user.username,
         rib: user.rib,
         email: user.email,
+        role: user.role,
       },
     },
   });

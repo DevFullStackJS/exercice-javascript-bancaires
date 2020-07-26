@@ -6,6 +6,7 @@ module.exports = {
   invalid_date: 'Invalid date format',
   invalid_rib: 'Invalid rib',
   select_period: 'Choisir la période',
+  is_exist: 'Identifiants deja utilise',
   from: 'Du',
   to: 'Au',
   select_rib: 'Choisir RIB',

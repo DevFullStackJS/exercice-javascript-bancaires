@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import CreateCompteScreen from './Compte/create';
+import CreateCompteScreen from './Compte';
 import HomeScreen from './Home';
 
 const Tab = createBottomTabNavigator();

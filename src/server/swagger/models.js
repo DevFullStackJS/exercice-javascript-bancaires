@@ -178,6 +178,16 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
         },
       },
       delete: {
@@ -210,6 +220,16 @@ module.exports = {
               properties: {
                 error: {
                   type: 'Compte not found',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
                 },
               },
             },
@@ -251,7 +271,7 @@ module.exports = {
       //   },
       // },
     },
-    '/users/login': {
+    '/login': {
       post: {
         tags: [
           'Users',
@@ -294,6 +314,16 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
         },
       },
     },
@@ -316,6 +346,11 @@ module.exports = {
         produces: [
           'application/json',
         ],
+        security: [
+          {
+            JWT: [],
+          },
+        ],
         responses: {
           200: {
             description: 'New user is created',
@@ -329,11 +364,26 @@ module.exports = {
               $ref: '#/definitions/Errors',
             },
           },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
         },
       },
       get: {
         tags: [
           'Users',
+        ],
+        security: [
+          {
+            JWT: [],
+          },
         ],
         summary: 'Get all users in system',
         responses: {
@@ -341,6 +391,16 @@ module.exports = {
             description: 'OK',
             schema: {
               $ref: '#/definitions/Users',
+            },
+          },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
             },
           },
         },
@@ -360,6 +420,11 @@ module.exports = {
         tags: [
           'Users',
         ],
+        security: [
+          {
+            JWT: [],
+          },
+        ],
         summary: 'Get user with given ID',
         responses: {
           200: {
@@ -378,12 +443,27 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
         },
       },
       delete: {
         summary: 'Delete user with given ID',
         tags: [
           'Users',
+        ],
+        security: [
+          {
+            JWT: [],
+          },
         ],
         responses: {
           200: {
@@ -409,12 +489,27 @@ module.exports = {
               },
             },
           },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
         },
       },
       put: {
         summary: 'Update user with give ID',
         tags: [
           'Users',
+        ],
+        security: [
+          {
+            JWT: [],
+          },
         ],
         parameters: [
           {
@@ -439,6 +534,16 @@ module.exports = {
               properties: {
                 error: {
                   type: 'User not found',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
                 },
               },
             },
@@ -574,12 +679,17 @@ module.exports = {
         },
       },
     },
+    ArrayOfRibs: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
     User: {
       required: [
         'email',
         'password',
-        'username',
-        'rib',
+        'role',
       ],
       properties: {
         email: {
@@ -589,11 +699,12 @@ module.exports = {
         password: {
           type: 'string',
         },
-        username: {
-          type: 'string',
+        role: {
+          type: 'number',
         },
         rib: {
-          type: 'string',
+          type: 'array',
+          $ref: '#/definitions/ArrayOfRibs',
         },
       },
     },

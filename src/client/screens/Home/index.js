@@ -28,6 +28,22 @@ const PikerDate = (props) => (
   </View>
 );
 
+export const RibList = ({ strictRIBList, setRIBId }) => (
+  <View style={{ flex: 0.3 }}>
+    <View style={styles.titleLabel}>
+      <Text style={styles.textLabel}>{select_rib}</Text>
+    </View>
+    <FlatList
+      scrollEnabled
+      data={strictRIBList}
+      keyExtractor={(_, index) => index.toString()}
+      renderItem={({ item }) => (
+        <SelectItem {...item} setRIBId={setRIBId} />
+      )}
+    />
+  </View>
+);
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +64,7 @@ class Home extends React.Component {
 
   async componentDidMount() {
     await this.props.operations();
-    await this.props.getComptes();
+    // await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
   }
 
@@ -107,8 +123,8 @@ class Home extends React.Component {
   }
 
   getStrictList = (lists) => {
-    const { list } = this.props.comptes;
-    console.log({ list });
+    // const { list } = this.props.comptes;
+    // console.log({ list });
     const ls = lists && lists.map(m => m.RIB);
     let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
     strictRIBList = strictRIBList && strictRIBList.map(l => {
@@ -122,7 +138,6 @@ class Home extends React.Component {
     const { logout } = this.props;
     const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding } = this.state;
 
-    console.log(this.props);
     return (
       <Background>
         <Layout {...this.props} title={home_title} logout={logout}>
@@ -146,7 +161,11 @@ class Home extends React.Component {
                   onDatePicked={this.onDatePickedMax}
                 />
               </View>
-              <View style={{ flex: 0.3 }}>
+              <RibList
+                strictRIBList={strictRIBList}
+                setRIBId={this.setRIBId}
+              />
+              {/* <View style={{ flex: 0.3 }}>
                 <View style={styles.titleLabel}>
                   <Text style={styles.textLabel}>{select_rib}</Text>
                 </View>
@@ -158,7 +177,7 @@ class Home extends React.Component {
                     <SelectItem {...item} setRIBId={this.setRIBId} />
                   )}
                 />
-              </View>
+              </View> */}
               <View style={{ flex: 0.3 }}>
                 { !loding
                 ? <Button

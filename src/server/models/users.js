@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
+  role: {
+    type: Number,
     required: true,
-    minlength: 3,
-    maxlength: 50,
+    enum: [1, 2],
+    default: 1,
   },
   email: {
     type: String,
@@ -14,19 +14,18 @@ const UserSchema = new mongoose.Schema({
     maxlength: 255,
     unique: true,
   },
-  rib: {
-    type: String,
-    required: true,
-    minlength: 20,
-    maxlength: 255,
-    // unique: true
+  // rib: {
+  //   type: String,
+  //   required: true,
+  //   minlength: 20,
+  //   maxlength: 255,
+  //   // unique: true
+  // },
+  // rib: [String],
+  rib: { 
+    type: [{ type: String, unique: false }],
+    unique: false,
   },
-  ribs: [{
-    type: String,
-    required: true,
-    minlength: 20,
-    maxlength: 255,
-  }],
   password: {
     type: String,
     required: true,
