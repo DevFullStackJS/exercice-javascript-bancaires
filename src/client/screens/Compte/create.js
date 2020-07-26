@@ -8,6 +8,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import Modal from '../../components/Common/Modal';
+
 import styles from './styles';
 
 import validator from '../../../validator/users';
@@ -66,6 +68,7 @@ const SignInScreen = () => {
   const createCompte = async () => {
     setErrors({});
     setLoading(true);
+    setUsername('');
     console.log({ email, password, username, rib });
     // if (sign === 'signUp') {
     //   return signUp({ email, password, username, rib }, (res) => callBack(res));
@@ -92,7 +95,8 @@ const SignInScreen = () => {
             <View style={{}}>
               {<View style={styles.inputVew}>
                 <Text style={styles.labelInput}>Type Compte</Text>
-                <TextInput
+                <Modal />
+                {/* <TextInput
                   placeholder="username"
                   value={username}
                   onChangeText={(value => setUsername(() => {
@@ -101,7 +105,7 @@ const SignInScreen = () => {
                     return value;
                   }))}
                   style={styles.TextInput}
-                />
+                /> */}
               </View>}
               <DisplyErrorComponet
                 errors={errors.username}
