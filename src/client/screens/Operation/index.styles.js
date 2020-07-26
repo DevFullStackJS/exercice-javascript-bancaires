@@ -41,4 +41,15 @@ export const styles = {
   rigthAlignment: {
     textAlign: 'right',
   },
+  empty_operation: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    margin: 30,
+  },
+  empty_text: {
+    backgroundColor: 'white',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    padding: 4,
+  },
 };
