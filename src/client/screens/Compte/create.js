@@ -35,15 +35,15 @@ const roles = (r) => (r === 1 ? 'Utilisateur' : 'Administrateur');
 
 const ModalRole = ({ setRole, role }) => (
   <View>
-    <Text style={{ textAlign: 'center' }}>Role</Text>
-    <View style={{ margin: 20 }}>
+    <Text style={styles.modalRoleTitle}>Rôle</Text>
+    <View style={styles.modalRoleContaint}>
       <TouchableOpacity onPress={() => setRole(1)}>
-        <Text style={{ backgroundColor: role === 1 ? 'blue' : 'white' }}>{roles(1)}</Text>
+        <Text style={[styles.modalRoleText, { backgroundColor: role === 1 ? 'beige' : 'white' }]}>{roles(1)}</Text>
       </TouchableOpacity>
     </View>
-    <View style={{ margin: 20 }}>
+    <View style={styles.modalRoleContaint}>
       <TouchableOpacity onPress={() => setRole(2)}>
-        <Text style={{ backgroundColor: role === 2 ? 'blue' : 'white' }}>{roles(2)}</Text>
+        <Text style={[styles.modalRoleText, { backgroundColor: role === 2 ? 'beige' : 'white' }]}>{roles(2)}</Text>
       </TouchableOpacity>
     </View>
   </View>
@@ -59,6 +59,7 @@ const SignInScreen = (props) => {
   const [loading, setLoading] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [errors, setErrors] = React.useState({});
+  const [roleModal, setRoleModal] = React.useState(false);
 
   const callBack = (res) => {
     setRole(1);
@@ -100,26 +101,39 @@ const SignInScreen = (props) => {
             <Text style={styles.textPage}>{signTitle}</Text>
           </View>
           <View style={{}}>
-            {<View style={styles.inputVew}>
+            <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Type Compte</Text>
-              <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
+              <View style={styles.modalInput}>
+                <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                    setRoleModal(true);
+                  }}>
+                  <Text style={{ margin: 10 }}>Modifier</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
               <TouchableOpacity
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}>
                 <Text style={styles.labelInput}>Modifier</Text>
-              </TouchableOpacity>
-            </View>}
+              </TouchableOpacity> */}
+            </View>
             <DisplyErrorComponet
               errors={errors.role}
               name='role'
             />
-            {<View style={styles.inputVew}>
+            <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Rib</Text>
               <TextInput
                 placeholder="rib"
                 value={selectedRIB}
-                onFocus={() => setModalVisible(!modalVisible)}
+                onFocus={() => {
+                  setModalVisible(!modalVisible);
+                  setRoleModal(false);
+                }}
                 // onChangeText={setRib}
                 // onChangeText={(value => setRib(() => {
                 //   setMessage('');
@@ -128,7 +142,7 @@ const SignInScreen = (props) => {
                 // }))}
                 style={styles.TextInput}
               />
-            </View>}
+            </View>
             <DisplyErrorComponet
               errors={errors.rib}
               name='rib'
@@ -187,11 +201,12 @@ const SignInScreen = (props) => {
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
           >
-            <RibList
-              strictRIBList={strictRIBList}
-              setRIBId={setRIBId}
-            />
-            <ModalRole setRole={setRole} role={role} />
+            {!roleModal
+              ? <RibList
+                  strictRIBList={strictRIBList}
+                  setRIBId={setRIBId}
+                />
+              : <ModalRole setRole={setRole} role={role} />}
           </Modal>
         </View>
       </ScrollView>

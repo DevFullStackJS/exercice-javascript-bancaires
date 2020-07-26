@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 16,
   },
+  ribListStyle: {
+    flex: 1,
+  },
 });
 
 export default styles;

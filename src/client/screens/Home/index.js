@@ -29,7 +29,7 @@ const PikerDate = (props) => (
 );
 
 export const RibList = ({ strictRIBList, setRIBId }) => (
-  <View style={{ flex: 0.3 }}>
+  <View style={styles.ribListStyle}>
     <View style={styles.titleLabel}>
       <Text style={styles.textLabel}>{select_rib}</Text>
     </View>

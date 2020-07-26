@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import mapStateToProps from '../../services/redux/mapStateToProps';
 import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
+import { home_title } from '../../../config/constants';
+
 import Sigin from './create';
+import Layout from '../Layout';
 import Background from '../../components/Common/background';
 
 class Home extends React.Component {
@@ -47,18 +50,22 @@ class Home extends React.Component {
   }
 
   render() {
+    const { logout } = this.props;
     const { strictRIBList, selectedRIB } = this.state;
+
     return (
       <Background>
-        <View style={{ flex: 1 }}>
-          <Sigin
-            {...this.props}
-            signUp={this.signUp}
-            strictRIBList={strictRIBList}
-            setRIBId={this.setRIBId}
-            selectedRIB={selectedRIB}
-          />
-        </View>
+        <Layout {...this.props} title={home_title} logout={logout}>
+          <View style={{ flex: 1 }}>
+            <Sigin
+              {...this.props}
+              signUp={this.signUp}
+              strictRIBList={strictRIBList}
+              setRIBId={this.setRIBId}
+              selectedRIB={selectedRIB}
+            />
+          </View>
+        </Layout>
       </Background>
     );
   }

@@ -45,6 +45,11 @@ const styles = StyleSheet.create({
     color: 'red',
     fontWeight: 'bold',
   },
+  modalInput: {
+    flexDirection: 'row',
+    padding: 10,
+    width: x / 2,
+  },
   messageShow: {
     textAlign: 'center',
     padding: 5,
@@ -88,6 +93,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 4,
     backgroundColor: 'white',
+  },
+  modalRoleTitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  modalRoleContaint: {
+    margin: 5,
+  },
+  modalRoleText: {
+    margin: 10,
+    padding: 10,
   },
 });
 
