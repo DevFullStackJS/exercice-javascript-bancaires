@@ -29,7 +29,7 @@ const PikerDate = (props) => (
 );
 
 export const RibList = ({ strictRIBList, setRIBId }) => (
-  <View style={styles.ribListStyle}>
+  <>
     <View style={styles.titleLabel}>
       <Text style={styles.textLabel}>{select_rib}</Text>
     </View>
@@ -41,7 +41,7 @@ export const RibList = ({ strictRIBList, setRIBId }) => (
         <SelectItem {...item} setRIBId={setRIBId} />
       )}
     />
-  </View>
+  </>
 );
 
 class Home extends React.Component {
@@ -161,10 +161,12 @@ class Home extends React.Component {
                   onDatePicked={this.onDatePickedMax}
                 />
               </View>
-              <RibList
-                strictRIBList={strictRIBList}
-                setRIBId={this.setRIBId}
-              />
+              <View style={{ flex: 0.3 }}>
+                <RibList
+                  strictRIBList={strictRIBList}
+                  setRIBId={this.setRIBId}
+                />
+              </View>
               {/* <View style={{ flex: 0.3 }}>
                 <View style={styles.titleLabel}>
                   <Text style={styles.textLabel}>{select_rib}</Text>

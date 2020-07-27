@@ -202,10 +202,12 @@ const SignInScreen = (props) => {
             setModalVisible={setModalVisible}
           >
             {!roleModal
-              ? <RibList
-                  strictRIBList={strictRIBList}
-                  setRIBId={setRIBId}
-                />
+              ? <View style={{ flex: 1 }}>
+                  <RibList
+                    strictRIBList={strictRIBList}
+                    setRIBId={setRIBId}
+                  />
+                </View>
               : <ModalRole setRole={setRole} role={role} />}
           </Modal>
         </View>
