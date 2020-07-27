@@ -23,7 +23,7 @@ export default class SelectItem extends React.Component {
   }
 
   render() {
-    const { RIB, selectedItem, selectedRIB } = this.props;
+    const { RIB } = this.props;
     const { setSelectedColor } = this.state;
 
     return (

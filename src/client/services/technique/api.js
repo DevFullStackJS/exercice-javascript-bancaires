@@ -34,13 +34,13 @@ export const post = async (url, data, token) => {
     const res = await axios.post(`${baseURL}${pathApi}${url}`, data, {
       headers: headers(token),
     });
-    console.log('post res ------------>', res);
+    // console.log('post res ------------>', res);
     return res;
   } catch (e) {
-    console.log('e.response', e.response);
+    // console.log('e.response', e.response);
 
     const errors = e && e.response ? e.response.data : { error: true };
-    console.log('post errors ------------>', errors);
+    // console.log('post errors ------------>', errors);
     return errors;
   }
 };
