@@ -92,7 +92,11 @@ const SignInScreen = (props) => {
 
   console.log({ user });
 
-  // const isAdmin = user && user.
+  const isAdmin = user && user.role === 2;
+
+  const rib = !isAdmin && user.rib && user.rib[0] && user.rib[0].split(`${user.email}//`).length > 0
+    ? user.rib[0].split(`${user.email}//`)[1]
+    : selectedRIB;
 
   console.log({ strictRIBList });
 
@@ -107,7 +111,7 @@ const SignInScreen = (props) => {
             <Text style={styles.textPage}>{signTitle}</Text>
           </View>
           <View style={{}}>
-            <View style={styles.inputVew}>
+            {isAdmin && <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Type Compte</Text>
               <View style={styles.modalInput}>
                 <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
@@ -119,14 +123,7 @@ const SignInScreen = (props) => {
                   <Text style={{ margin: 10 }}>Modifier</Text>
                 </TouchableOpacity>
               </View>
-              {/* <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}>
-                <Text style={styles.labelInput}>Modifier</Text>
-              </TouchableOpacity> */}
-            </View>
+            </View>}
             <DisplyErrorComponet
               errors={errors.role}
               name='role'
@@ -135,27 +132,12 @@ const SignInScreen = (props) => {
               <Text style={styles.labelInput}>Rib</Text>
               <TouchableOpacity
                 onPress={() => {
-                  setModalVisible(!modalVisible);
+                  isAdmin && setModalVisible(!modalVisible);
                   setRoleModal(false);
                 }}
                 style={styles.TextInput}>
-                <Text>{selectedRIB}</Text>
+                <Text>{rib}</Text>
               </TouchableOpacity>
-              {/* <TextInput
-                placeholder="rib"
-                value={selectedRIB}
-                onFocus={() => {
-                  setModalVisible(!modalVisible);
-                  setRoleModal(false);
-                }}
-                // onChangeText={setRib}
-                // onChangeText={(value => setRib(() => {
-                //   setMessage('');
-                //   setErrors({ ...errors, rib: ribValidator(value, 20) || [] });
-                //   return value;
-                // }))}
-                style={styles.TextInput}
-              /> */}
             </View>
             <DisplyErrorComponet
               errors={errors.rib}
@@ -167,11 +149,6 @@ const SignInScreen = (props) => {
                 placeholder="Identifiant"
                 value={email}
                 onChangeText={setEmail}
-                // onChangeText={(value => setEmail(() => {
-                //   setMessage('');
-                //   setErrors({ ...errors, email: roleValidator(value, 5) || [] });
-                //   return value;
-                // }))}
                 style={styles.TextInput}
               />
             </View>
@@ -185,11 +162,6 @@ const SignInScreen = (props) => {
                 placeholder="Password"
                 value={password}
                 onChangeText={setPassword}
-                // onChangeText={(value => setPassword(() => {
-                //   setMessage('');
-                //   setErrors({ ...errors, password: passwordValidator(value) || [] });
-                //   return value;
-                // }))}
                 secureTextEntry
                 style={styles.TextInput}
                 autoCompleteType='password'
@@ -201,7 +173,7 @@ const SignInScreen = (props) => {
             />
             <Text style={styles.messageShow}>{messageall}</Text>
           </View>
-          <View>
+          {isAdmin && <View>
             {!loading ? <Button
               // disabled={isInvalidate}
               onPress={async () => await createCompte()}
@@ -210,22 +182,8 @@ const SignInScreen = (props) => {
               style={styles.btn}
             /> :
               <ActivityIndicator size={'large'} />}
-          </View>
-          {/* <Modal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-          >
-            {!roleModal
-              ? <View style={{ flex: 1 }}>
-                  <RibList
-                    strictRIBList={strictRIBList}
-                    setRIBId={setRIBId}
-                  />
-                </View>
-              : <ModalRole setRole={setRole} role={role} />}
-          </Modal> */}
+          </View>}
         </View>
-
       </ScrollView>
       <Modal
           modalVisible={modalVisible}
