@@ -59,6 +59,7 @@ class Home extends React.Component {
       selectedRIB: '',
       strictRIBList: [],
       loding: false,
+      getRibByRole: [],
     };
   }
 
@@ -66,6 +67,9 @@ class Home extends React.Component {
     await this.props.operations();
     // await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
+    const { users } = this.props;
+    const getRibByRole = users && users.user && users.user.user && users.user.user.role === 1 ? [{ RIB: users.user.user.rib[0] }] : [];
+    this.setState({ getRibByRole });
   }
 
   componentWillMount() {
@@ -136,7 +140,8 @@ class Home extends React.Component {
 
   render() {
     const { logout } = this.props;
-    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding } = this.state;
+    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding, getRibByRole } = this.state;
+    const ribToshow = getRibByRole === [] ? strictRIBList : getRibByRole;
 
     return (
       <Background>
@@ -163,7 +168,7 @@ class Home extends React.Component {
               </View>
               <View style={{ flex: 0.3 }}>
                 <RibList
-                  strictRIBList={strictRIBList}
+                  strictRIBList={ribToshow}
                   setRIBId={this.setRIBId}
                 />
               </View>
@@ -186,7 +191,7 @@ class Home extends React.Component {
                     title={find}
                     onPress={this.showRIBInfos}
                   />
-                : <ActivityIndicator />}
+                : <ActivityIndicator size={'large'} />}
               </View>
             </View>
             )
