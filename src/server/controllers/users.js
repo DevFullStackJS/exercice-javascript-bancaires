@@ -34,6 +34,10 @@ const checkUser = async (id) => {
 module.exports.checkUser = checkUser;
 
 module.exports.create = async (req, res) => {
+  const { role } = req.user;
+  if (!role || role === 1) {
+    return res.status(401).json({ error: { message: 'Access denied' } });
+  }
   const errors = validatorUsers(req.body);
   // const errors = validationResult(req);
   console.log({ errors });
@@ -51,7 +55,7 @@ module.exports.create = async (req, res) => {
   const user = new User({
     ...req.body,
     password,
-    rib: req.body.rib ? req.body.rib.map(r => `${req.body.email}//${r}`) : undefined,
+    rib: req.body.rib && req.body.role === 1 ? req.body.rib.map(r => `${req.body.email}//${r}`) : [],
   });
   await user.save();
   res.json(user);
@@ -119,6 +123,7 @@ module.exports.login = async (req, res) => {
     {
       name: user.name,
       id: user._id,
+      role: user.role,
     },
     process.env.TOKEN_SECRET,
   );
