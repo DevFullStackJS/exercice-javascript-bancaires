@@ -71,15 +71,10 @@ class Home extends React.Component {
 
   async componentDidMount() {
     await this.props.operations();
-    // await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
     const { users } = this.props;
     const getRibByRole = users && users.user && users.user.role === 1 ? [{ RIB: users.user.rib[0].split('//')[1] }] : [];
     this.setState({ getRibByRole });
-  }
-
-  componentWillMount() {
-    // Modal.setAppElement('body');
   }
 
   onDatePicked = (date) => {
@@ -189,7 +184,6 @@ class Home extends React.Component {
               <Operations { ...this.props } hideRIBInfos={this.hideRIBInfos} ribId={selectedRIB} />
             )
           }
-          {/* <ModalComponent /> */}
         </Layout>
       </Background>
     );
