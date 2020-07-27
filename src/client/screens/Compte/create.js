@@ -50,7 +50,7 @@ const ModalRole = ({ setRole, role }) => (
 );
 
 const SignInScreen = (props) => {
-  const { signUp, strictRIBList, setRIBId, selectedRIB } = props;
+  const { signUp, strictRIBList, setRIBId, selectedRIB, user } = props;
   const [email, setEmail] = React.useState('resdyyy3@body.email');
   const [password, setPassword] = React.useState('req1dd12.body.password');
   const [role, setRole] = React.useState(1);
@@ -89,6 +89,10 @@ const SignInScreen = (props) => {
     }
     await signUp(data, (res) => callBack(res));
   };
+
+  console.log({ user });
+
+  // const isAdmin = user && user.
 
   console.log({ strictRIBList });
 

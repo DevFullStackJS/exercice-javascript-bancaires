@@ -7,7 +7,7 @@ import mapDispatchToProps from '../../services/redux/mapDispatchToProps';
 
 import { home_title } from '../../../config/constants';
 
-import Sigin from './create';
+import Create from './create';
 import Layout from '../Layout';
 import Background from '../../components/Common/background';
 
@@ -50,19 +50,20 @@ class Home extends React.Component {
   }
 
   render() {
-    const { logout } = this.props;
+    const { logout, users } = this.props;
     const { strictRIBList, selectedRIB } = this.state;
 
     return (
       <Background>
         <Layout {...this.props} title={home_title} logout={logout}>
           <View style={{ flex: 1 }}>
-            <Sigin
+            <Create
               {...this.props}
               signUp={this.signUp}
               strictRIBList={strictRIBList}
               setRIBId={this.setRIBId}
               selectedRIB={selectedRIB}
+              user={users.user || {}}
             />
           </View>
         </Layout>

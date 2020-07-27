@@ -132,11 +132,9 @@ module.exports.login = async (req, res) => {
     error: null,
     data: {
       token,
-      user: {
-        rib: user.rib,
-        email: user.email,
-        role: user.role,
-      },
+      rib: user.rib,
+      email: user.email,
+      role: user.role,
     },
   });
 };

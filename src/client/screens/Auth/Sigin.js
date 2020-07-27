@@ -37,8 +37,8 @@ const DisplyErrorComponet = ({ errors, name }) => {
 
 const SignInScreen = (props) => {
   const { signIn, signUp } = props;
-  const [email, setEmail] = React.useState('resdyyy3@body.email');
-  const [password, setPassword] = React.useState('req1dd12.body.password');
+  const [email, setEmail] = React.useState('azerty');
+  const [password, setPassword] = React.useState('azerty123');
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
