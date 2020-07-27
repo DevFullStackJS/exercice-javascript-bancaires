@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   },
   modalRoleContaint: {
     margin: 5,
+    padding: 10,
   },
   modalRoleText: {
     margin: 10,

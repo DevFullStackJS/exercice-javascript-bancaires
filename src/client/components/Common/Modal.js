@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, Platform, Modal, StyleSheet, TouchableOpacity, Button, Dimensions } from 'react-native';
+import { Text, View, Platform, Modal, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import ModalWeb from 'modal-react-native-web';
 
 const ModalWebMobile = Platform.OS === 'web' ? ModalWeb : Modal;
-const wd = Dimensions.get('window').width;
+// const wd = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   modal: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 50,
+    padding: 10,
     shadowColor: 'black',
     shadowOffset: {
       width: 0,
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    flex: 1,
   },
   closeStyle: {
     justifyContent: 'space-between',
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   btnContainer: {
-    width: wd / 8,
+    // width: wd / 6,
     padding: 10,
   },
 });

@@ -90,6 +90,8 @@ const SignInScreen = (props) => {
     await signUp(data, (res) => callBack(res));
   };
 
+  console.log({ strictRIBList });
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -127,7 +129,15 @@ const SignInScreen = (props) => {
             />
             <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Rib</Text>
-              <TextInput
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setRoleModal(false);
+                }}
+                style={styles.TextInput}>
+                <Text>{selectedRIB}</Text>
+              </TouchableOpacity>
+              {/* <TextInput
                 placeholder="rib"
                 value={selectedRIB}
                 onFocus={() => {
@@ -141,7 +151,7 @@ const SignInScreen = (props) => {
                 //   return value;
                 // }))}
                 style={styles.TextInput}
-              />
+              /> */}
             </View>
             <DisplyErrorComponet
               errors={errors.rib}
@@ -197,7 +207,7 @@ const SignInScreen = (props) => {
             /> :
               <ActivityIndicator size={'large'} />}
           </View>
-          <Modal
+          {/* <Modal
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
           >
@@ -209,9 +219,23 @@ const SignInScreen = (props) => {
                   />
                 </View>
               : <ModalRole setRole={setRole} role={role} />}
-          </Modal>
+          </Modal> */}
         </View>
+
       </ScrollView>
+      <Modal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        >
+          {!roleModal
+            ? <View style={{ flex: 1 }}>
+                <RibList
+                  strictRIBList={strictRIBList}
+                  setRIBId={setRIBId}
+                />
+              </View>
+            : <ModalRole setRole={setRole} role={role} />}
+        </Modal>
     </View>
   );
 };
