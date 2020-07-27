@@ -24,4 +24,14 @@ module.exports = {
     cancel: 'Retour',
     no_op_saved: 'Aucune opération trouvée',
   },
+  auth: {
+    signTitle: 'Connexion',
+    signupTitle: 'Création',
+    sign: 'Authentification',
+    signUp: 'Création compte',
+    succès: 'Ajout avec success',
+    username: 'Pseudo',
+    email: 'Email',
+    password: 'Mot de passe',
+  },
 };

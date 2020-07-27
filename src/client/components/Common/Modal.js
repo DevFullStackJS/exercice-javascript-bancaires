@@ -3,8 +3,6 @@ import { Text, View, Platform, Modal, StyleSheet, TouchableOpacity, Button } fro
 import ModalWeb from 'modal-react-native-web';
 
 const ModalWebMobile = Platform.OS === 'web' ? ModalWeb : Modal;
-// const wd = Dimensions.get('window').width;
-
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
@@ -34,7 +32,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   btnContainer: {
-    // width: wd / 6,
     padding: 10,
   },
 });

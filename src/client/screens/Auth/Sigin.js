@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 
 import styles from './Sigin.style';
-
 import validator from '../../../validator/users';
+import { auth, operation_trad } from '../../../config/constants';
 
 const {
   usernameValidator,
@@ -37,22 +37,20 @@ const DisplyErrorComponet = ({ errors, name }) => {
 
 const SignInScreen = (props) => {
   const { signIn, signUp } = props;
-  const [email, setEmail] = React.useState('azerty');
-  const [password, setPassword] = React.useState('azerty123');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');
-  const [sign, setSign] = React.useState('signIn');
-  // const [n_sign, setNoSign] = React.useState('signUp');
-  const [signTitle, setSignTitle] = React.useState('sign In');
+  const [sign, setSign] = React.useState(auth.sign);
+  const [signTitle, setSignTitle] = React.useState(auth.signTitle);
   const [loading, setLoading] = React.useState(false);
   const [errors, setErrors] = React.useState({});
 
   const toogleSign = () => {
     setErrors({});
-    setSign(sign === 'signIn' ? 'signUp' : 'signIn');
-    // setNoSign(sign !== 'signIn' ? 'sign Up' : 'sign In');
-    setSignTitle(sign === 'signIn' ? 'sign Up' : 'sign In');
+    setSign(sign === auth.sign ? auth.signUp : auth.sign);
+    setSignTitle(sign === auth.sign ? auth.signupTitle : auth.signTitle);
   };
 
   const callBack = (res) => {
@@ -65,16 +63,16 @@ const SignInScreen = (props) => {
       const resErrors = data.reduce((acc, { param, value, msg }) => ({ ...acc, [param]: { value, msg } }), {});
       return setErrors(resErrors);
     }
-    if (sign === 'signUp' && res && res.data && res.data._id) {
+    if (sign === auth.signUp && res && res.data && res.data._id) {
       toogleSign();
-      setMessage('Ajout avec success');
+      setMessage(auth.succès);
     }
   };
 
   const toSignIn = async () => {
     setErrors({});
     setLoading(true);
-    if (sign === 'signUp') {
+    if (sign === auth.signUp) {
       return signUp({ email, password, username, rib }, (res) => callBack(res));
     }
     await signIn({ email, password }, (res) => callBack(res));
@@ -93,10 +91,10 @@ const SignInScreen = (props) => {
               <Text style={styles.textPage}>{sign}</Text>
             </View>
             <View style={{}}>
-              {sign === 'signUp' && <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Username</Text>
+              {sign === auth.signUp && <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>{auth.username}</Text>
                 <TextInput
-                  placeholder="username"
+                  placeholder={auth.username}
                   value={username}
                   onChangeText={(value => setUsername(() => {
                     setMessage('');
@@ -108,12 +106,12 @@ const SignInScreen = (props) => {
               </View>}
               <DisplyErrorComponet
                 errors={errors.username}
-                name='username'
+                name={auth.username}
               />
-              {sign === 'signUp' && <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Rib</Text>
+              {sign === auth.signUp && <View style={styles.inputVew}>
+                <Text style={styles.labelInput}>{operation_trad.rib}</Text>
                 <TextInput
-                  placeholder="rib"
+                  placeholder={operation_trad.rib}
                   value={rib}
                   onChangeText={(value => setRib(() => {
                     setMessage('');
@@ -126,12 +124,12 @@ const SignInScreen = (props) => {
               </View>}
               <DisplyErrorComponet
                 errors={errors.rib}
-                name='rib'
+                name={operation_trad.rib}
               />
               <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Email</Text>
+                <Text style={styles.labelInput}>{auth.email}</Text>
                 <TextInput
-                  placeholder="email"
+                  placeholder={auth.email}
                   value={email}
                   onChangeText={(value => setEmail(() => {
                     setMessage('');
@@ -145,12 +143,12 @@ const SignInScreen = (props) => {
               </View>
               <DisplyErrorComponet
                 errors={errors.email}
-                name='email'
+                name={auth.email}
               />
               <View style={styles.inputVew}>
-                <Text style={styles.labelInput}>Password</Text>
+                <Text style={styles.labelInput}>{auth.password}</Text>
                 <TextInput
-                  placeholder="Password"
+                  placeholder={auth.password}
                   value={password}
                   onChangeText={(value => setPassword(() => {
                     setMessage('');
@@ -159,12 +157,12 @@ const SignInScreen = (props) => {
                   }))}
                   secureTextEntry
                   style={styles.TextInput}
-                  autoCompleteType='password'
+                  autoCompleteType={auth.password}
                 />
               </View>
               <DisplyErrorComponet
                 errors={errors.password}
-                name='password'
+                name={auth.password}
               />
               <Text style={styles.messageShow}>{message}</Text>
             </View>
@@ -178,16 +176,6 @@ const SignInScreen = (props) => {
               /> :
                 <ActivityIndicator size={'large'} />}
             </View>
-            {/* <View style={styles.option}>
-              <Text style={styles.optionSeparatorStr}>ou</Text>
-              <Button
-                onPress={() => toogleSign()}
-                title={n_sign}
-                color="#841584"
-                style={styles.btn}
-                containerStyle={styles.containerStyle}
-              />
-            </View> */}
           </View>
         </ScrollView>
       </View>

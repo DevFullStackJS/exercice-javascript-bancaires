@@ -18,10 +18,22 @@ class Home extends React.Component {
     };
   }
 
+  /**
+   * Function to signIn in the app
+   *
+   * @param {object} data Infos to login.
+   * @param {function} callBack Func to execute after success action.
+   */
   signIn = async (data, callBack) => {
     this.props.signin(data, callBack);
   }
 
+  /**
+   * Function to signUp in the app
+   *
+   * @param {object} data Infos to register.
+   * @param {function} callBack Func to execute after success action.
+   */
   signUp = async (data, callBack) => {
     this.props.signup(data, callBack);
   }
