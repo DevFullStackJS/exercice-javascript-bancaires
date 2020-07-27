@@ -65,7 +65,7 @@ const SignInScreen = (props) => {
     }
     if (sign === auth.signUp && res && res.data && res.data._id) {
       toogleSign();
-      setMessage(auth.succès);
+      setMessage(auth.succes);
     }
   };
 

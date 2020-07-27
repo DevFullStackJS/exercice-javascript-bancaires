@@ -25,7 +25,6 @@ class Home extends React.Component {
 
   async componentDidMount() {
     await this.props.operations();
-    // await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
   }
 

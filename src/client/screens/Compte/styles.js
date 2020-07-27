@@ -50,6 +50,12 @@ const styles = StyleSheet.create({
     padding: 10,
     width: x / 2,
   },
+  mgnText: {
+    margin: 10,
+  },
+  textEditColor: {
+    color: 'blue',
+  },
   messageShow: {
     textAlign: 'center',
     padding: 5,

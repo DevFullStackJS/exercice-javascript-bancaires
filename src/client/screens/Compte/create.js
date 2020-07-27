@@ -9,16 +9,15 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import styles from './styles';
 import { RibList } from '../Home';
 import Modal from '../../components/Common/Modal';
-
-import styles from './styles';
-
 import validator from '../../../validator/users';
+import { auth, operation_trad } from '../../../config/constants';
 
 const { validatorUsers } = validator;
 
-const signTitle = 'Creation Compte';
+const signTitle = auth.signUp;
 
 const DisplyErrorComponet = ({ errors, name }) => {
   if (!errors || !name) {
@@ -31,11 +30,11 @@ const DisplyErrorComponet = ({ errors, name }) => {
   );
 };
 
-const roles = (r) => (r === 1 ? 'Utilisateur' : 'Administrateur');
+const roles = (r) => (r === 1 ? auth.user_usr : auth.user_adm);
 
 const ModalRole = ({ setRole, role }) => (
   <View>
-    <Text style={styles.modalRoleTitle}>Rôle</Text>
+    <Text style={styles.modalRoleTitle}>{auth.role}</Text>
     <View style={styles.modalRoleContaint}>
       <TouchableOpacity onPress={() => setRole(1)}>
         <Text style={[styles.modalRoleText, { backgroundColor: role === 1 ? 'beige' : 'white' }]}>{roles(1)}</Text>
@@ -51,11 +50,10 @@ const ModalRole = ({ setRole, role }) => (
 
 const SignInScreen = (props) => {
   const { signUp, strictRIBList, setRIBId, selectedRIB, user } = props;
-  const [email, setEmail] = React.useState('resdyyy3@body.email');
-  const [password, setPassword] = React.useState('req1dd12.body.password');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [role, setRole] = React.useState(1);
   const [messageall, setMessage] = React.useState('');
-  // const [rib, setRib] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [errors, setErrors] = React.useState({});
@@ -74,7 +72,7 @@ const SignInScreen = (props) => {
       return;
     }
     if (res && res.data) {
-      setMessage('Ajout avec success');
+      setMessage(auth.succes);
     }
 
   };
@@ -96,29 +94,28 @@ const SignInScreen = (props) => {
     ? user.rib[0].split(`${user.email}//`)[1]
     : selectedRIB;
 
-  const title = isAdmin ? signTitle : 'Profile';
+  const title = isAdmin ? signTitle : auth.profil;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <ScrollView
-        style={{}}
         contentContainerStyle={styles.contentContainerStyle}
       >
         <View style={styles.body}>
           <View style={styles.titleContainer}>
             <Text style={styles.textPage}>{title}</Text>
           </View>
-          <View style={{}}>
+          <View>
             {isAdmin && <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Type Compte</Text>
+              <Text style={styles.labelInput}>{auth.account_type}</Text>
               <View style={styles.modalInput}>
-                <Text style={{ color: 'blue', margin: 10 }}>{roles(role)}</Text>
+                <Text style={[styles.mgnText, styles.textEditColor]}>{roles(role)}</Text>
                 <TouchableOpacity
                   onPress={() => {
                     setModalVisible(!modalVisible);
                     setRoleModal(true);
                   }}>
-                  <Text style={{ margin: 10 }}>Modifier</Text>
+                  <Text style={styles.mgnText}>{auth.edit}</Text>
                 </TouchableOpacity>
               </View>
             </View>}
@@ -127,7 +124,7 @@ const SignInScreen = (props) => {
               name='role'
             />
             <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Rib</Text>
+              <Text style={styles.labelInput}>{operation_trad.rib}</Text>
               <TouchableOpacity
                 onPress={() => {
                   isAdmin && setModalVisible(!modalVisible);
@@ -142,9 +139,9 @@ const SignInScreen = (props) => {
               name='rib'
             />
             <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Identifiant</Text>
+              <Text style={styles.labelInput}>{auth.identification}</Text>
               <TextInput
-                placeholder="Identifiant"
+                placeholder={auth.identification}
                 value={email}
                 onChangeText={setEmail}
                 style={styles.TextInput}
@@ -155,19 +152,19 @@ const SignInScreen = (props) => {
               name='email'
             />
             {isAdmin && <View style={styles.inputVew}>
-              <Text style={styles.labelInput}>Password</Text>
+              <Text style={styles.labelInput}>{auth.password}</Text>
               <TextInput
-                placeholder="Password"
+                placeholder={auth.password}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
                 style={styles.TextInput}
-                autoCompleteType='password'
+                autoCompleteType={auth.password}
               />
             </View>}
             <DisplyErrorComponet
               errors={errors.password}
-              name='password'
+              name={auth.password}
             />
             <Text style={styles.messageShow}>{messageall}</Text>
           </View>
@@ -188,7 +185,7 @@ const SignInScreen = (props) => {
           setModalVisible={setModalVisible}
         >
           {!roleModal
-            ? <View style={{ flex: 1 }}>
+            ? <View style={styles.container}>
                 <RibList
                   strictRIBList={strictRIBList}
                   setRIBId={setRIBId}
