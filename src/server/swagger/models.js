@@ -58,219 +58,219 @@ module.exports = {
     },
   },
   paths: {
-    '/comptes': {
-      get: {
-        tags: [
-          'Comptes',
-        ],
-        summary: 'Get all compte in system',
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        responses: {
-          200: {
-            description: 'OK',
-            schema: {
-              $ref: '#/definitions/Comptes',
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-      post: {
-        tags: [
-          'Comptes',
-        ],
-        description: 'Create new compte in system',
-        parameters: [
-          {
-            name: 'comptes',
-            in: 'body',
-            description: 'Comptes that we want to signin',
-            schema: {
-              properties: {
-                rib: {
-                  type: 'string',
-                },
-              },
-            },
-          },
-        ],
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        produces: [
-          'application/json',
-        ],
-        responses: {
-          200: {
-            description: 'OK',
-            schema: {
-              $ref: '#/definitions/Comptes',
-            },
-          },
-          400: {
-            description: 'Bad Request',
-            schema: {
-              $ref: '#/definitions/Errors',
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    '/comptes/{compteId}': {
-      parameters: [
-        {
-          name: 'compteId',
-          in: 'path',
-          required: true,
-          description: 'ID of compte that we want to find',
-          type: 'string',
-        },
-      ],
-      get: {
-        tags: [
-          'Comptes',
-        ],
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        summary: 'Get Compte with given ID',
-        responses: {
-          200: {
-            description: 'Compte is found',
-            schema: {
-              $ref: '#/definitions/Comptes',
-            },
-          },
-          404: {
-            description: 'Compte not found',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Compte not found',
-                },
-              },
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-      delete: {
-        summary: 'Delete Compte with given ID',
-        tags: [
-          'Comptes',
-        ],
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        responses: {
-          200: {
-            description: 'Compte is deleted',
-            schema: {
-              properties: {
-                success: {
-                  type: 'string',
-                },
-                _id: {
-                  type: 'string',
-                },
-              },
-            },
-          },
-          404: {
-            description: 'Comptes not found',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Compte not found',
-                },
-              },
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-      // put: {
-      //   summary: 'Update user with give ID',
-      //   tags: [
-      //     'Users',
-      //   ],
-      //   parameters: [
-      //     {
-      //       name: 'user',
-      //       in: 'body',
-      //       description: 'User with new values of properties',
-      //       schema: {
-      //         $ref: '#/definitions/User',
-      //       },
-      //     },
-      //   ],
-      //   responses: {
-      //     200: {
-      //       description: 'User is updated',
-      //       schema: {
-      //         $ref: '#/definitions/User',
-      //       },
-      //     },
-      //     404: {
-      //       description: 'User not found',
-      //       schema: {
-      //         properties: {
-      //           error: {
-      //             type: 'User not found',
-      //           },
-      //         },
-      //       },
-      //     },
-      //   },
-      // },
-    },
+    // '/comptes': {
+    //   get: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     summary: 'Get all compte in system',
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'OK',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    //   post: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     description: 'Create new compte in system',
+    //     parameters: [
+    //       {
+    //         name: 'comptes',
+    //         in: 'body',
+    //         description: 'Comptes that we want to signin',
+    //         schema: {
+    //           properties: {
+    //             rib: {
+    //               type: 'string',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     produces: [
+    //       'application/json',
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'OK',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       400: {
+    //         description: 'Bad Request',
+    //         schema: {
+    //           $ref: '#/definitions/Errors',
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    // '/comptes/{compteId}': {
+    //   parameters: [
+    //     {
+    //       name: 'compteId',
+    //       in: 'path',
+    //       required: true,
+    //       description: 'ID of compte that we want to find',
+    //       type: 'string',
+    //     },
+    //   ],
+    //   get: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     summary: 'Get Compte with given ID',
+    //     responses: {
+    //       200: {
+    //         description: 'Compte is found',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       404: {
+    //         description: 'Compte not found',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Compte not found',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    //   delete: {
+    //     summary: 'Delete Compte with given ID',
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'Compte is deleted',
+    //         schema: {
+    //           properties: {
+    //             success: {
+    //               type: 'string',
+    //             },
+    //             _id: {
+    //               type: 'string',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       404: {
+    //         description: 'Comptes not found',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Compte not found',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // put: {
+    //   summary: 'Update user with give ID',
+    //   tags: [
+    //     'Users',
+    //   ],
+    //   parameters: [
+    //     {
+    //       name: 'user',
+    //       in: 'body',
+    //       description: 'User with new values of properties',
+    //       schema: {
+    //         $ref: '#/definitions/User',
+    //       },
+    //     },
+    //   ],
+    //   responses: {
+    //     200: {
+    //       description: 'User is updated',
+    //       schema: {
+    //         $ref: '#/definitions/User',
+    //       },
+    //     },
+    //     404: {
+    //       description: 'User not found',
+    //       schema: {
+    //         properties: {
+    //           error: {
+    //             type: 'User not found',
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    //},
     '/login': {
       post: {
         tags: [
