@@ -68,7 +68,7 @@ class Home extends React.Component {
     // await this.props.getComptes();
     this.getStrictList(this.props.rib.operations);
     const { users } = this.props;
-    const getRibByRole = users && users.user && users.user.user && users.user.user.role === 1 ? [{ RIB: users.user.user.rib[0] }] : [];
+    const getRibByRole = users && users.user && users.user.role === 1 ? [{ RIB: users.user.rib[0].split('//')[1] }] : [];
     this.setState({ getRibByRole });
   }
 
@@ -141,7 +141,7 @@ class Home extends React.Component {
   render() {
     const { logout } = this.props;
     const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding, getRibByRole } = this.state;
-    const ribToshow = getRibByRole === [] ? strictRIBList : getRibByRole;
+    const ribToshow = getRibByRole && getRibByRole.length > 0 ? getRibByRole : strictRIBList;
 
     return (
       <Background>
