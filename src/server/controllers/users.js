@@ -40,7 +40,6 @@ module.exports.create = async (req, res) => {
   }
   const errors = validatorUsers(req.body);
   // const errors = validationResult(req);
-  console.log({ errors });
   if (!errors || errors.length > 0) {
     return res.status(400).json({ errors: errors });
   }
@@ -96,7 +95,7 @@ module.exports.update = async (req, res) => {
 
 module.exports.view = async (req, res) => {
   const user = await checkUser(req.params.id);
-  console.log({ user });
+
   if (!user) {
     return res.status(404).json(errorMessage(not_found));
   }

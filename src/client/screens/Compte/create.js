@@ -90,15 +90,13 @@ const SignInScreen = (props) => {
     await signUp(data, (res) => callBack(res));
   };
 
-  console.log({ user });
-
   const isAdmin = user && user.role === 2;
 
   const rib = !isAdmin && user.rib && user.rib[0] && user.rib[0].split(`${user.email}//`).length > 0
     ? user.rib[0].split(`${user.email}//`)[1]
     : selectedRIB;
 
-  console.log({ strictRIBList });
+  const title = isAdmin ? signTitle : 'Profile';
 
   return (
     <View style={{ flex: 1 }}>
@@ -108,7 +106,7 @@ const SignInScreen = (props) => {
       >
         <View style={styles.body}>
           <View style={styles.titleContainer}>
-            <Text style={styles.textPage}>{signTitle}</Text>
+            <Text style={styles.textPage}>{title}</Text>
           </View>
           <View style={{}}>
             {isAdmin && <View style={styles.inputVew}>
@@ -156,7 +154,7 @@ const SignInScreen = (props) => {
               errors={errors.email}
               name='email'
             />
-            <View style={styles.inputVew}>
+            {isAdmin && <View style={styles.inputVew}>
               <Text style={styles.labelInput}>Password</Text>
               <TextInput
                 placeholder="Password"
@@ -166,7 +164,7 @@ const SignInScreen = (props) => {
                 style={styles.TextInput}
                 autoCompleteType='password'
               />
-            </View>
+            </View>}
             <DisplyErrorComponet
               errors={errors.password}
               name='password'

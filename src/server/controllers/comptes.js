@@ -3,7 +3,6 @@ const Comptes = require('../models/comptes');
 
 module.exports = {
   create: async (req, res) => {
-    console.log(req.user);
 
     const id = req.user.id;
     const { rib } = req.body;

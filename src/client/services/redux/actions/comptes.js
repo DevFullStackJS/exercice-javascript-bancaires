@@ -3,7 +3,6 @@ import comptesSapp from '../../applicatif/comptes';
 
 export const getComptes = (callBack) => async (dispatch) => {
   const payload = await comptesSapp.getComptes(constants.url.comptes);
-  console.log({ payload });
   callBack && callBack(payload);
   if (payload && payload.data && payload.data.length > 0) {
     return dispatch({

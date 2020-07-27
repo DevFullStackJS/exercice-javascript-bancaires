@@ -34,12 +34,9 @@ class Home extends React.Component {
   }
 
   getStrictList = (lists) => {
-    // const { list } = this.props.comptes;
-    // console.log({ list });
     const ls = lists && lists.map(m => m.RIB);
     let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
     strictRIBList = strictRIBList && strictRIBList.map(l => {
-      console.log('l');
       return { RIB: l };
     });
     this.setState({ strictRIBList });

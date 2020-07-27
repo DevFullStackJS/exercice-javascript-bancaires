@@ -17,17 +17,19 @@ export default class SelectItem extends React.Component {
   }
 
   onHandleRIB = (rib) => {
-    this.setState({ setSelectedColor: 'beige' });
+    const { setSelectedColor } = this.state;
+    this.setState({ setSelectedColor: setSelectedColor === 'beige' ? 'white' : 'beige' });
     this.props.setRIBId(rib);
   }
 
   render() {
-    const { RIB } = this.props;
+    const { RIB, selectedItem, selectedRIB } = this.props;
     const { setSelectedColor } = this.state;
 
     return (
       <View>
         <View style={{ backgroundColor: `${setSelectedColor}`, padding: 5 }}>
+        {/* <View style={{ backgroundColor: selectedRIB === RIB ? 'beige' : 'white', padding: 5 }}> */}
           <TouchableOpacity
             onPress={ () => this.onHandleRIB(RIB) }
             hitSlop={{
@@ -41,4 +43,4 @@ export default class SelectItem extends React.Component {
       </View>
     );
   }
-  }
+}

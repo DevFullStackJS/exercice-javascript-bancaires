@@ -79,11 +79,9 @@ const validatorType = ({ type, validator = {}, value }) => {
       return isArrayData(value) ? isArrayValid : false;
     case min.key:
       if (type === 'array') {
-        console.log('vfgdf', value);
         const isTabs = isArrayValidator(value);
         if (!isTabs) {
           const tab = value.some(elem => elem.length < 20);
-          console.log({ tab });
           return tab ? isArrayValid : false;
         }
         return isArrayValid;

@@ -28,7 +28,7 @@ const PikerDate = (props) => (
   </View>
 );
 
-export const RibList = ({ strictRIBList, setRIBId }) => (
+export const RibList = ({ strictRIBList, setRIBId, selectedItem, selectedRIB }) => (
   <>
     <View style={styles.titleLabel}>
       <Text style={styles.textLabel}>{select_rib}</Text>
@@ -38,7 +38,12 @@ export const RibList = ({ strictRIBList, setRIBId }) => (
       data={strictRIBList}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => (
-        <SelectItem {...item} setRIBId={setRIBId} />
+        <SelectItem
+          {...item}
+          setRIBId={setRIBId}
+          selectedItem={selectedItem}
+          selectedRIB={selectedRIB}
+        />
       )}
     />
   </>
@@ -60,6 +65,7 @@ class Home extends React.Component {
       strictRIBList: [],
       loding: false,
       getRibByRole: [],
+      selectedItem: [],
     };
   }
 
@@ -100,8 +106,7 @@ class Home extends React.Component {
   }
 
   callBack = (res) => {
-    console.log({ res });
-    this.setState({ showResult: true });
+    this.setState({ showResult: true, res });
   }
 
   showRIBInfos = async () => {
@@ -123,16 +128,14 @@ class Home extends React.Component {
   }
 
   setRIBId = (selectedRIB) => {
-    this.setState({ selectedRIB });
+    const { selectedItem } = this.state;
+    this.setState({ selectedRIB, selectedItem: [...selectedItem, selectedRIB] });
   }
 
   getStrictList = (lists) => {
-    // const { list } = this.props.comptes;
-    // console.log({ list });
     const ls = lists && lists.map(m => m.RIB);
     let strictRIBList = ls && ls.filter((v, i) => ls.indexOf(v) === i);
     strictRIBList = strictRIBList && strictRIBList.map(l => {
-      console.log('l');
       return { RIB: l };
     });
     this.setState({ strictRIBList });
@@ -140,7 +143,7 @@ class Home extends React.Component {
 
   render() {
     const { logout } = this.props;
-    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding, getRibByRole } = this.state;
+    const { minDate, maxDate, minDate2, showResult, strictRIBList, selectedRIB, loding, getRibByRole, selectedItem } = this.state;
     const ribToshow = getRibByRole && getRibByRole.length > 0 ? getRibByRole : strictRIBList;
 
     return (
@@ -170,21 +173,10 @@ class Home extends React.Component {
                 <RibList
                   strictRIBList={ribToshow}
                   setRIBId={this.setRIBId}
+                  selectedItem={selectedItem}
+                  selectedRIB={selectedRIB}
                 />
               </View>
-              {/* <View style={{ flex: 0.3 }}>
-                <View style={styles.titleLabel}>
-                  <Text style={styles.textLabel}>{select_rib}</Text>
-                </View>
-                <FlatList
-                  scrollEnabled
-                  data={strictRIBList}
-                  keyExtractor={(_, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <SelectItem {...item} setRIBId={this.setRIBId} />
-                  )}
-                />
-              </View> */}
               <View style={{ flex: 0.3 }}>
                 { !loding
                 ? <Button

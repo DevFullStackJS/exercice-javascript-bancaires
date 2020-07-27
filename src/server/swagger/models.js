@@ -270,7 +270,7 @@ module.exports = {
     //     },
     //   },
     // },
-    //},
+    // },
     '/login': {
       post: {
         tags: [
