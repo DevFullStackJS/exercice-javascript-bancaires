@@ -22,6 +22,8 @@ mongoose
 require('./models/comptes');
 require('./models/operations');
 require('./models/users');
+require('./models/folders');
+require('./models/media');
 
 app.listen(port, () => {
   console.log(`Server running on localhost:${port}`);
