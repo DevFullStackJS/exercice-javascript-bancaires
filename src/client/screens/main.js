@@ -43,7 +43,7 @@ export default connect(
 // import React from "react";
 // import { View, Text } from "react-primitives";
 // import MediaQuery from "react-native-web-responsive";
- 
+
 // const ResponsiveExample = () => {
 //   return (
 //     <View>

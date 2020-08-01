@@ -538,7 +538,7 @@ module.exports = {
           },
         },
       },
-    }
+    },
   },
   definitions: {
     Date: {
@@ -587,15 +587,15 @@ module.exports = {
       $ref: '#/definitions/Folders',
     },
     Annex_chauffage: {
-      type: "object",
+      type: 'object',
       properties: {
-        "etat": {
-          description: "missing description",
-          type: "string"
+        etat: {
+          description: 'missing description',
+          type: 'string',
         },
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
@@ -606,69 +606,69 @@ module.exports = {
           $ref: '#/definitions/Performance',
         },
 
-      }
+      },
     },
     Bureau_etude: {
-      type: "object",
+      type: 'object',
       properties: {
         name: {
-          "description": "\n",
-          type: "string"
+          description: '\n',
+          type: 'string',
         },
         contact: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         adressElectronique: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Calculs: {
-      type: "object",
+      type: 'object',
       properties: {
         logiciel: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         temps: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Chauffage_regulation: {
-      type: "object",
+      type: 'object',
       properties: {
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         marque: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         energie: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         commentaire: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         annex: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Climatisation: {
-      type: "object",
+      type: 'object',
       properties: {
         description: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
@@ -678,64 +678,64 @@ module.exports = {
           type: 'object',
           $ref: '#/definitions/Performance',
         },
-      }
+      },
     },
     Comptes: {
-      type: "object",
+      type: 'object',
       properties: {
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         identifiant: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         password: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         contact: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         adress: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         photo: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         role: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Conditions_utilisation: {
-      type: "object",
+      type: 'object',
       properties: {
         surface_chauffe: {
-          "description": "\n",
-          type: "string"
+          description: '\n',
+          type: 'string',
         },
         heures_presence: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         numbre_occupants: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         temperature: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Decriptif_ouvrants: {
-      type: "object",
+      type: 'object',
       properties: {
         portes: {
           type: 'object',
@@ -744,11 +744,11 @@ module.exports = {
         fenetres: {
           type: 'object',
           $ref: '#/definitions/Infos_descriptifs',
-        }
-      }
+        },
+      },
     },
     Descriptif_parois: {
-      type: "object",
+      type: 'object',
       properties: {
         planchers: {
           type: 'object',
@@ -761,11 +761,11 @@ module.exports = {
         murs: {
           type: 'object',
           $ref: '#/definitions/Infos_descriptifs',
-        }
-      }
+        },
+      },
     },
     Descriptif_system: {
-      type: "object",
+      type: 'object',
       properties: {
         climatisation: {
           type: 'object',
@@ -790,23 +790,23 @@ module.exports = {
       },
     },
     Eau_chaude_sanitaire: {
-      type: "object",
+      type: 'object',
       properties: {
         description: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         quantites: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         lieu: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         volume_chauffe: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         performance: {
           type: 'object',
@@ -814,27 +814,27 @@ module.exports = {
         }, media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        }
-      }
+        },
+      },
     },
     Eclairage: {
-      type: "object",
+      type: 'object',
       properties: {
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         dure_de_vie: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         efficacite: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         pice: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         performance: {
           type: 'object',
@@ -842,11 +842,11 @@ module.exports = {
         }, media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        }
-      }
+        },
+      },
     },
     Etat_lieux_existants: {
-      type: "object",
+      type: 'object',
       properties: {
         conditions_utilisation: {
           type: 'object',
@@ -867,15 +867,15 @@ module.exports = {
         ressenti_occupans: {
           type: 'object',
           $ref: '#/definitions/Ressenti_occupans',
-        }
-      }
+        },
+      },
     },
     Face: {
-      type: "object",
+      type: 'object',
       properties: {
         description: {
-          description: "missing description",
-          type: "string",
+          description: 'missing description',
+          type: 'string',
         },
         video: {
           type: 'array',
@@ -885,10 +885,10 @@ module.exports = {
           type: 'array',
           $ref: '#/definitions/Media',
         },
-      }
+      },
     },
     Folders: {
-      type: "object",
+      type: 'object',
       properties: {
         info_generale: {
           type: 'object',
@@ -897,11 +897,11 @@ module.exports = {
         etat_lieux_existants: {
           type: 'object',
           $ref: '#/definitions/Etat_lieux_existants',
-        }
-      }
+        },
+      },
     },
     Info_generale: {
-      type: "object",
+      type: 'object',
       properties: {
         maitre_ovrage: {
           type: 'object',
@@ -934,63 +934,63 @@ module.exports = {
         photos_face: {
           type: 'object',
           $ref: '#/definitions/Photos_face',
-        }
-      }
+        },
+      },
     },
     Infos_descriptifs: {
-      type: "object",
+      type: 'object',
       properties: {
         description: {
-          "description": "o\tMateriau\no\tVitrage\no\tDimension\no\tSurface\no\tUW\no\tVolet\no\tEpaisseur lame d’air\n",
-          type: "string"
+          description: 'o\tMateriau\no\tVitrage\no\tDimension\no\tSurface\no\tUW\no\tVolet\no\tEpaisseur lame d’air\n',
+          type: 'string',
         },
         composition: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         information: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         materiau: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         vitrage: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         surface: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         Uw: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         volet: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         epaisseur_lame_air: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         dimension: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         Ud: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         code: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         quantites: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
@@ -1001,74 +1001,74 @@ module.exports = {
           $ref: '#/definitions/Performance',
         },
 
-      }
+      },
     },
     Maitre_ovrage: {
-      type: "object",
+      type: 'object',
       properties: {
         statut: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         adress: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         nom: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Media: {
-      type: "object",
+      type: 'object',
       properties: {
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         url: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         name: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     MediaInput: {
-      type: "object",
+      type: 'object',
       properties: {
         type: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         url: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         name: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Performance: {
-      type: "object",
+      type: 'object',
       properties: {
         key: {
-          description: "\tInsiffisante(0)\n\tMoyenne(1)\n\tBone(2)\n\tTres Bonne(3)\n",
-          type: "string"
+          description: '\tInsiffisante(0)\n\tMoyenne(1)\n\tBone(2)\n\tTres Bonne(3)\n',
+          type: 'string',
         },
         description: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Photos_face: {
-      type: "object",
+      type: 'object',
       properties: {
         nord: {
           type: 'array',
@@ -1085,91 +1085,91 @@ module.exports = {
         est: {
           type: 'array',
           $ref: '#/definitions/Face',
-        }
-      }
+        },
+      },
     },
     Plan: {
-      type: "object",
+      type: 'object',
       properties: {
         description: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         legende: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        }
-      }
+        },
+      },
     },
     Reference: {
-      type: "object",
+      type: 'object',
       properties: {
         code: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         code_postal: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         objet: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         adress_batiment: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        }
-      }
+        },
+      },
     },
     Ressenti_occupans: {
-      type: "object",
+      type: 'object',
       properties: {
         question: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         resulta: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Site_audit: {
-      type: "object",
+      type: 'object',
       properties: {
         date: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         departement: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         surface_habitable: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         anne_construction: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Type_annex_chauffage: {
-      type: "object",
+      type: 'object',
       properties: {
         etat: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         performance: {
           type: 'object',
@@ -1180,34 +1180,34 @@ module.exports = {
           $ref: '#/definitions/Media',
         },
         code: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         label: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     TypeCompte: {
-      type: "object",
+      type: 'object',
       properties: {
         value: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         key: {
-          description: "missing description",
-          type: "string"
-        }
-      }
+          description: 'missing description',
+          type: 'string',
+        },
+      },
     },
     Ventilation: {
-      type: "object",
+      type: 'object',
       properties: {
         descriptif: {
-          description: "missing description",
-          type: "string"
+          description: 'missing description',
+          type: 'string',
         },
         media: {
           type: 'array',
@@ -1217,16 +1217,16 @@ module.exports = {
           type: 'object',
           $ref: '#/definitions/Performance',
         },
-      }
+      },
     },
     Zone_climatique: {
-      type: "object",
+      type: 'object',
       properties: {
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        }
-      }
+        },
+      },
     },
   },
   components: {
