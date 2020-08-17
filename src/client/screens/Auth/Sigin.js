@@ -39,6 +39,8 @@ const SignInScreen = (props) => {
   const { signIn, signUp } = props;
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  // const [email, setEmail] = React.useState('azerty');
+  // const [password, setPassword] = React.useState('azerty123');
   const [username, setUsername] = React.useState('');
   const [message, setMessage] = React.useState('');
   const [rib, setRib] = React.useState('');

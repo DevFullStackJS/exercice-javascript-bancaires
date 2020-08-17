@@ -6,5 +6,5 @@ module.exports = {
   pathApi: 'api/',
   myprivatekey: 'myprivatekey',
   urlApiRib: 'https://agrcf.lib.id/exercice@dev/',
-  // ...process.env,
+  ...process.env,
 };
