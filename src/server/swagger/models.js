@@ -15,12 +15,16 @@ module.exports = {
   basePath: config.pathApi,
   tags: [
     {
-      name: 'Comptes',
-      description: 'API for comptes in the system',
+      name: 'Users',
+      description: 'API for users in the system',
     },
     {
-      name: 'Folders',
-      description: 'API for folders in the system',
+      name: 'Operations',
+      description: 'API for operation in the system',
+    },
+    {
+      name: 'Comptes',
+      description: 'API for comptes in the system',
     },
   ],
   schemes: [
@@ -29,7 +33,7 @@ module.exports = {
   ],
   servers: [
     {
-      url: config.baseURL,
+      url: 'https://api_url_testing',
       description: 'Testing server',
     },
   ],
@@ -54,10 +58,223 @@ module.exports = {
     },
   },
   paths: {
+    // '/comptes': {
+    //   get: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     summary: 'Get all compte in system',
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'OK',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    //   post: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     description: 'Create new compte in system',
+    //     parameters: [
+    //       {
+    //         name: 'comptes',
+    //         in: 'body',
+    //         description: 'Comptes that we want to signin',
+    //         schema: {
+    //           properties: {
+    //             rib: {
+    //               type: 'string',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     produces: [
+    //       'application/json',
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'OK',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       400: {
+    //         description: 'Bad Request',
+    //         schema: {
+    //           $ref: '#/definitions/Errors',
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    // '/comptes/{compteId}': {
+    //   parameters: [
+    //     {
+    //       name: 'compteId',
+    //       in: 'path',
+    //       required: true,
+    //       description: 'ID of compte that we want to find',
+    //       type: 'string',
+    //     },
+    //   ],
+    //   get: {
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     summary: 'Get Compte with given ID',
+    //     responses: {
+    //       200: {
+    //         description: 'Compte is found',
+    //         schema: {
+    //           $ref: '#/definitions/Comptes',
+    //         },
+    //       },
+    //       404: {
+    //         description: 'Compte not found',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Compte not found',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    //   delete: {
+    //     summary: 'Delete Compte with given ID',
+    //     tags: [
+    //       'Comptes',
+    //     ],
+    //     security: [
+    //       {
+    //         JWT: [],
+    //       },
+    //     ],
+    //     responses: {
+    //       200: {
+    //         description: 'Compte is deleted',
+    //         schema: {
+    //           properties: {
+    //             success: {
+    //               type: 'string',
+    //             },
+    //             _id: {
+    //               type: 'string',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       404: {
+    //         description: 'Comptes not found',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Compte not found',
+    //             },
+    //           },
+    //         },
+    //       },
+    //       401: {
+    //         description: 'KO',
+    //         schema: {
+    //           properties: {
+    //             error: {
+    //               type: 'Invalid token.',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // put: {
+    //   summary: 'Update user with give ID',
+    //   tags: [
+    //     'Users',
+    //   ],
+    //   parameters: [
+    //     {
+    //       name: 'user',
+    //       in: 'body',
+    //       description: 'User with new values of properties',
+    //       schema: {
+    //         $ref: '#/definitions/User',
+    //       },
+    //     },
+    //   ],
+    //   responses: {
+    //     200: {
+    //       description: 'User is updated',
+    //       schema: {
+    //         $ref: '#/definitions/User',
+    //       },
+    //     },
+    //     404: {
+    //       description: 'User not found',
+    //       schema: {
+    //         properties: {
+    //           error: {
+    //             type: 'User not found',
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
+    // },
     '/login': {
       post: {
         tags: [
-          'Comptes',
+          'Users',
         ],
         description: 'Create new user in system',
         parameters: [
@@ -110,68 +327,35 @@ module.exports = {
         },
       },
     },
-    '/comptes': {
-      get: {
-        tags: [
-          'Comptes',
-        ],
-        summary: 'Get all compte in system',
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        responses: {
-          200: {
-            description: 'OK',
-            schema: {
-              $ref: '#/definitions/Comptes',
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
+    '/users': {
       post: {
         tags: [
-          'Comptes',
+          'Users',
         ],
-        description: 'Create new compte in system',
+        description: 'Create new user in system',
         parameters: [
           {
-            name: 'comptes',
+            name: 'user',
             in: 'body',
-            description: 'Comptes that we want to signin',
+            description: 'User that we want to create',
             schema: {
-              properties: {
-                rib: {
-                  type: 'string',
-                },
-              },
+              $ref: '#/definitions/User',
             },
-          },
-        ],
-        security: [
-          {
-            JWT: [],
           },
         ],
         produces: [
           'application/json',
         ],
+        security: [
+          {
+            JWT: [],
+          },
+        ],
         responses: {
           200: {
-            description: 'OK',
+            description: 'New user is created',
             schema: {
-              $ref: '#/definitions/Comptes',
+              $ref: '#/definitions/User',
             },
           },
           400: {
@@ -192,40 +376,69 @@ module.exports = {
           },
         },
       },
-    },
-    '/comptes/{compteId}': {
-      parameters: [
-        {
-          name: 'compteId',
-          in: 'path',
-          required: true,
-          description: 'ID of compte that we want to find',
-          type: 'string',
-        },
-      ],
       get: {
         tags: [
-          'Comptes',
+          'Users',
         ],
         security: [
           {
             JWT: [],
           },
         ],
-        summary: 'Get Compte with given ID',
+        summary: 'Get all users in system',
         responses: {
           200: {
-            description: 'Compte is found',
+            description: 'OK',
             schema: {
-              $ref: '#/definitions/Comptes',
+              $ref: '#/definitions/Users',
             },
           },
-          404: {
-            description: 'Compte not found',
+          401: {
+            description: 'KO',
             schema: {
               properties: {
                 error: {
-                  type: 'Compte not found',
+                  type: 'Invalid token.',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    '/users/{userId}': {
+      parameters: [
+        {
+          name: 'userId',
+          in: 'path',
+          required: true,
+          description: 'ID of user that we want to find',
+          type: 'string',
+        },
+      ],
+      get: {
+        tags: [
+          'Users',
+        ],
+        security: [
+          {
+            JWT: [],
+          },
+        ],
+        summary: 'Get user with given ID',
+        responses: {
+          200: {
+            description: 'User is found',
+            schema: {
+              $ref: '#/definitions/User',
+            },
+          },
+          404: {
+            description: 'User not found',
+            schema: {
+              properties: {
+                error: {
+                  type: 'User not found',
                 },
               },
             },
@@ -243,9 +456,9 @@ module.exports = {
         },
       },
       delete: {
-        summary: 'Delete Compte with given ID',
+        summary: 'Delete user with given ID',
         tags: [
-          'Comptes',
+          'Users',
         ],
         security: [
           {
@@ -254,7 +467,7 @@ module.exports = {
         ],
         responses: {
           200: {
-            description: 'Compte is deleted',
+            description: 'User is deleted',
             schema: {
               properties: {
                 success: {
@@ -267,11 +480,11 @@ module.exports = {
             },
           },
           404: {
-            description: 'Comptes not found',
+            description: 'User not found',
             schema: {
               properties: {
                 error: {
-                  type: 'Compte not found',
+                  type: 'User not found',
                 },
               },
             },
@@ -291,7 +504,12 @@ module.exports = {
       put: {
         summary: 'Update user with give ID',
         tags: [
-          'Comptes',
+          'Users',
+        ],
+        security: [
+          {
+            JWT: [],
+          },
         ],
         parameters: [
           {
@@ -299,7 +517,7 @@ module.exports = {
             in: 'body',
             description: 'User with new values of properties',
             schema: {
-              $ref: '#/definitions/Comptes',
+              $ref: '#/definitions/User',
             },
           },
         ],
@@ -307,15 +525,25 @@ module.exports = {
           200: {
             description: 'User is updated',
             schema: {
-              $ref: '#/definitions/Comptes',
+              $ref: '#/definitions/User',
             },
           },
           404: {
-            description: 'Compte not found',
+            description: 'User not found',
             schema: {
               properties: {
                 error: {
-                  type: 'Compte not found',
+                  type: 'User not found',
+                },
+              },
+            },
+          },
+          401: {
+            description: 'KO',
+            schema: {
+              properties: {
+                error: {
+                  type: 'Invalid token.',
                 },
               },
             },
@@ -323,12 +551,12 @@ module.exports = {
         },
       },
     },
-    '/folders': {
+    '/operations': {
       get: {
         tags: [
-          'Folders',
+          'Operations',
         ],
-        summary: 'Get all Folders in system',
+        summary: 'Get all operation in system',
         security: [
           {
             JWT: [],
@@ -338,7 +566,7 @@ module.exports = {
           200: {
             description: 'OK',
             schema: {
-              $ref: '#/definitions/FoldersAll',
+              $ref: '#/definitions/Operations',
             },
           },
           401: {
@@ -349,110 +577,40 @@ module.exports = {
                   type: 'Invalid token.',
                 },
               },
-            },
-          },
-        },
-      },
-      post: {
-        summary: 'Add folders',
-        tags: [
-          'Folders',
-        ],
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        parameters: [
-          {
-            name: 'user',
-            in: 'body',
-            description: 'User with new values of properties',
-            schema: {
-              $ref: '#/definitions/Folders',
-            },
-          },
-        ],
-        responses: {
-          200: {
-            description: 'User is updated',
-            schema: {
-              $ref: '#/definitions/Folders',
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-          400: {
-            description: 'Bad Request',
-            schema: {
-              $ref: '#/definitions/Errors',
             },
           },
         },
       },
     },
-    '/folders/{foldersID}': {
+    '/operations/{rib}/{min}/{max}': {
       parameters: [
         {
-          name: 'foldersID',
+          name: 'rib',
           in: 'path',
           required: true,
-          description: 'ID of folders that we want to find',
+          description: 'rib of user that we want to find operations',
+          type: 'string',
+        },
+        {
+          name: 'min',
+          in: 'path',
+          required: true,
+          description: 'date min format YYYY-MM-DD',
+          type: 'string',
+        },
+        {
+          name: 'max',
+          in: 'path',
+          required: true,
+          description: 'date max format YYYY-MM-DD',
           type: 'string',
         },
       ],
       get: {
         tags: [
-          'Folders',
+          'Operations',
         ],
-        security: [
-          {
-            JWT: [],
-          },
-        ],
-        summary: 'Get Folders with given ID',
-        responses: {
-          200: {
-            description: 'Folders is found',
-            schema: {
-              $ref: '#/definitions/Folders',
-            },
-          },
-          404: {
-            description: 'Folders not found',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Folders not found',
-                },
-              },
-            },
-          },
-          401: {
-            description: 'KO',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-      delete: {
-        summary: 'Delete Folders with given ID',
-        tags: [
-          'Folders',
-        ],
+        summary: 'Get Operations of rib in system',
         security: [
           {
             JWT: [],
@@ -460,68 +618,17 @@ module.exports = {
         ],
         responses: {
           200: {
-            description: 'Folders is deleted',
+            description: 'OK',
             schema: {
-              properties: {
-                success: {
-                  type: 'string',
-                },
-                _id: {
-                  type: 'string',
-                },
-              },
+              $ref: '#/definitions/Operations',
             },
           },
-          404: {
-            description: 'Folders not found',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Folders not found',
-                },
-              },
-            },
-          },
-          401: {
+          400: {
             description: 'KO',
             schema: {
               properties: {
                 error: {
-                  type: 'Invalid token.',
-                },
-              },
-            },
-          },
-        },
-      },
-      put: {
-        summary: 'Update Folders with give ID',
-        tags: [
-          'Folders',
-        ],
-        parameters: [
-          {
-            name: 'Folders',
-            in: 'body',
-            description: 'Folders with new values of properties',
-            schema: {
-              $ref: '#/definitions/Folders',
-            },
-          },
-        ],
-        responses: {
-          200: {
-            description: 'Folders is updated',
-            schema: {
-              $ref: '#/definitions/Folders',
-            },
-          },
-          404: {
-            description: 'Folders not found',
-            schema: {
-              properties: {
-                error: {
-                  type: 'Folders not found',
+                  type: 'Rib not found or Date Invalid',
                 },
               },
             },
@@ -541,6 +648,16 @@ module.exports = {
     },
   },
   definitions: {
+    Comptes: {
+      required: [
+        'rib',
+      ],
+      properties: {
+        rib: {
+          type: 'string',
+        },
+      },
+    },
     Date: {
       properties: {
         min: {
@@ -559,6 +676,35 @@ module.exports = {
         token: {
           type: 'string',
           uniqueItems: true,
+        },
+      },
+    },
+    ArrayOfRibs: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+    User: {
+      required: [
+        'email',
+        'password',
+        'role',
+      ],
+      properties: {
+        email: {
+          type: 'string',
+          uniqueItems: true,
+        },
+        password: {
+          type: 'string',
+        },
+        role: {
+          type: 'number',
+        },
+        rib: {
+          type: 'array',
+          $ref: '#/definitions/ArrayOfRibs',
         },
       },
     },
@@ -582,93 +728,91 @@ module.exports = {
       type: 'array',
       $ref: '#/definitions/Error',
     },
-    FoldersAll: {
+    Users: {
       type: 'array',
-      $ref: '#/definitions/Folders',
+      $ref: '#/definitions/User',
     },
     Annex_chauffage: {
-      type: 'object',
+      type: "object",
       properties: {
-        etat: {
-          description: 'missing description',
-          type: 'string',
+        "etat": {
+          description: "missing description",
+          type: "string"
         },
         type: {
-          description: 'missing description',
+          description: "missing description",
+          type: "string"
+        },
+        Libelle: {
           type: 'string',
         },
-        media: {
-          type: 'array',
-          $ref: '#/definitions/Media',
-        },
-        performance: {
-          type: 'object',
-          $ref: '#/definitions/Performance',
+        Montant: {
+          type: 'string',
         },
 
-      },
+      }
     },
     Bureau_etude: {
-      type: 'object',
+      type: "object",
       properties: {
         name: {
-          description: '\n',
-          type: 'string',
+          "description": "\n",
+          type: "string"
         },
         contact: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         adressElectronique: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Calculs: {
-      type: 'object',
+      type: "object",
       properties: {
         logiciel: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         temps: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Chauffage_regulation: {
-      type: 'object',
+      type: "object",
       properties: {
         type: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         marque: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         energie: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         commentaire: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         annex: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Climatisation: {
-      type: 'object',
+      type: "object",
       properties: {
         description: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         media: {
           type: 'array',
@@ -678,64 +822,64 @@ module.exports = {
           type: 'object',
           $ref: '#/definitions/Performance',
         },
-      },
+      }
     },
     Comptes: {
-      type: 'object',
+      type: "object",
       properties: {
         type: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         identifiant: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         password: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         contact: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         adress: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         photo: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         role: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Conditions_utilisation: {
-      type: 'object',
+      type: "object",
       properties: {
         surface_chauffe: {
-          description: '\n',
-          type: 'string',
+          "description": "\n",
+          type: "string"
         },
         heures_presence: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         numbre_occupants: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         temperature: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Decriptif_ouvrants: {
-      type: 'object',
+      type: "object",
       properties: {
         portes: {
           type: 'object',
@@ -744,11 +888,11 @@ module.exports = {
         fenetres: {
           type: 'object',
           $ref: '#/definitions/Infos_descriptifs',
-        },
-      },
+        }
+      }
     },
     Descriptif_parois: {
-      type: 'object',
+      type: "object",
       properties: {
         planchers: {
           type: 'object',
@@ -761,11 +905,11 @@ module.exports = {
         murs: {
           type: 'object',
           $ref: '#/definitions/Infos_descriptifs',
-        },
-      },
+        }
+      }
     },
     Descriptif_system: {
-      type: 'object',
+      type: "object",
       properties: {
         climatisation: {
           type: 'object',
@@ -790,23 +934,23 @@ module.exports = {
       },
     },
     Eau_chaude_sanitaire: {
-      type: 'object',
+      type: "object",
       properties: {
         description: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         quantites: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         lieu: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         volume_chauffe: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         performance: {
           type: 'object',
@@ -814,27 +958,27 @@ module.exports = {
         }, media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        },
-      },
+        }
+      }
     },
     Eclairage: {
-      type: 'object',
+      type: "object",
       properties: {
         type: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         dure_de_vie: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         efficacite: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         pice: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         performance: {
           type: 'object',
@@ -842,11 +986,11 @@ module.exports = {
         }, media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        },
-      },
+        }
+      }
     },
     Etat_lieux_existants: {
-      type: 'object',
+      type: "object",
       properties: {
         conditions_utilisation: {
           type: 'object',
@@ -867,15 +1011,15 @@ module.exports = {
         ressenti_occupans: {
           type: 'object',
           $ref: '#/definitions/Ressenti_occupans',
-        },
-      },
+        }
+      }
     },
     Face: {
-      type: 'object',
+      type: "object",
       properties: {
         description: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string",
         },
         video: {
           type: 'array',
@@ -885,10 +1029,10 @@ module.exports = {
           type: 'array',
           $ref: '#/definitions/Media',
         },
-      },
+      }
     },
     Folders: {
-      type: 'object',
+      type: "object",
       properties: {
         info_generale: {
           type: 'object',
@@ -897,11 +1041,11 @@ module.exports = {
         etat_lieux_existants: {
           type: 'object',
           $ref: '#/definitions/Etat_lieux_existants',
-        },
-      },
+        }
+      }
     },
     Info_generale: {
-      type: 'object',
+      type: "object",
       properties: {
         maitre_ovrage: {
           type: 'object',
@@ -934,63 +1078,63 @@ module.exports = {
         photos_face: {
           type: 'object',
           $ref: '#/definitions/Photos_face',
-        },
-      },
+        }
+      }
     },
     Infos_descriptifs: {
-      type: 'object',
+      type: "object",
       properties: {
         description: {
-          description: 'o\tMateriau\no\tVitrage\no\tDimension\no\tSurface\no\tUW\no\tVolet\no\tEpaisseur lame d’air\n',
-          type: 'string',
+          "description": "o\tMateriau\no\tVitrage\no\tDimension\no\tSurface\no\tUW\no\tVolet\no\tEpaisseur lame d’air\n",
+          type: "string"
         },
         composition: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         information: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         materiau: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         vitrage: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         surface: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         Uw: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         volet: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         epaisseur_lame_air: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         dimension: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         Ud: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         code: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         quantites: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         media: {
           type: 'array',
@@ -1001,74 +1145,74 @@ module.exports = {
           $ref: '#/definitions/Performance',
         },
 
-      },
+      }
     },
     Maitre_ovrage: {
-      type: 'object',
+      type: "object",
       properties: {
         statut: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         adress: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         nom: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Media: {
-      type: 'object',
+      type: "object",
       properties: {
         type: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         url: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         name: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     MediaInput: {
-      type: 'object',
+      type: "object",
       properties: {
         type: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         url: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         name: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Performance: {
-      type: 'object',
+      type: "object",
       properties: {
         key: {
-          description: '\tInsiffisante(0)\n\tMoyenne(1)\n\tBone(2)\n\tTres Bonne(3)\n',
-          type: 'string',
+          description: "\tInsiffisante(0)\n\tMoyenne(1)\n\tBone(2)\n\tTres Bonne(3)\n",
+          type: "string"
         },
         description: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Photos_face: {
-      type: 'object',
+      type: "object",
       properties: {
         nord: {
           type: 'array',
@@ -1085,91 +1229,91 @@ module.exports = {
         est: {
           type: 'array',
           $ref: '#/definitions/Face',
-        },
-      },
+        }
+      }
     },
     Plan: {
-      type: 'object',
+      type: "object",
       properties: {
         description: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         legende: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        },
-      },
+        }
+      }
     },
     Reference: {
-      type: 'object',
+      type: "object",
       properties: {
         code: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         code_postal: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         objet: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         adress_batiment: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        },
-      },
+        }
+      }
     },
     Ressenti_occupans: {
-      type: 'object',
+      type: "object",
       properties: {
         question: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         resulta: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Site_audit: {
-      type: 'object',
+      type: "object",
       properties: {
         date: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         departement: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         surface_habitable: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         anne_construction: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Type_annex_chauffage: {
-      type: 'object',
+      type: "object",
       properties: {
         etat: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         performance: {
           type: 'object',
@@ -1180,34 +1324,34 @@ module.exports = {
           $ref: '#/definitions/Media',
         },
         code: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         label: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     TypeCompte: {
-      type: 'object',
+      type: "object",
       properties: {
         value: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         key: {
-          description: 'missing description',
-          type: 'string',
-        },
-      },
+          description: "missing description",
+          type: "string"
+        }
+      }
     },
     Ventilation: {
-      type: 'object',
+      type: "object",
       properties: {
         descriptif: {
-          description: 'missing description',
-          type: 'string',
+          description: "missing description",
+          type: "string"
         },
         media: {
           type: 'array',
@@ -1217,16 +1361,16 @@ module.exports = {
           type: 'object',
           $ref: '#/definitions/Performance',
         },
-      },
+      }
     },
     Zone_climatique: {
-      type: 'object',
+      type: "object",
       properties: {
         media: {
           type: 'array',
           $ref: '#/definitions/Media',
-        },
-      },
+        }
+      }
     },
   },
   components: {

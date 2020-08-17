@@ -29,7 +29,7 @@ const FoldersSchema = new mongoose.Schema({
     },
     photos_face: {
       type: Object,
-    },
+    }
   },
   etat_lieux_existants: {
     conditions_utilisation: {
@@ -46,7 +46,7 @@ const FoldersSchema = new mongoose.Schema({
     },
     ressenti_occupans: {
       type: Object,
-    },
+    }
   },
 });
 
